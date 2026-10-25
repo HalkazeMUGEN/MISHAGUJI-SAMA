@@ -2988,7 +2988,7 @@ trigger9 = !(!(var(32)&32))
 trigger9 = (var(32)%8) = 1
 trigger9 = var(32) := 8
 trigger10= var(32) = 0
-trigger10= sysvar(3) = 900 || var(9) = 900
+trigger10= sysvar(3) = 900
 trigger10= movecontact && enemynear(!enemynear,alive&&numenemy>1),movetype != A
 trigger10= var(32) := 8
 trigger11= var(32)
