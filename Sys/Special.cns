@@ -5668,6 +5668,8 @@ ignorehitpause = 1
 type = SelfState
 trigger1 = roundsexisted > 0
 trigger1 = var(40) = 555555520
+trigger1 = roundstate <= 3
+trigger2 = var(40) = 555555521
 value = 555555521
 persistent = 256
 ignorehitpause = 1
@@ -9191,6 +9193,7 @@ ignorehitpause = 1
 
 [State 555555521]
 type = Null
+trigger1 = var(40) := 555555521
 trigger1 = var(15)
 trigger1 = var(-147) := 5150
 ignorehitpause = 1
