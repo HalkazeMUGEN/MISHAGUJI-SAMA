@@ -45,7 +45,7 @@ triggerall = var(58) > 9
 triggerall = var(15)
 triggerall = hitpausetime
 triggerall = alive
-triggerall = !numexplod(1646180000) || gametime%60 = 0
+triggerall = !numexplod(1646180000) || gametime%60 = 0 || var(799)
 trigger1 = anim = [3051,3052]
 trigger1 = var(-10) := 0 || 1
 trigger1 = var(-9) := 0 || 1
@@ -783,22 +783,30 @@ ignorehitpause = 1
 
 [State 4];直死+αペナルティ
 type = SelfState
-triggerall = !numprojID(1646180002)
+triggerall = (!var(15)&&!numprojID(1646180002)) || (var(15)&&!var(!!var(15)*393))
 triggerall = !numexplod(1646180000)
+; 条件１：前ラウンドペナルティ発動済み
 trigger1 = !(!(var(20)&4))
 trigger1 = !(!(var(19)&1073741824))
+; 条件２：直死検知
 trigger2 = !numexplod(351711)
 trigger2 = sysfvar(4) && !alive
 trigger3 = !alive && var(15)
 trigger3 = !(!(var(805)&32768))
 trigger3 = var(804) != 1
+; 条件３：何らかの行動阻害
 trigger4 = var(15)
 trigger4 = roundstate
 trigger4 = !(!(var(805)&7991))
+; 条件４：最大ライフ弄り
 trigger5 = lifemax <= 0
-trigger6 = !(!(var(20)&16)) && (var(19)&3) = 3
-trigger7 = var(15)
-trigger7 = var(799)
+trigger6 = roundstate > 2
+trigger6 = enemy(0),life > enemy(0),lifemax || enemy(0),life < 0 || enemy(numenemy>1),life > enemy(numenemy>1),lifemax || enemy(numenemy>1),life < 0
+; 条件５：開始時隔離水準２
+trigger7 = !(!(var(20)&16)) && (var(19)&3) = 3
+; 条件６：対隔離強化発動時
+trigger8 = var(15)
+trigger8 = var(799)
 value = 1646180002 + 1 * (var(15)!=0&&!(var(19)&1073741824))
 ctrl = 0 * (var(20):=(var(20)&(4^-1)))
 persistent = 256
@@ -807,7 +815,7 @@ ignorehitpause = 1
 [State 4];再行動後ペナルティ演出
 type = SelfState
 trigger1 = var(15)
-trigger1 = numprojID(1646180002)
+trigger1 = var(393)
 trigger1 = (var(805)&40) = 8
 trigger1 = !(!(var(806)&1))
 value = 1646180005 + (var(59):=1)*0
@@ -1769,7 +1777,10 @@ ignorehitpause = 1
 
 [State 1646180002]
 type = Projectile
-trigger1 = var(58) > 9
+triggerall = var(58) > 9
+trigger1 = var(15)
+trigger1 = var(393) := 1
+trigger2 = 1
 attr = ,N
 guard.dist = 0
 projID = 1646180002
@@ -2408,7 +2419,10 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = Projectile
-trigger1 = var(58) > 9
+triggerall = var(58) > 9
+trigger1 = var(15)
+trigger1 = var(393) := 1
+trigger2 = 1
 attr = ,N
 guard.dist = 0
 projID = 1646180002

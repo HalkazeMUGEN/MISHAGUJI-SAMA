@@ -523,11 +523,12 @@ ignorehitpause = 1
 type = Null
 trigger1 = var(59) = 0
 trigger1 = roundstate = 0
-trigger1 = var(4) := enemy(0),life || 1
 trigger1 = var(5) := ifelse(var(58)=5,var(5),9) || 1
 trigger1 = var(6) := life * (palno=[1,4]) || 1
 trigger1 = var(7) := 0 || 1
 trigger1 = var(12) := facing || 1
+trigger1 = var(16) := enemy(0),lifemax || 1
+trigger1 = var(17) := enemy(numenemy>1),lifemax || 1
 trigger1 = var(20) := (var(20)&-2147483136) || 1
 trigger1 = var(23) := 0 || 1
 trigger1 = var(26) := -1 || 1
@@ -2143,12 +2144,20 @@ ignorehitpause = 1
 
 [State -2];‰ñ•œˆ—‚P(11P)
 type = VarAdd
-trigger1 = var(58) = 11
-trigger1 = !numexplod(5186375)
-trigger1 = roundstate < 3
-trigger1 = enemy(!enemy,alive&&numenemy>1),life > var(4)
-trigger1 = var(59) := ceil(1000*((enemy(!enemy,alive&&numenemy>1),life-var(4))*1.0/enemy(!enemy,alive&&numenemy>1),lifemax))
-trigger1 = var(59) > 0
+triggerall = var(58) = 11
+triggerall = !numexplod(5186375)
+triggerall = roundstate < 3
+triggerall = var(59) := 0 || 1
+trigger1 = enemy(0),life > var(16)
+trigger1 = (var(59):=ceil(1000*(1.0*(enemy(0),life-var(16))/enemy(0),lifemax))) || 1
+trigger1 = var(59) < 0
+trigger1 = var(59) := 0
+trigger2 = numenemy > 1
+trigger2 = enemy(1),life > var(17)
+trigger2 = (var(59):=var(59)+ceil(1000*(1.0*(enemy(1),life-var(17))/enemy(1),lifemax))) || 1
+trigger2 = var(59) < 0
+trigger2 = var(59) := 0
+trigger3 = var(59) > 0
 sysfvar(4) = var(59)
 ignorehitpause = 1
 
@@ -2305,24 +2314,30 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2]
-type = Null
-trigger1 = var(58) != 5
-trigger1 = !(!(var(19)&512))
-trigger1 = roundstate = 3
-trigger1 = losetime || drawgame
-trigger1 = !(var(30)&-2147483648)
-trigger1 = var(4) < enemy(!enemy,alive&&numenemy>1),life
-trigger1 = enemy(!enemy,alive&&numenemy>1),life = enemy(!enemy,alive&&numenemy>1),lifemax || losetime
-trigger1 = var(30) := (var(30)|-2147483648) || 1
+[State -2]; TU‰ñ•œŒŸ’m
+type = VarSet
+triggerall = var(58) != 5
+triggerall = !(!(var(19)&512))
+triggerall = roundstate = 3
+triggerall = losetime || drawgame
+triggerall = !(var(30)&-2147483648)
+triggerall = var(16) < enemy(0),life || var(17) < enemy(numenemy>1),life
+trigger1 = losetime
+trigger2 = var(16) < enemy(0),life && enemy(0),life >= enemy(0),lifemax
+trigger3 = numenemy > 1
+trigger3 = var(17) < enemy(1),life && enemy(1),life >= enemy(1),lifemax
+var(30) = (var(30)|-2147483648)
 ignorehitpause = 1
 
 [State -2];“Gƒ‰ƒCƒtŠÄ‹
-type = VarSet
-trigger1 = var(58) < 10
-trigger2 = (var(19)&3) < 3
-trigger3 = enemy(!enemy,alive&&numenemy>1),life < var(4)
-var(4) = enemy(!enemy,alive&&numenemy>1),life
+type = Null
+trigger1 = var(58) < 10 || (var(19)&3) < 3 || enemy(0),life < var(16)
+trigger1 = (var(16):=enemy(0),life) && 0
+trigger2 = numenemy < 2
+trigger2 = (var(17):=var(16)) || 1
+trigger3 = numenemy > 1
+trigger3 = var(58) < 10 || (var(19)&3) < 3 || enemy(1),life < var(17)
+trigger3 = var(17) := enemy(1),life
 ignorehitpause = 1
 
 [State -2]

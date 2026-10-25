@@ -7586,13 +7586,38 @@ sparkno = -1
 priority = 7,H
 ignorehitpause = 1
 
-[State 333033333]
-type = TargetLifeAdd
+[State 333033333]; ƒ‰ƒCƒt‰ñ•œ‘jŽ~iŠu—£”Åj
+type = Null
 triggerall = root,var(58) >= 10
+triggerall = (root,var(19)&3) > 2
+triggerall = root,var(15)
+trigger1 = var(59) := var(var(4938572)+46940-teamside*4)
+trigger1 = (var(var(59)+352) := root,var(16)) && 0
+trigger2 = numenemy > 1
+trigger2 = var(59) := var(var(4938572)+46948-teamside*4)
+trigger2 = var(var(59)+352) := root,var(17)
+ignorehitpause = 1
+
+[State 333033333]
+type = Null
+trigger1 = var(59) := 0 || 1
 trigger1 = numtarget
-trigger1 = (root,var(19)&3) > 2
-trigger1 = enemy(!enemy,alive&&numenemy>1),life - root,var(4) > 0
-value = -(enemy(!enemy,alive&&numenemy>1),life-root,var(4))
+trigger1 = var(59) := target,id
+ignorehitpause = 1
+
+[State 333033333]; ƒ‰ƒCƒt‰ñ•œ‘jŽ~i”ñŠu—£”Åj
+type = TargetLifeAdd
+triggerall = var(59)
+triggerall = root,var(58) >= 10
+triggerall = (root,var(19)&3) > 2
+trigger1 = var(59) = enemy(0),id
+trigger1 = enemy(0),life - root,var(16) > 0
+trigger1 = var(59) := -(enemy(0),life-root,var(16))
+trigger2 = numenemy > 1
+trigger2 = var(59) = enemy(1),id
+trigger2 = enemy(1),life - root,var(17) > 0
+trigger2 = var(59) := -(enemy(1),life-root,var(17))
+value = -var(59)
 absolute = 1
 ignorehitpause = 1
 
