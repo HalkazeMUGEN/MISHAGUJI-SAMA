@@ -11,6 +11,19 @@ hitdefpersist = 1
 movehitpersist = 1
 hitcountpersist = 1
 
+[State 11111];Šu—£‹Zp—˜—p‰Â”\«Šm”F + ©ƒXƒƒbƒg‚h‚cæ“¾
+type = Null
+triggerall = ishelper(const(size.shadowoffset))
+triggerall = !var(15)
+triggerall = root,var(15)
+trigger1 = var(15) := alive || 1
+trigger1 = var(-7) := var(15) + 1 || 1
+trigger1 = alive != var(15)
+trigger1 = var(-7) := var(15) || 1
+trigger1 = var(15) := var(-910) || 1
+trigger2 = var(15) := 0
+ignorehitpause = 1
+
 [State 11111]
 type = ParentVarSet
 triggerall = ishelper(const(size.shadowoffset))
@@ -25,21 +38,29 @@ ignorehitpause = 1
 [State 11111]
 type = ParentVarSet
 triggerall = ishelper(const(size.shadowoffset))
+triggerall = var(15)
 triggerall = root,ID = parent,ID
-triggerall = root,numexplod(468746114) != [1,12]
-triggerall = root,var(58) != [1,12]
+triggerall = (root,numexplod(468746114)!=[1,12]) || (root,var(58)!=[1,12])
+triggerall = root,var(801) = [1,12]
 trigger1 = root,name = "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾" && root,authorname = "Halkaze"
 trigger2 = root,authorname = "Halkaze" && root,const(data.airjuggle) = 2661342
 trigger3 = root,const(data.airjuggle) = 2661342 && root,name = "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"
-var(58) = 11
+var(58) = root,var(801)
 ignorehitpause = 1
 
 [State ALL];©•ª‚Ìƒwƒ‹ƒp[‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper(const(size.shadowoffset))
-trigger2 = root,var(58) < 10
-trigger2 = !(root,numexplod(468746114)=root,var(58)&&(root,var(58)=[1,12]))
-trigger2 = !(root,numexplod(468746114)=13&&root,var(58)=5&&(root,numexplod(1424678194)||root,numexplod(1865338)!=1))
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 11111];PalNo‚ª³í‚Å‚ ‚éê‡‚Ì‚İ’Ê‚·
+type = ChangeState
+triggerall = !(root,numexplod(468746114)=root,var(58)&&(root,var(58)=[1,12]))
+triggerall = !(root,numexplod(468746114)=13&&root,var(58)=5&&(root,numexplod(1424678194)||root,numexplod(1865338)!=1))
+trigger1 = !var(15)
+trigger2 = !(root,var(801)=root,var(58)&&(root,var(58)=[1,12]))
 value = 1141514113
 persistent = 256
 ignorehitpause = 1
@@ -4642,15 +4663,17 @@ ignorehitpause = 1
 
 [State 60050,12]
 type = RemoveExplod
-trigger1 = numexplod(100040)
+triggerall = numexplod(100040)
 trigger1 = root,numexplod(351711)
+trigger2 = root,sysvar(3) = 1646180003
 ID = 100040
 ignorehitpause = 1
 
 [State 60050,12]
 type = RemoveExplod
-trigger1 = numexplod(100041)
+triggerall = numexplod(100041)
 trigger1 = root,numexplod(351711)
+trigger2 = root,sysvar(3) = 1646180003
 ID = 100041
 ignorehitpause = 1
 
@@ -4660,17 +4683,19 @@ trigger1 = 1
 sysfvar(4) = 1
 ignorehitpause = 1
 
-[State 60040,13]
+[State 60050,13]
 type = ChangeAnim
-trigger1 = ishelper(var(1))
+triggerall = ishelper(var(1))
 trigger1 = root,numexplod(351711)
+trigger2 = root,sysvar(3) = 1646180003
 value = 101111111
 ignorehitpause = 1
 
 [State 60050,14]
 type = DestroySelf
-trigger1 = ishelper(60050)
+triggerall = ishelper(60050)
 trigger1 = root,numexplod(351711)
+trigger2 = root,sysvar(3) = 1646180003
 ignorehitpause = 1
 
 [State ALL]
@@ -4911,7 +4936,7 @@ ignorehitpause = 1
 [State 33333330,14]
 type = VarSet
 trigger1 = sysvar(2) = 0
-sysvar(3) = root,sysvar(3)
+sysvar(3) = ifelse(root,sysvar(3)=1646180003,-1,root,sysvar(3))
 ignorehitpause = 1
 
 [State 33333330,15]
@@ -5021,7 +5046,7 @@ ignorehitpause = 1
 [State 33333331,10]
 type = VarSet
 trigger1 = sysvar(2) = 0
-sysvar(3) = root,sysvar(3)
+sysvar(3) = ifelse(root,sysvar(3)=1646180003,-1,root,sysvar(3))
 ignorehitpause = 1
 
 [State 33333331,11]
@@ -5084,7 +5109,7 @@ trigger1 = 1
 value = 101111111
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,4]
 type = VelSet
 trigger1 = 1
 x = 0
@@ -5097,20 +5122,20 @@ trigger1 = numtarget
 trigger1 = var(10) := target,ID
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,6]
 type = TargetDrop
 trigger1 = numtarget > 1
 excludeid = 0
 keepone = 1
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,7]
 type = TargetDrop
 trigger1 = numtarget
 trigger1 = var(10) != enemy(!enemy,alive&&numenemy>1),ID
 ignorehitpause = 1
 
-[State 33333332,5];‰i‘±ƒ^[ƒQƒbƒgŠm•Û
+[State 33333332,8];‰i‘±ƒ^[ƒQƒbƒgŠm•Û
 type = ReversalDef
 trigger1 = numtarget
 reversal.attr = SCA,AA,AT,AP
@@ -5118,7 +5143,7 @@ guard.dist = 0
 sparkno = -1
 ignorehitpause = 1
 
-[State 33333332,5];–{‘Ìƒ^ƒQæ“¾‚Å‚O‚»‚êˆÈŠO‚Å1`3
+[State 33333332,9];–{‘Ìƒ^ƒQæ“¾‚Å‚O‚»‚êˆÈŠO‚Å1`3
 type = Null
 trigger1 = var(59) := 0 || 1
 trigger1 = roundstate = 2
@@ -5126,32 +5151,32 @@ trigger1 = numtarget = 0
 trigger1 = var(59) := random%3 + 1 || 1
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,10]
 type = PosSet
 trigger1 = 1
 x = root,fvar(2)
 y = root,fvar(3)
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,11]
 type = StateTypeSet
 trigger1 = var(59) = 1
 statetype = S
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,12]
 type = StateTypeSet
 trigger1 = var(59) = 2
 statetype = C
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,13]
 type = StateTypeSet
 trigger1 = var(59) = 3
 statetype = A
 ignorehitpause = 1
 
-[State 33333332,5];Attr‘®«—p—”¶¬
+[State 33333332,14];Attr‘®«—p—”¶¬
 type = Null
 triggerall = var(59)
 trigger1 = root,numexplod(351715)
@@ -5162,26 +5187,26 @@ trigger3 = gametime%100 >= 50 || (gametime%4=1||gametime%4=2)
 trigger3 = var(59) := 10 || 1
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,15]
 type = PosSet
 trigger1 = var(59) = [1,9]
 x = enemy,pos x
 y = enemy,pos y
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,16]
 type = StateTypeSet
 trigger1 = var(59) = [1,9]
 movetype = A
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾ReversaldDef—pUŒ‚Anim
+[State 33333332,17];ƒ^ƒQæ“¾ReversaldDef—pUŒ‚Anim
 type = ChangeAnim
 trigger1 = var(59)
 value = 111111
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,18];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 1
 attr = ,NA
@@ -5193,7 +5218,7 @@ hitsound = -1
 guardsound = -1
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,19];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 2
 attr = ,SA
@@ -5205,7 +5230,7 @@ hitsound = -1
 guardsound = -1
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,20];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 3
 attr = ,HA
@@ -5217,7 +5242,7 @@ hitsound = -1
 guardsound = -1
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,21];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 4
 attr = ,NT
@@ -5232,7 +5257,7 @@ fall = 0
 fall.damage = 2147483647 * !(!(root,numexplod(351715)))
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,22];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 5
 attr = ,ST
@@ -5247,7 +5272,7 @@ fall = 0
 fall.damage = 2147483647 * !(!(root,numexplod(351715)))
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,23];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 6
 attr = ,HT
@@ -5262,7 +5287,7 @@ fall = 0
 fall.damage = 2147483647 * !(!(root,numexplod(351715)))
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,24];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 7
 attr = ,NP
@@ -5274,7 +5299,7 @@ hitsound = -1
 guardsound = -1
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,25];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 8
 attr = ,SP
@@ -5286,7 +5311,7 @@ hitsound = -1
 guardsound = -1
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾HitDef
+[State 33333332,26];ƒ^ƒQæ“¾HitDef
 type = HitDef
 trigger1 = var(59) = 9
 attr = ,HP
@@ -5298,7 +5323,7 @@ hitsound = -1
 guardsound = -1
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾ReversalDef
+[State 33333332,27];ƒ^ƒQæ“¾ReversalDef
 type = ReversalDef
 trigger1 = var(59) = 10
 reversal.attr = SCA,AA,AT,AP
@@ -5310,16 +5335,16 @@ sparkno = -1
 priority = 7,H
 ignorehitpause = 1
 
-[State 33333332,5];ƒ^ƒQæ“¾Š´’mProjectile
+[State 33333332,28];ƒ^ƒQæ“¾Š´’mProjectile
 type = Projectile
-trigger1 = root,numprojID(351711) = 0
+trigger1 = root,numprojID(351711) < 5
 trigger1 = numtarget
 attr = ,N
 guard.dist = 0
 projID = 351711
 projanim = 101111111
 projremove = 0
-projremovetime = -1
+projremovetime = 1
 projedgebound = 1000000000
 projstagebound = 2147483647
 projheightbound = -2147483648,2147483647
@@ -5327,13 +5352,13 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,29]
 type = LifeSet
 trigger1 = root,numexplod(351711)
 value = gametime%2 + 1
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,30]
 type = TargetLifeAdd
 trigger1 = numtarget
 trigger1 = root,numexplod(351711)
@@ -5342,7 +5367,7 @@ value = -2147483648
 absolute = 1
 ignorehitpause = 1
 
-[State 33333332,5];ƒ‰ƒCƒt•Ï“®•s‰ÂŠ´’mProjectile
+[State 33333332,31];ƒ‰ƒCƒt•Ï“®•s‰ÂŠ´’mProjectile
 type = Projectile
 trigger1 = !root,numexplod(351712) && !root,numexplod(351713)
 trigger1 = root,numexplod(351711)
@@ -5360,7 +5385,7 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,32]
 type = Null
 trigger1 = numtarget
 trigger1 = root,numexplod(351712)
@@ -5371,12 +5396,17 @@ trigger1 = target,const(data.airjuggle) = 2661342
 trigger1 = var(59) := 0
 ignorehitpause = 1
 
-[State 33333332,5]
+[State 33333332,33]
 type = TargetState
 trigger1 = numtarget
 trigger1 = root,numexplod(351712)
 trigger1 = var(59)
 value = 3517062
+ignorehitpause = 1
+
+[State 33333332,34]
+type = DestroySelf
+trigger1 = root,sysvar(3) = 1646180003
 ignorehitpause = 1
 
 [State ALL]
@@ -6817,6 +6847,12 @@ supermovetime = 2147483647
 ignorehitpause = 1
 
 [State 220222222,15]
+type = DestroySelf
+trigger1 = ishelper(251435870)
+trigger1 = root,sysvar(3) = 1646180003
+ignorehitpause = 1
+
+[State 220222222,16]
 type = VarSet
 trigger1 = playeridexist(ID)
 sysvar(4) = 614473619
@@ -6938,7 +6974,7 @@ trigger1 = root,var(58) = [10,11]
 trigger1 = !(!(root,var(20)&16777216))
 trigger2 = root,var(58) != 6 && root,var(58) != 12
 trigger2 = root,numexplod(351710)
-trigger2 = !root,numexplod(351712) && !root,numprojID(351712)
+trigger2 = !root,numprojID(351712) && !root,numexplod(351712)
 var(59) = 1
 ignorehitpause = 1
 
@@ -6947,7 +6983,7 @@ type = SuperPause
 trigger1 = root,numexplod(2008212247) = 1
 trigger2 = root,var(58) = 6 || root,var(58) = 12
 trigger3 = var(59)
-time = 2147483647
+time = 2147483647 + (var(39):=var(39)+1)*0
 movetime = 2147483647
 anim = -1
 darken = 0
@@ -7755,6 +7791,12 @@ trigger1 = !ishelper(const(size.shadowoffset))
 trigger2 = const(size.shadowoffset) != 510908553
 value = 1141514113
 persistent = 256
+ignorehitpause = 1
+
+[State ]
+type = VarAdd
+trigger1 = 1
+sysfvar(3) = 1
 ignorehitpause = 1
 
 [State 550555555,1]

@@ -105,6 +105,7 @@ ignorehitpause = 1
 
 [State 0,8]
 type = SelfState
+trigger1 = var(58) < 10
 trigger1 = ifelse(var(58)<5,!var(6),!sysfvar(4))
 trigger1 = !alive && numexplod(351711)
 trigger1 = roundstate = 4
@@ -8440,7 +8441,7 @@ pausemovetime = 2147483647
 supermovetime = 2147483647
 ignorehitpause = 1
 
-[State 5901,9];ÅIƒwƒ‹ƒp[Ý’u’†‘ŠŽè‚ðŽ~‚ß‚é
+[State 5901,9];ÅIƒwƒ‹ƒp[Ý’u’†‘ŠŽè‚ðŽ~‚ß‚éi•s‹ï‡–hŽ~‚Ì‚½‚ß’âŽ~j
 type = Null
 trigger1 = 0
 trigger1 = var(58) > 9

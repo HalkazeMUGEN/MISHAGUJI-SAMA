@@ -1973,9 +1973,663 @@ persistent = 256
 ignorehitpause = 1
 
 ;„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
+;‚i‚Q‚Q‚a
+;„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
+[Statedef 1400]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper && !(numexplod(468746114)=var(58)&&(var(58)=[1,12]))
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = stateno != sysvar(3)
+trigger1 = fvar(38) := 1 || 1
+trigger2 = stateno = var(8)
+trigger2 = fvar(38) := fvar(38) + 1 || 1
+sysvar(2) = 0 + (var(9):=sysvar(3)) * 0
+ignorehitpause = 1
+
+[State ALL]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 1400]
+type = StateTypeSet
+trigger1 = var(20) := (var(20)|64) || 1
+trigger1 = !sysvar(2)
+trigger1 = var(5) := (var(5)&(63^-1)) || 1
+trigger1 = var(5) := (var(5)|2) || 1
+trigger1 = var(5) := (var(5)|32) || 1
+statetype = A
+movetype = A
+physics = N
+ignorehitpause = 1
+
+[State 1400]
+type = CtrlSet
+trigger1 = !sysvar(2)
+trigger1 = var(20) := (var(20)&(4^-1)) || 1
+value = 0
+ignorehitpause = 1
+
+[State 1400]
+type = ChangeAnim
+trigger1 = !sysvar(2)
+value = 1400 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 1400]
+type = VelMul
+trigger1 = anim = 1400
+trigger1 = animelemno(0) < 5
+x = 0.75
+y = 0.75
+ignorehitpause = 1
+
+[State 1400]
+type = VelAdd
+trigger1 = anim = 1400
+trigger1 = animelemno(0) > 4
+y = const(movement.yaccel)
+ignorehitpause = 1
+
+[State 1400]
+type = VelSet
+trigger1 = anim = 1400
+trigger1 = ifelse(var(58)>9,animelemno(0)=4&&var(26)=1,!animelemtime(5))
+y = 10 + ifelse(pos y<=0,ifelse(pos y<-100,5,pos y/-20),0)
+x = 2.5
+ignorehitpause = 1
+
+[State 1400]
+type = ChangeAnim
+trigger1 = anim = 1400
+trigger1 = animelemno(0) > 4
+trigger1 = vel y > 0 && (pos y+vel y) >= 0
+value = 1401 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 1400]
+type = EnvShake
+trigger1 = anim = 1401
+trigger1 = vel y > 0
+time = 10
+freq = 90
+ampl = -3
+ignorehitpause = 1
+
+[State 1400]
+type = PlaySnd
+trigger1 = anim = 1401
+trigger1 = vel y > 0
+value = 5,1
+freqmul = 0.7
+ignorehitpause = 1
+
+[State 1400]
+type = PosSet
+trigger1 = anim = 1401
+trigger1 = vel y > 0
+y = (fvar(13):=(fvar(13)+(fvar(39):=0)-pos y)) * 0 + fvar(39)
+ignorehitpause = 1
+
+[State 1400]
+type = VelSet
+trigger1 = anim = 1401
+trigger1 = vel y > 0
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 1400]
+type = PowerAdd
+trigger1 = !sysvar(2)
+value = 40 * ifelse(var(58)>6,ifelse(var(58)>9,5,3),1)
+ignorehitpause = 1
+
+[State 1400]
+type = NotHitBy
+trigger1 = var(58) > 6
+trigger1 = anim = 1400
+trigger2 = var(58) > 6
+trigger2 = anim = 1401
+trigger2 = animelemno(0) < 6
+value = SCA
+time = 1 + (var(6):=1+(var(6)-1)*(var(58)<5)) * 0
+ignorehitpause = 1
+
+[State 1400]
+type = Null
+triggerall = anim = 1401
+triggerall = animelemno(0) > 3
+trigger1 = var(30) := (var(30)|48) || 1
+trigger1 = var(58) > 6
+trigger1 = movecontact || movereversed
+trigger1 = var(30) := (var(30)|6) && 0
+trigger2 = animelemno(0) > 6
+trigger2 = var(30) := (var(30)|6) && 0
+ignorehitpause = 1
+
+[State 1400]
+type = VarAdd
+trigger1 = anim = 1400
+trigger1 = ifelse(var(58)>9,animelemno(0)=4&&var(26)=1,!animelemtime(5))
+trigger1 = var(5) := (var(5)&(65408^-1)) || 1
+trigger1 = var(5) := (var(5)|(120*128)) || 1
+fvar(14) = -200
+ignorehitpause = 1
+
+[State 1400]
+type = HitDef
+trigger1 = !movecontact && !movereversed
+trigger1 = var(20) := (var(20)&(8192^-1)) || 1
+trigger1 = var(59) := ceil(65+vel y) || 1
+ID = 1400
+attr = A,SA
+damage = ceil(var(59)*fvar(15)),ceil(ifelse((var(58)<5),var(59)/10,var(59)/2)*fvar(15))
+getpower = 0,0
+givepower = var(59)/3,var(59)*2
+animtype = Hard
+air.animtype = Back
+hitflag = MAF
+guardflag = HA
+priority = ifelse((var(58)<5),6,7),H
+pausetime = ifelse((var(58)<5),7,5),12
+hitsound = S5,2
+guardsound = S6,0
+ground.type = High
+ground.slidetime = 20
+ground.hittime = 23
+air.hittime = 23
+ground.velocity = -7,0
+air.velocity = -1,10
+fall = 1
+air.fall = 1
+fall.recover = 0
+ignorehitpause = 1
+
+[State 1400]
+type = Explod
+trigger1 = !(var(20)&8192)
+trigger1 = movecontact
+anim = ifelse(moveguarded,29999,20012)
+ID = 20012
+postype = Left
+pos = floor(screenpos x+(40+ifelse(abs(fvar(4))>40,fvar(4)/abs(fvar(4))*40,fvar(4)))*facing),floor(screenpos y-5+ifelse(fvar(5)<0,ifelse(fvar(5)<-50,-50,fvar(5)),0))
+facing = facing
+scale = .7,.7
+ownpal = 1
+ontop = 1
+sprpriority = 0
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
+ignorehitpause = 1
+
+[State 1400]
+type = VarAdd
+trigger1 = var(58) < 10
+trigger1 = !(var(20)&8192)
+trigger1 = numtarget
+trigger1 = movecontact = 1
+fvar(15) = -0.8 * (fvar(15)/1.0)
+ignorehitpause = 1
+
+[State 1400]
+type = PowerAdd
+trigger1 = !(var(20)&8192)
+trigger1 = movecontact || movereversed
+trigger1 = var(20) := (var(20)|8192) || 1
+value = ifelse(var(58)>6||movehit,160,80)
+ignorehitpause = 1
+
+[State 1400]
+type = PlaySnd
+trigger1 = anim = 1400
+trigger1 = ifelse(var(58)>9,animelemno(0)=3&&var(26)=1,!animelemtime(4))
+value = 10,2
+ignorehitpause = 1
+
+[State 1400]
+type = SelfState
+trigger1 = anim = 1401
+trigger1 = !(!(var(20)&268435456))
+value = 0 + ((var(20):=(var(20)|4))&&0)
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+[State 1400]
+type = SelfState
+trigger1 = anim = 1400
+trigger1 = animelemno(0) < 5
+trigger1 = vel y > 0 && (pos y+vel y) >= 0
+value = 52 + ((var(20):=(var(20)|4))&&0)
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+Type = VarAdd
+trigger1 = 1
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = fvar(0):=vel x||fvar(1):=vel y||fvar(2):=pos x||fvar(3):=pos y||1
+sysvar(3) = stateno
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) > 9
+trigger2 = roundstate > 2 && var(58) = [7,9]
+value = 5150
+persistent = 256
+ignorehitpause = 1
+
+;„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
+;‚i‚Q‚Q‚b
+;„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
+[Statedef 1410]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper && !(numexplod(468746114)=var(58)&&(var(58)=[1,12]))
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = stateno != sysvar(3)
+trigger1 = fvar(38) := 1 || 1
+trigger2 = stateno = var(8)
+trigger2 = fvar(38) := fvar(38) + 1 || 1
+sysvar(2) = 0 + (var(9):=sysvar(3)) * 0
+ignorehitpause = 1
+
+[State ALL]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 1410]
+type = StateTypeSet
+trigger1 = var(20) := (var(20)|64) || 1
+trigger1 = !sysvar(2)
+trigger1 = var(5) := (var(5)&(63^-1)) || 1
+trigger1 = var(5) := (var(5)|2) || 1
+trigger1 = var(5) := (var(5)|32) || 1
+statetype = A
+movetype = A
+physics = N
+ignorehitpause = 1
+
+[State 1410]
+type = CtrlSet
+trigger1 = !sysvar(2)
+trigger1 = var(20) := (var(20)&(4^-1)) || 1
+value = 0
+ignorehitpause = 1
+
+[State 1410]
+type = ChangeAnim
+trigger1 = !sysvar(2)
+value = 1410 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 1410]
+type = VelMul
+trigger1 = anim = 1410
+trigger1 = animelemno(0) < 10
+x = 0.85
+y = 0.85
+ignorehitpause = 1
+
+[State 1410]
+type = VelAdd
+trigger1 = anim = 1410
+trigger1 = animelemno(0) > 10
+y = const(movement.yaccel)
+ignorehitpause = 1
+
+[State 1410]
+type = VelSet
+trigger1 = anim = 1410
+trigger1 = ifelse(var(58)>9,animelemno(0)=9&&var(26)=1,!animelemtime(10))
+y = 10 + ifelse(pos y<=0,ifelse(pos y<-100,5,pos y/-20),0)
+x = 0.5
+ignorehitpause = 1
+
+[State 1410]
+type = ChangeAnim
+trigger1 = anim = 1410
+trigger1 = animelemno(0) > 10
+trigger1 = vel y > 0 && (pos y+vel y) >= 0
+value = 1411 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 1410]
+type = EnvShake
+trigger1 = anim = 1411
+trigger1 = vel y > 0
+time = 12
+freq = 90
+ampl = -5
+ignorehitpause = 1
+
+[State 1410]
+type = PlaySnd
+trigger1 = anim = 1411
+trigger1 = vel y > 0
+value = 5,1
+freqmul = 0.7
+ignorehitpause = 1
+
+[State 1410]
+type = PosSet
+trigger1 = anim = 1411
+trigger1 = vel y > 0
+y = (fvar(13):=(fvar(13)+(fvar(39):=0)-pos y)) * 0 + fvar(39)
+ignorehitpause = 1
+
+[State 1410]
+type = VelSet
+trigger1 = anim = 1411
+trigger1 = vel y > 0
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 1410]
+type = PowerAdd
+trigger1 = !sysvar(2)
+value = 40 * ifelse(var(58)>6,ifelse(var(58)>9,5,3),1)
+ignorehitpause = 1
+
+[State 1410]
+type = NotHitBy
+trigger1 = var(58) > 6
+trigger1 = anim = 1410
+trigger2 = var(58) > 6
+trigger2 = anim = 1411
+trigger2 = animelemno(0) < 5
+value = SCA
+time = 1 + (var(6):=1+(var(6)-1)*(var(58)<5)) * 0
+ignorehitpause = 1
+
+[State 1410]
+type = Null
+triggerall = anim = 1411
+triggerall = animelemno(0) > 4
+trigger1 = var(30) := (var(30)|48) || 1
+trigger1 = var(58) > 6
+trigger1 = movecontact || movereversed
+trigger1 = var(30) := (var(30)|6) && 0
+trigger2 = animelemno(0) > 7
+trigger2 = var(30) := (var(30)|6) && 0
+ignorehitpause = 1
+
+[State 1410]
+type = VarAdd
+trigger1 = anim = 1410
+trigger1 = ifelse(var(58)>9,animelemno(0)=9&&var(26)=1,!animelemtime(10))
+trigger1 = var(5) := (var(5)&(65408^-1)) || 1
+trigger1 = var(5) := (var(5)|(120*128)) || 1
+fvar(14) = -200
+ignorehitpause = 1
+
+[State 1410]
+type = HitDef
+trigger1 = !movecontact && !movereversed
+trigger1 = var(20) := (var(20)&(8192^-1)) || 1
+trigger1 = var(59) := ceil(85+vel y) || 1
+ID = 1410
+attr = A,SA
+damage = ceil(var(59)*fvar(15)),ceil(ifelse((var(58)<5),var(59)/10,var(59)/2)*fvar(15))
+getpower = 0,0
+givepower = var(59)/3,var(59)*2
+animtype = Hard
+air.animtype = Back
+hitflag = MAF
+guardflag = H
+priority = ifelse((var(58)<5),6,7),H
+pausetime = ifelse((var(58)<5),10,5),15
+hitsound = S5,2
+guardsound = S6,0
+ground.type = High
+ground.slidetime = 20
+ground.hittime = 23
+air.hittime = 23
+ground.velocity = -7,0
+air.velocity = -1,10
+fall = 1
+air.fall = 1
+fall.recover = 0
+ignorehitpause = 1
+
+[State 1410]
+type = Explod
+trigger1 = !(var(20)&8192)
+trigger1 = movecontact
+anim = ifelse(moveguarded,29999,20012)
+ID = 20012
+postype = Left
+pos = floor(screenpos x+(40+ifelse(abs(fvar(4))>40,fvar(4)/abs(fvar(4))*40,fvar(4)))*facing),floor(screenpos y-5+ifelse(fvar(5)<0,ifelse(fvar(5)<-50,-50,fvar(5)),0))
+facing = facing
+scale = .7,.7
+ownpal = 1
+ontop = 1
+sprpriority = 0
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
+ignorehitpause = 1
+
+[State 1410]
+type = VarAdd
+trigger1 = var(58) < 10
+trigger1 = !(var(20)&8192)
+trigger1 = numtarget
+trigger1 = movecontact = 1
+fvar(15) = -0.1 * (fvar(15)/1.0)
+ignorehitpause = 1
+
+[State 1410]
+type = PowerAdd
+trigger1 = !(var(20)&8192)
+trigger1 = movecontact || movereversed
+trigger1 = var(20) := (var(20)|8192) || 1
+value = ifelse(var(58)>6||movehit,200,100)
+ignorehitpause = 1
+
+[State 1410]
+type = PlaySnd
+triggerall = anim = 1410
+trigger1 = ifelse(var(58)>9,animelemno(0)=2&&var(26)=1,!animelemtime(3))
+trigger2 = ifelse(var(58)>9,animelemno(0)=5&&var(26)=1,!animelemtime(6))
+value = 10,1
+ignorehitpause = 1
+
+[State 1410]
+type = PlaySnd
+trigger1 = anim = 1410
+trigger1 = ifelse(var(58)>9,animelemno(0)=8&&var(26)=1,!animelemtime(9))
+value = 10,2
+ignorehitpause = 1
+
+[State 1410]
+type = PlaySnd
+triggerall = anim = 1411
+triggerall = animelemno(0) = [1,3]
+trigger1 = ifelse(var(58)>9,animelemtime(1)+var(26)+1,animelemtime(1))%14 = 0
+trigger2 = ifelse(var(58)>9,animelemtime(1)+var(26)+1,animelemtime(1))%6 = 0
+trigger2 = random%2
+value = 7,8
+channel = 7
+ignorehitpause = 1
+
+[State 1410]
+type = Projectile
+trigger1 = anim = 1411
+trigger1 = animelemno(0) = [1,3]
+trigger1 = ifelse(var(58)>9,animelemtime(1)+var(26)+1,animelemtime(1))%4 = 0
+projanim = 15542
+projscale = 0.76,0.76
+projid = 14310
+projsprpriority = -1
+projedgebound = 1000000000
+projstagebound = 1000000000
+projheightbound = -2147483648,2147483647
+postype = p1
+offset = 60,0
+projremove = 0
+projremovetime = 25
+attr = SCA,AA,AT,AP
+damage = ceil(10*fvar(15)),ceil(ifelse((var(58)<5),1,5)*fvar(15))
+getpower = 20,ifelse(var(58)<5,10,20)
+givepower = 5,10
+animtype = Hard
+hitflag = MFD
+guardflag = L
+pausetime = 0,40
+ground.type = Low
+ground.hittime = 0
+air.hittime = 0
+numhits = 0
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 1410]
+type = Explod
+trigger1 = anim = 1411
+trigger1 = animelemno(0) = [1,3]
+trigger1 = ifelse(var(58)>9,animelemtime(1)+var(26)+1,animelemtime(1))%4 = 0
+anim = 15542
+trans = sub
+removetime = 25
+ID = 20014
+postype = p1
+pos = 60,0
+facing = facing
+scale = .8,.8
+ownpal = 1
+sprpriority = -2
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
+ignorehitpause = 1
+
+[State 1410]
+type = Projectile
+trigger1 = anim = 1411
+trigger1 = animelemno(0) = [1,3]
+trigger1 = ifelse(var(58)>9,animelemtime(1)+var(26)+1,animelemtime(1))%2 = 0
+projanim = 15520
+projremanim = 15522 + random%12
+projscale = 0.3,0.3
+projid = 14311
+projsprpriority = 2147483647
+projedgebound = 1000000000
+projstagebound = 1000000000
+projheightbound = -2147483648,2147483647
+offset = -15 + random%151,0
+velocity = 0,-(2+(random%40/10.0))
+accel = 0,0
+velmul = 0,0.90
+projremove = 0
+projremovetime = 20
+attr = C,SP
+damage = ceil(10*fvar(15)),ceil(ifelse((var(58)<5),1,5)*fvar(15))
+getpower = 24,ifelse(var(58)<5,12,24)
+givepower = 7,15
+animtype = Medium
+hitflag = MFAD
+guardflag = M
+pausetime = 0,5
+ground.type = High
+ground.velocity = -6,-6
+air.velocity = -6,-6
+guard.hittime = 15
+guard.ctrltime = 15
+guard.slidetime = 15
+fall = 1
+fall.recover = 0
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 1410]
+type = SelfState
+trigger1 = anim = 1411
+trigger1 = !(!(var(20)&268435456))
+value = 0 + ((var(20):=(var(20)|4))&&0)
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+Type = VarAdd
+trigger1 = 1
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = fvar(0):=vel x||fvar(1):=vel y||fvar(2):=pos x||fvar(3):=pos y||1
+sysvar(3) = stateno
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) > 9
+trigger2 = roundstate > 2 && var(58) = [7,9]
+value = 5150
+persistent = 256
+ignorehitpause = 1
+
+;„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
 ;ƒXƒLƒ‹ƒJ[ƒh”­“®Œã‰‰o
 ;„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª„ª
-
 [Statedef 351798]
 type = U
 movetype = U

@@ -114,24 +114,29 @@ ignorehitpause = 1
 type = Null
 trigger1 = var(59) := (((var(30)&1572864)/524288) + ifelse(var(58)>9,1,!(!(var(19)&67108864)))) && 0
 trigger2 = var(59) = 0
-trigger2 = var(59) := 00060 || 1
-trigger2 = fvar(38) := 5 * ifelse(var(58)<5,2,1) || 1
-trigger2 = fvar(39) := 22 || 1
+trigger2 = var(59) := 00060
+trigger2 = fvar(37) := 30
+trigger2 = fvar(38) := 5 * ifelse(var(58)<5,2,1)
+trigger2 = fvar(39) := 22
 trigger3 = var(59) = 1
-trigger3 = var(59) := 20080 || 1
-trigger3 = fvar(38) := 4 * ifelse(var(58)<5,2,1) || 1
-trigger3 = fvar(39) := 25 || 1
+trigger3 = var(59) := 20080
+trigger3 = fvar(37) := 25
+trigger3 = fvar(38) := 4 * ifelse(var(58)<5,2,1)
+trigger3 = fvar(39) := 25
 trigger4 = var(59) = 2
-trigger4 = var(59) := 35100 || 1
-trigger4 = fvar(38) := 3 * ifelse(var(58)<5,2,1) || 1
-trigger4 = fvar(39) := 28 || 1
+trigger4 = var(59) := 35100
+trigger4 = fvar(37) := 18
+trigger4 = fvar(38) := 3 * ifelse(var(58)<5,2,1)
+trigger4 = fvar(39) := 28
 trigger5 = var(59) = 3
-trigger5 = var(59) := 35120 || 1
-trigger5 = fvar(38) := 2 * ifelse(var(58)<5,2,1) || 1
-trigger5 = fvar(39) := 32 || 1
-trigger6 = var(59) := 65999 || 1
-trigger6 = fvar(38) := 1 + (var(58)>6) * 1 || 1
-trigger6 = fvar(39) := 40 || 1
+trigger5 = var(59) := 35120
+trigger5 = fvar(37) := 12
+trigger5 = fvar(38) := 2 * ifelse(var(58)<5,2,1)
+trigger5 = fvar(39) := 32
+trigger6 = var(59) := 65999
+trigger6 = fvar(37) := 5
+trigger6 = fvar(38) := 1 + (var(58)>6) * 1
+trigger6 = fvar(39) := 40
 ignorehitpause = 1
 
 [State 351702];Šu—£UŒ‚
@@ -142,9 +147,9 @@ triggerall = var(400) := (var(19)&3) - 1
 ;LV1 ‚È‚µ / ‚È‚µ
 ;LV2 –³“G‰ğœ / ‘SƒLƒƒƒ‰–³“G‰ğœ
 trigger1 = var(59) >= 35100
-trigger1 = var(-831) := (var(-831)|4)
+trigger1 = var(806) := (var(806)|4)
 trigger1 = var(400) > 1
-trigger1 = var(-831) := (var(-831)|1024) && 0
+trigger1 = var(806) := (var(806)|1024) && 0
 ;LV3 ‹­§MoveType=H‰» / ‘SƒLƒƒƒ‰“Áê–³“G‰ğœ
 trigger2 = var(59) >= 35120
 trigger2 = var(401) := var(var(4938572)+46928+4*((var(15)%2)+1))
@@ -154,12 +159,15 @@ trigger3 = var(401) := var(var(4938572)+46928+4*((var(15)%2)+3))
 trigger3 = var(var(401)+3588) := 2 && 0
 trigger4 = var(59) >= 35120
 trigger4 = var(400) > 1
-trigger4 = var(-831) := (var(-831)|2048) && 0
-;LV4 NoKO‰ğœ / ~‚ß‘Ï«‰ğœ
+trigger4 = var(806) := (var(806)|2048) && 0
+;LV4 NoKO‰ğœ / ~‚ß‘Ï«‰ğœ / ƒqƒbƒg’¼€iNoKO‰ğœ‚Íæ‚èÁ‚µj
 trigger5 = var(59) = 65999
-trigger5 = var(-831) := (var(-831)|2)
+trigger5 = var(806) := (var(806)|2)
 trigger5 = var(400) > 1
-trigger5 = var(-831) := (var(-831)|16) && 0
+trigger5 = var(806) := (var(806)|16)
+trigger5 = var(799) && (var(19)&-2147483648)
+trigger5 = projhittime(13502) = 0
+trigger5 = var(806) := ((var(806)&-3)|65536)
 ignorehitpause = 1
 
 [State 351702]
@@ -263,7 +271,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -301,7 +309,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -339,7 +347,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -377,7 +385,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -415,7 +423,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -453,7 +461,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -499,7 +507,7 @@ projremove = 1
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Hard
@@ -537,7 +545,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -575,7 +583,7 @@ projremove = 0
 attr = A,HP
 damage = ceil(fvar(39)*ifelse(fvar(15)<0.5,0.5,fvar(15))),ceil(ifelse((var(58)<5),fvar(39)*(1/fvar(38)),fvar(39)*(1/(fvar(38)/2)))*ifelse(fvar(15)<0.5,0.5,fvar(15)))
 projhits = ifelse(var(58)<10,1,100)
-projmisstime = ifelse(var(58)<10,1,20)
+projmisstime = ifelse(var(58)<10,1,floor(fvar(37)))
 getpower = ceil(fvar(39)*1.5) * (var(58)>5),ceil(fvar(39)*1.5) / ifelse((var(58)<5),2,1) * (var(58)>5)
 givepower = ceil(fvar(39)),ceil(ifelse((var(58)<5),1.5,1)*fvar(39))
 animtype = Medium
@@ -830,13 +838,13 @@ trigger1 = anim = 3040 || anim = [3042,3043]
 trigger1 = var(400) > 0
 ;LV2 –³“G‰ğœ / ‚È‚µ
 trigger1 = var(59) >= 2
-trigger1 = var(-831) := (var(-831)|4)
+trigger1 = var(806) := (var(806)|4)
 ;LV3 “Áê–³“G‰ğœ / ‚È‚µ
 trigger1 = var(59) >= 3
-trigger1 = var(-831) := (var(-831)|8)
+trigger1 = var(806) := (var(806)|8)
 ;LV4 NoKO‰ğœ / ‹­§ƒ‰ƒCƒtŒ¸­
 trigger1 = var(59) = 4
-trigger1 = var(-831) := (var(-831)|2)
+trigger1 = var(806) := (var(806)|2)
 ignorehitpause = 1
 
 [State 351704]
@@ -1502,24 +1510,6 @@ trigger4 = numtarget || (var(54):=3517044)*0
 value = 3517044
 ignorehitpause = 1
 
-[State 351704];Šu—£UŒ‚
-type = Null
-triggerall = var(15)
-triggerall = var(58) > 9
-;LV4 NoKO‰ğœ / ‹­§ƒ‰ƒCƒtŒ¸­
-triggerall = var(59) = 4
-triggerall = anim = 3043
-triggerall = var(400) > 1
-trigger1 = var(26) = -1
-trigger1 = var(-831) := (var(-831)|4096)
-trigger2 = animelemno(0) = 10 && var(26) = 1
-trigger2 = var(-831) := (var(-831)|4096)
-trigger3 = animelemno(0) = 23 && var(26) = 0
-trigger3 = var(-831) := (var(-831)|4096)
-trigger4 = animelemno(0) = 28 && var(26) = 0
-trigger4 = var(-831) := (var(-831)|4096)
-ignorehitpause = 1
-
 [State 351704];‹­§–³“G‰ğœ—pƒ^ƒQƒXƒe
 type = TargetState
 triggerall = numtarget || var(59) > 9
@@ -1531,6 +1521,27 @@ trigger1 = numtarget || (var(54):=3517044)*0
 trigger2 = ifelse(var(58)>9,animelemno(0)=3&&var(26)=4,!animelemtime(4))
 trigger2 = numtarget || (var(54):=3517044)*0
 value = 3517044
+ignorehitpause = 1
+
+[State 351704];Šu—£UŒ‚
+type = Null
+triggerall = var(15)
+triggerall = var(58) > 9
+;LV4 NoKO‰ğœ / ‹­§ƒ‰ƒCƒtŒ¸­ / LifeMax˜M‚è
+triggerall = var(59) = 4
+triggerall = var(400) > 1
+trigger1 = anim = 3043
+trigger1 = var(26) = -1
+trigger1 = var(806) := (var(806)|4096)
+trigger2 = anim = 3043
+trigger2 = animelemno(0) = 10 && var(26) = 1
+trigger2 = var(806) := (var(806)|4096)
+trigger3 = anim = 3043
+trigger3 = animelemno(0) = 23 && var(26) = 0
+trigger3 = var(806) := (var(806)|ifelse((var(799)&&(var(19)&-2147483648)),135168,4096))
+trigger4 = anim = 3044
+trigger4 = animelemno(0) = 2 && var(26) = 5
+trigger4 = var(806) := (var(806)|ifelse((var(799)&&(var(19)&-2147483648)),135168,4096))
 ignorehitpause = 1
 
 [State 351704]
@@ -1763,16 +1774,19 @@ triggerall = var(400) := (var(19)&3) - 1
 ;LV2 ‹­§MoveType=H‰» / –³“G‰ğœ
 trigger1 = var(59) >= 62
 trigger1 = var(400) > 1
-trigger1 = var(-831) := (var(-831)|4) && 0
+trigger1 = var(806) := (var(806)|4) && 0
 ;LV3 ~‚ß‘Ï«‰ğœ / “Áê–³“G‰ğœ
 trigger2 = var(59) >= 93
 trigger2 = var(400) > 1
-trigger2 = var(-831) := (var(-831)|8) && 0
-;LV4 NoKO‰ğœ / HitDefAttr•t—^, HitOverRide‰ğœ
+trigger2 = var(806) := (var(806)|8) && 0
+;LV4 NoKO‰ğœ / HitDefAttr•t—^, HitOverRide‰ğœ / ’¼€
 trigger3 = var(59) = 214
-trigger3 = var(-831) := (var(-831)|2)
+trigger3 = var(806) := (var(806)|2)
 trigger3 = var(400) > 1
-trigger3 = var(-831) := (var(-831)|96)
+trigger3 = var(806) := (var(806)|96)
+trigger3 = var(799) && (var(19)&-2147483648)
+trigger3 = anim = 3054 && animelemno(0) = 2
+trigger3 = var(806) := (var(806)|65536)
 ignorehitpause = 1
 
 [State 351705]
@@ -2010,7 +2024,7 @@ trigger2 = var(401) := var(var(4938572)+46928+4*((var(15)%2)+3))
 trigger2 = var(var(401)+3588) := 2 && 0
 ;LV3 ~‚ß‘Ï«‰ğœ / “Áê–³“G‰ğœ
 trigger3 = var(59) > 62
-trigger3 = var(-831) := (var(-831)|16)
+trigger3 = var(806) := (var(806)|16)
 ignorehitpause = 1
 
 [State 351705];‰‰o—p’x‰„
@@ -2799,18 +2813,18 @@ triggerall = var(58) > 9
 triggerall = var(400) := (var(19)&3) - 1
 ;LV2 ‹­§ƒIƒoƒtƒƒ_ƒ[ƒW•t—^, –³“G‰ğœ / ‘SƒLƒƒƒ‰‹­§ƒIƒoƒtƒƒ_ƒ[ƒW•t—^
 trigger1 = var(59) >= 2
-trigger1 = var(-831) := (var(-831)|4)
+trigger1 = var(806) := (var(806)|4)
 trigger1 = var(400) > 1
 trigger1 = sysvar(2) = [581,590]
-trigger1 = var(-831) := (var(-831)|16384) && 0
+trigger1 = var(806) := (var(806)|16384) && 0
 ;LV3 ‹­§ƒA[ƒ}[ŠÑ’Ê–C, “Áê–³“G‰ğœ / HitDefAttr•t—^, HitOverRide‰ğœ
 trigger2 = var(59) >= 3
-trigger2 = var(-831) := (var(-831)|8)
+trigger2 = var(806) := (var(806)|8)
 trigger2 = var(400) > 1
-trigger2 = var(-831) := (var(-831)|96) && 0
+trigger2 = var(806) := (var(806)|96) && 0
 ;LV4 ‹­§ƒ^[ƒQƒbƒgæ“¾, NoKO‰ğœ, ‹­§‘¦€•Ô‚µ / ‹­§‚ ‚ä‚ ‚äƒLƒ‰[
 trigger3 = var(59) >= 4
-trigger3 = var(-831) := (var(-831)|2)
+trigger3 = var(806) := (var(806)|2)
 ignorehitpause = 1
 
 [State 351706]
@@ -3215,34 +3229,37 @@ triggerall = var(400) > 0
 triggerall = anim = 3060
 triggerall = animelemno(0) > 7
 triggerall = sysvar(2) = [581,652]
+;LV = 4 -> ‚È‚µ / ‚È‚µ / ’¼€iNoKO‰ğœ‚Íæ‚èÁ‚µj
+trigger1 = var(799) && (var(19)&-2147483648)
+trigger1 = var(806) := ((var(806)&-3)|65536) && 0
 ;LV >= 2 -> ‹­§ƒIƒoƒtƒƒ_ƒ[ƒW•t—^ / ‚È‚µ
 ;LV = 4 -> ‚È‚µ / ‹­§‚ ‚ä‚ ‚äƒLƒ‰[
-trigger1 = var(401) := var(var(4938572)+46928+4*((var(15)%2)+1+2*(!enemy,alive&&numenemy>1)))
-trigger1 = sysvar(2) = [581,590]
-trigger1 = var(59) >= 2
-trigger1 = var(var(401)+4136) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life) || 1
-trigger1 = var(59) = 4
-trigger1 = var(400) > 1
-trigger1 = var(var(401)+3052) != var(-150)
-trigger1 = var(var(401)+3060) := ifelse(random%4,ifelse(random%3,ifelse(random%2,random,151+random%5),ifelse(random%6,(500+random%12)*10,(520+random%2)*10)),abs(sysvar(0))) || 1
-trigger1 = var(var(401)+3588) := 2
-;LV = 4 -> ‹­§‘¦€•Ô‚µ / ‚È‚µ
-trigger2 = sysvar(2) = [591,600]
+trigger2 = var(401) := var(var(4938572)+46928+4*((var(15)%2)+1+2*(!enemy,alive&&numenemy>1)))
+trigger2 = sysvar(2) = [581,590]
+trigger2 = var(59) >= 2
+trigger2 = var(var(401)+4136) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life) || 1
 trigger2 = var(59) = 4
-trigger2 = var(51) >= 0
+trigger2 = var(400) > 1
 trigger2 = var(var(401)+3052) != var(-150)
-trigger2 = var(var(401)+3060) := var(51) || 1
+trigger2 = var(var(401)+3060) := ifelse(random%4,ifelse(random%3,ifelse(random%2,random,151+random%5),ifelse(random%6,(500+random%12)*10,(520+random%2)*10)),abs(sysvar(0))) || 1
+trigger2 = var(var(401)+3588) := 2
+;LV = 4 -> ‹­§‘¦€•Ô‚µ / ‚È‚µ
+trigger3 = sysvar(2) = [591,600]
+trigger3 = var(59) = 4
+trigger3 = var(51) >= 0
+trigger3 = var(var(401)+3052) != var(-150)
+trigger3 = var(var(401)+3060) := var(51) || 1
 ;LV >= 3 -> ‹­§ƒA[ƒ}[ŠÑ’Ê–C / ‚È‚µ
-trigger3 = sysvar(2) = [601,650]
-trigger3 = var(59) >= 3
-trigger3 = !(var(var(401)+3060)=5100&&var(var(401)+3580)<3)
-trigger3 = var(var(401)+4136) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life) || 1
-trigger3 = var(var(401)+4212) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life) || 1
-trigger3 = var(var(401)+3060) := ifelse(random%4,ifelse(random%3,ifelse(random%2,5080,5081),5100),5110)
-trigger3 = var(var(401)+3580) := 0 || 1
-trigger3 = var(var(401)+4148) := 0 || 1
-trigger3 = var(var(401)+4152) := 0 || 1
-trigger3 = var(var(401)+4188) := ifelse(var(var(401)+3060)=5100,1065353216,0) || 1
+trigger4 = sysvar(2) = [601,650]
+trigger4 = var(59) >= 3
+trigger4 = !(var(var(401)+3060)=5100&&var(var(401)+3580)<3)
+trigger4 = var(var(401)+4136) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life) || 1
+trigger4 = var(var(401)+4212) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life) || 1
+trigger4 = var(var(401)+3060) := ifelse(random%4,ifelse(random%3,ifelse(random%2,5080,5081),5100),5110)
+trigger4 = var(var(401)+3580) := 0 || 1
+trigger4 = var(var(401)+4148) := 0 || 1
+trigger4 = var(var(401)+4152) := 0 || 1
+trigger4 = var(var(401)+4188) := ifelse(var(var(401)+3060)=5100,1065353216,0) || 1
 ignorehitpause = 1
 
 [State 351706];Šu—£UŒ‚
@@ -3400,6 +3417,22 @@ trigger1 = var(58) = [7,9]
 trigger1 = var(59) > 2
 trigger2 = var(58) > 9
 value = ifelse((var(59)>3||(var(58)>9&&var(59)>2)),3517062,3517061)
+ignorehitpause = 1
+
+[State 351706];Šu—£UŒ‚
+type = Null
+trigger1 = var(15)
+trigger1 = var(58) > 9
+;LV = 4 -> ‚È‚µ / ‚È‚µ / ’¼€ + s“®Ï‚İƒtƒ‰ƒO•t—^
+trigger1 = var(59) = 4
+trigger1 = var(400) > 1
+trigger1 = roundstate = 2
+trigger1 = sysvar(2) = [652,669]
+trigger1 = var(799) && (var(19)&-2147483648)
+trigger1 = var(806) := (var(806)|65536)
+trigger1 = numtarget
+trigger1 = !target,alive || target,stateno = 3517062 || target,hitpausetime < 3
+trigger1 = var(806) := (var(806)|32768)
 ignorehitpause = 1
 
 [State 351706]
@@ -3996,12 +4029,12 @@ triggerall = var(15)
 triggerall = var(58) > 9
 triggerall = var(400) := (var(19)&3) - 1
 ;LV1 –³“G‰ğœ / ‚È‚µ
-trigger1 = var(-831) := (var(-831)|4)
+trigger1 = var(806) := (var(806)|4)
 ;LV2 “Áê–³“G‰ğœ / ‘SƒLƒƒƒ‰–³“G‰ğœ
 trigger1 = var(59) >= 2
-trigger1 = var(-831) := (var(-831)|8)
+trigger1 = var(806) := (var(806)|8)
 trigger1 = var(400) > 1
-trigger1 = var(-831) := (var(-831)|1024) && 0
+trigger1 = var(806) := (var(806)|1024) && 0
 ;LV3 ‹­§ƒ^[ƒQƒbƒgæ“¾ / ‘SƒLƒƒƒ‰“Áê–³“G‰ğœ
 trigger2 = var(59) >= 3
 trigger2 = sysvar(2) >= 230
@@ -4024,12 +4057,15 @@ trigger2 = var(var(-776)+16) := var(var(-776)+16) + 1 || 1
 trigger2 = var(var(-776)+8) := 1 && 0
 trigger3 = var(59) >= 3
 trigger3 = var(400) > 1
-trigger3 = var(-831) := (var(-831)|2048) && 0
-;LV4 NoKO‰ğœ / ‘SƒLƒƒƒ‰HitOverRide‰ğœ
+trigger3 = var(806) := (var(806)|2048) && 0
+;LV4 NoKO‰ğœ / ‘SƒLƒƒƒ‰HitOverRide‰ğœ / ƒqƒbƒg“€Œ‹•t—^, ƒqƒbƒgPersistentƒtƒ‰ƒO•t—^, ƒqƒbƒg’¼€
 trigger4 = var(59) = 4
-trigger4 = var(-831) := (var(-831)|2)
+trigger4 = var(806) := (var(806)|2)
 trigger4 = var(400) > 1
-trigger4 = var(-831) := (var(-831)|8192)
+trigger4 = var(806) := (var(806)|8192)
+trigger4 = var(799) && (var(19)&-2147483648)
+trigger4 = projhittime(13508) = 0
+trigger4 = var(806) := (var(806)|851968)
 ignorehitpause = 1
 
 [State 351708]
@@ -4390,7 +4426,7 @@ type = Null
 trigger1 = var(15)
 trigger1 = var(58) > 9
 trigger1 = var(400) := (var(19)&3) - 1
-trigger1 = var(-831) := (var(-831)|2)
+trigger1 = var(806) := (var(806)|2)
 ignorehitpause = 1
 
 [State 351710];ƒfƒoƒbƒO—p ’·‚³’²®
@@ -4954,7 +4990,19 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = var(58) > 6
 trigger1 = numexplod(351713)
-sysfvar(4) = !!alive
+sysfvar(4) = ifelse(!alive,0,ifelse(var(58)>9,0.5,1))
+ignorehitpause = 1
+
+[State 351710];Šu—£—˜—p‘h¶
+type = SelfState
+trigger1 = var(15)
+trigger1 = hitpausetime
+trigger1 = !alive
+trigger1 = numexplod(351713)
+trigger1 = var(-7) := -1
+trigger1 = alive = -1
+value = 351710
+persistent = 256
 ignorehitpause = 1
 
 [State 351710];‘h¶ƒXƒe[ƒg‚Ö
@@ -4964,6 +5012,15 @@ trigger1 = !alive
 trigger1 = numexplod(351713)
 value = 1646184419
 persistent = 256
+ignorehitpause = 1
+
+[State 351710];Šu—£‘Ï«ˆê•”ƒIƒti©E—pj
+type = Null
+trigger1 = var(15)
+trigger1 = var(803) := 1
+trigger1 = numexplod(351711)
+trigger1 = !numexplod(351713)
+trigger1 = var(804) := 1
 ignorehitpause = 1
 
 [State 351710];‘h¶ƒ^ƒCƒ~ƒ“ƒO—pExplod
@@ -5007,9 +5064,12 @@ ignorehitpause = 1
 
 [State 351710];ã‹LExplodíœ / ~‚ßÄŠJŠÔİ’èˆÊ’u
 type = RemoveExplod
-trigger1 = numexplod(351712)
-trigger1 = !numprojID(351712)
+triggerall = numexplod(351712)
+triggerall = !numprojID(351712)
 trigger1 = !enemy(!enemy,alive&&numenemy>1),life && !enemy(!enemy,alive&&numenemy>1),hitpausetime
+trigger2 = var(15)
+trigger2 = var(400) > 0
+trigger2 = (!(enemy(0),alive)&&!(enemy(numenemy>1),alive)) || var(400) > 1
 ID = 351712
 ignorehitpause = 1
 
@@ -5120,7 +5180,7 @@ trigger1 = var(58) > 9
 trigger1 = !numprojID(351711)
 trigger1 = !numexplod(351711)
 trigger1 = var(400) > 0
-trigger1 = var(-831) := (var(-831)|108)
+trigger1 = var(806) := (var(806)|108)
 ignorehitpause = 1
 
 [State 351710];Šu—£UŒ‚
@@ -5146,8 +5206,7 @@ trigger2 = var(var(59)+3608) := 0 || 1
 trigger2 = var(var(59)+3612) := 0 || 1
 trigger2 = var(var(59)+4148) := 0
 trigger3 = var(400) > 1
-trigger3 = !numexplod(351712)
-trigger3 = var(-831) := (var(-831)|128)
+trigger3 = var(806) := (var(806)|128)
 ignorehitpause = 1
 
 [State 351710];’´‘¦€—˜—p©E
@@ -5164,7 +5223,9 @@ ignorehitpause = 1
 
 [State 351710];’´‘¦€—˜—p©E
 type = SelfState
-trigger1 = var(59)
+triggerall = var(59)
+trigger1 = !var(15)
+trigger2 = var(804) := 1
 value = 1646184415
 persistent = 256
 ignorehitpause = 1
@@ -5510,20 +5571,167 @@ trigger1 = var(var(99)+3620) := 0 || 1
 trigger1 = var(var(99)+352) := 0 || 1
 trigger1 = var(var(99)+476) := 0 || 1
 trigger1 = var(var(99)+480) := 0 || 1
+trigger1 = var(799) && (var(19)&-2147483648)
+trigger1 = var(var(99)+3068) := -1
+trigger1 = var(var(99)+3072) := -1
+trigger1 = var(var(99)+3076) := -1
+trigger1 = var(var(99)+3080) := -1
+trigger1 = var(var(99)+3084) := -1
+trigger1 = var(var(99)+3088) := -1
+trigger1 = var(var(99)+3092) := -1
+trigger1 = var(var(99)+3096) := -1
+trigger1 = var(var(99)+3100) := -1
+trigger1 = var(var(99)+3104) := -1
+trigger1 = var(var(99)+3108) := -1
+trigger1 = var(var(99)+3112) := -1
+trigger1 = var(var(99)+3116) := -1
+trigger1 = var(var(99)+3120) := -1
+trigger1 = var(var(99)+3124) := -1
+trigger1 = var(var(99)+3128) := -1
+trigger1 = var(var(99)+3132) := -1
+trigger1 = var(var(99)+3136) := -1
+trigger1 = var(var(99)+3140) := -1
+trigger1 = var(var(99)+3144) := -1
+trigger1 = var(var(99)+3148) := -1
+trigger1 = var(var(99)+3152) := -1
+trigger1 = var(var(99)+3156) := -1
+trigger1 = var(var(99)+3160) := -1
+trigger1 = var(var(99)+3164) := -1
+trigger1 = var(var(99)+3168) := -1
+trigger1 = var(var(99)+3172) := -1
+trigger1 = var(var(99)+3176) := -1
+trigger1 = var(var(99)+3180) := -1
+trigger1 = var(var(99)+3184) := -1
+trigger1 = var(var(99)+3188) := -1
+trigger1 = var(var(99)+3192) := -1
+trigger1 = var(var(99)+3196) := -1
+trigger1 = var(var(99)+3200) := -1
+trigger1 = var(var(99)+3204) := -1
+trigger1 = var(var(99)+3208) := -1
+trigger1 = var(var(99)+3212) := -1
+trigger1 = var(var(99)+3216) := -1
+trigger1 = var(var(99)+3220) := -1
+trigger1 = var(var(99)+3224) := -1
+trigger1 = var(var(99)+3228) := -1
+trigger1 = var(var(99)+3232) := -1
+trigger1 = var(var(99)+3236) := -1
+trigger1 = var(var(99)+3240) := -1
+trigger1 = var(var(99)+3244) := -1
+trigger1 = var(var(99)+3248) := -1
+trigger1 = var(var(99)+3252) := -1
+trigger1 = var(var(99)+3256) := -1
+trigger1 = var(var(99)+3260) := -1
+trigger1 = var(var(99)+3264) := -1
+trigger1 = var(var(99)+3268) := -1
+trigger1 = var(var(99)+3272) := -1
+trigger1 = var(var(99)+3276) := -1
+trigger1 = var(var(99)+3280) := -1
+trigger1 = var(var(99)+3284) := -1
+trigger1 = var(var(99)+3288) := -1
+trigger1 = var(var(99)+3292) := -1
+trigger1 = var(var(99)+3296) := -1
+trigger1 = var(var(99)+3300) := -1
+trigger1 = var(var(99)+3304) := -1
+trigger1 = var(var(99)+3308) := -1
+trigger1 = var(var(99)+3312) := -1
+trigger1 = var(var(99)+3316) := -1
+trigger1 = var(var(99)+3320) := -1
+trigger1 = var(var(99)+3324) := -1
+trigger1 = var(var(99)+3328) := -1
+trigger1 = var(var(99)+3332) := -1
+trigger1 = var(var(99)+3336) := -1
+trigger1 = var(var(99)+3340) := -1
+trigger1 = var(var(99)+3344) := -1
+trigger1 = var(var(99)+3348) := -1
+trigger1 = var(var(99)+3352) := -1
+trigger1 = var(var(99)+3356) := -1
+trigger1 = var(var(99)+3360) := -1
+trigger1 = var(var(99)+3364) := -1
+trigger1 = var(var(99)+3368) := -1
+trigger1 = var(var(99)+3372) := -1
+trigger1 = var(var(99)+3376) := -1
+trigger1 = var(var(99)+3380) := -1
+trigger1 = var(var(99)+3384) := -1
+trigger1 = var(var(99)+3388) := -1
+trigger1 = var(var(99)+3392) := -1
+trigger1 = var(var(99)+3396) := -1
+trigger1 = var(var(99)+3400) := -1
+trigger1 = var(var(99)+3404) := -1
+trigger1 = var(var(99)+3408) := -1
+trigger1 = var(var(99)+3412) := -1
+trigger1 = var(var(99)+3416) := -1
+trigger1 = var(var(99)+3420) := -1
+trigger1 = var(var(99)+3424) := -1
+trigger1 = var(var(99)+3428) := -1
+trigger1 = var(var(99)+3432) := -1
+trigger1 = var(var(99)+3436) := -1
+trigger1 = var(var(99)+3440) := -1
+trigger1 = var(var(99)+3444) := -1
+trigger1 = var(var(99)+3448) := -1
+trigger1 = var(var(99)+3452) := -1
+trigger1 = var(var(99)+3456) := -1
+trigger1 = var(var(99)+3460) := -1
+trigger1 = var(var(99)+3464) := -1
+trigger1 = var(var(99)+3468) := -1
+trigger1 = var(var(99)+3472) := -1
+trigger1 = var(var(99)+3476) := -1
+trigger1 = var(var(99)+3480) := -1
+trigger1 = var(var(99)+3484) := -1
+trigger1 = var(var(99)+3488) := -1
+trigger1 = var(var(99)+3492) := -1
+trigger1 = var(var(99)+3496) := -1
+trigger1 = var(var(99)+3500) := -1
+trigger1 = var(var(99)+3504) := -1
+trigger1 = var(var(99)+3508) := -1
+trigger1 = var(var(99)+3512) := -1
+trigger1 = var(var(99)+3516) := -1
+trigger1 = var(var(99)+3520) := -1
+trigger1 = var(var(99)+3524) := -1
+trigger1 = var(var(99)+3528) := -1
+trigger1 = var(var(99)+3532) := -1
+trigger1 = var(var(99)+3536) := -1
+trigger1 = var(var(99)+3540) := -1
+trigger1 = var(var(99)+3544) := -1
+trigger1 = var(var(99)+3548) := -1
+trigger1 = var(var(99)+3552) := -1
+trigger1 = var(var(99)+3556) := -1
+trigger1 = var(var(99)+3560) := -1
+trigger1 = var(var(99)+3564) := -1
+trigger1 = var(var(99)+3568) := -1
+trigger1 = var(var(99)+3572) := -1
+trigger1 = var(var(99)+3576) := -1
+trigger1 = var(var(99)+3608) := 2147483647
+trigger1 = var(var(99)+3612) := 2147483647
+trigger1 = var(var(99)+4148) := 2147483647
+trigger1 = var(var(99)+348) := 0
 ignorehitpause = 1
 
 [State 351713]
 type = SelfState
+trigger1 = var(15)
 trigger1 = var(59) < var(var(4938572)+47444)
 value = 351713 + (var(59):=var(59)+1)*0
 persistent = 256
 ignorehitpause = 1
 
+[State 351713]; ESCƒL[‰Ÿ‰ºƒtƒ‰ƒOƒIƒ“
+type = Null
+trigger1 = var(15)
+trigger1 = var(799) && (var(19)&-2147483648)
+trigger1 = var(4942208) := (var(4942208)|256)
+ignorehitpause = 1
+
 [State 351713]
 type = Pause
-trigger1 = 1
+trigger1 = var(20) := (var(20)|16777216) || 1
 time = 2
 movetime = 2
+ignorehitpause = 1
+
+[State 351713]
+type = Null
+trigger1 = var(15)
+trigger1 = var(806) := (var(806)&(128^-1))
 ignorehitpause = 1
 
 [State 351713]
@@ -5567,14 +5775,14 @@ triggerall = var(15)
 triggerall = var(99) := var(var(4938572)+46928+4*var(59))
 triggerall = var(var(99)+12) != teamside
 ;HitBy–³“G‰ğœ
-trigger1 = !(!(Const(Data.KO.Echo)&1024))
+trigger1 = !(!(var(806)&1024))
 trigger1 = var(var(99)+4092) := 4095
 trigger1 = var(var(99)+4096) := 4095 && 0
 ;Unhittable–³“G‰ğœ
-trigger2 = !(!(Const(Data.KO.Echo)&2048))
+trigger2 = !(!(var(806)&2048))
 trigger2 = var(var(99)+4088) := 0
 ;HitOverRide‰ğœ
-trigger3 = !(!(Const(Data.KO.Echo)&8192))
+trigger3 = !(!(var(806)&8192))
 trigger3 = var(var(99)+4264) := 0 || 1
 trigger3 = var(var(99)+4284) := 0 || 1
 trigger3 = var(var(99)+4304) := 0 || 1
@@ -5584,12 +5792,16 @@ trigger3 = var(var(99)+4364) := 0 || 1
 trigger3 = var(var(99)+4384) := 0 || 1
 trigger3 = var(var(99)+4404) := 0
 ;‹­§ƒIƒoƒtƒƒ_ƒ[ƒW•t—^
-trigger4 = !(!(Const(Data.KO.Echo)&16384))
-trigger4 = var(var(99)+4136) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life)
+trigger4 = !(!(var(806)&16384))
+trigger4 = var(var(99)+4136) := ifelse(random%4,ifelse(random%3,ifelse(random%2,2147483647,-2147483648),-2147483648+enemy(!enemy,alive&&numenemy>1),life),enemy(!enemy,alive&&numenemy>1),life) && 0
+;s“®Ï‚İƒtƒ‰ƒO•t—^
+trigger5 = !(!(var(806)&32768))
+trigger5 = var(var(99)+3628) := gametime + 1
 ignorehitpause = 1
 
 [State 351720]
 type = SelfState
+trigger1 = var(15)
 trigger1 = var(59) < var(var(4938572)+47444)
 value = 351720 + (var(59):=var(59)+1)*0
 persistent = 256
@@ -5598,7 +5810,7 @@ ignorehitpause = 1
 [State 351720]
 type = Null
 trigger1 = var(15)
-trigger1 = var(-831) := (var(-831)&(27648^-1))
+trigger1 = var(806) := (var(806)&(60416^-1))
 ignorehitpause = 1
 
 [State 351720]

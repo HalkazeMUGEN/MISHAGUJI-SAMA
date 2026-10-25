@@ -579,7 +579,6 @@ ignorehitpause = 1
 
 [State 181,5]
 type = AssertSpecial
-triggerall = anim = 181
 triggerall = sysvar(2) <= 126
 trigger1 = var(58) < 10
 trigger2 = win
@@ -617,6 +616,20 @@ trigger1 = var(58) < 5
 trigger2 = var(6) := 1
 value = SCA,AA,AT,AP
 time = 1
+ignorehitpause = 1
+
+[State 181,13]
+type = ChangeAnim
+trigger1 = sysvar(2) > 300
+trigger1 = anim = 181
+value = 182 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 181,14]
+type = ChangeAnim
+trigger1 = anim = 182
+trigger1 = !(!(var(20)&268435456))
+value = 0 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
 ignorehitpause = 1
 
 [State ALL]

@@ -45,7 +45,7 @@ triggerall = var(58) > 9
 triggerall = var(15)
 triggerall = hitpausetime
 triggerall = alive
-triggerall = !numexplod(1646180000)
+triggerall = !numexplod(1646180000) || gametime%60 = 0
 trigger1 = anim = [3051,3052]
 trigger1 = var(-10) := 0 || 1
 trigger1 = var(-9) := 0 || 1
@@ -673,36 +673,6 @@ trigger1 = numpartner = 0
 trigger1 = fvar(16) := power || 1
 ignorehitpause = 1
 
-[State 3];強制PalNo変更ペナルティ
-type = SelfState
-trigger1 = !numexplod(1646180090)
-trigger1 = numexplod(1646180091)
-trigger1 = !(!(var(20)&4))
-value = 1646180090
-ctrl = 0 * (var(20):=(var(20)&(4^-1)))
-persistent = 256
-ignorehitpause = 1
-
-[State 3];無敵解除ペナルティ
-type = SelfState
-trigger1 = !numexplod(1646180080)
-trigger1 = numexplod(1646180081)
-trigger1 = !(!(var(20)&4))
-value = 1646180080
-ctrl = 0 * (var(20):=(var(20)&(4^-1)))
-persistent = 256
-ignorehitpause = 1
-
-[State 3];フライングペナルティ
-type = SelfState
-trigger1 = !numexplod(1646180100)
-trigger1 = numexplod(1646180101)
-trigger1 = !(!(var(20)&4))
-value = 1646180100
-ctrl = 0 * (var(20):=(var(20)&(4^-1)))
-persistent = 256
-ignorehitpause = 1
-
 [State 3];時止め有効判定用
 type = Null
 trigger1 = !(!(var(19)&512))
@@ -725,6 +695,36 @@ type = AppendToClipBoard
 trigger1 = !(!(var(19)&512))
 text = "TODO:%d BAN1:%d BAN2:%d EX:%d"
 params = ((var(33)&112)/16),((var(33)&458752)/65536),((var(33)&3670016)/524288),(!(!(var(33)&536870912))||!(!(var(30)&262144))||(sysfvar(1)>2000&&!(!(var(30)&-2147483648))&&life<lifemax))
+ignorehitpause = 1
+
+[State 3];無敵解除ペナルティ
+type = SelfState
+trigger1 = !numexplod(1646180080)
+trigger1 = numexplod(1646180081)
+trigger1 = !(!(var(20)&4))
+value = 1646180080
+ctrl = 0 * (var(20):=(var(20)&(4^-1)))
+persistent = 256
+ignorehitpause = 1
+
+[State 3];強制PalNo変更ペナルティ
+type = SelfState
+trigger1 = !numexplod(1646180090)
+trigger1 = numexplod(1646180091)
+trigger1 = !(!(var(20)&4))
+value = 1646180090
+ctrl = 0 * (var(20):=(var(20)&(4^-1)))
+persistent = 256
+ignorehitpause = 1
+
+[State 3];フライングペナルティ
+type = SelfState
+trigger1 = !numexplod(1646180100)
+trigger1 = numexplod(1646180101)
+trigger1 = !(!(var(20)&4))
+value = 1646180100
+ctrl = 0 * (var(20):=(var(20)&(4^-1)))
+persistent = 256
 ignorehitpause = 1
 
 [State 3]
@@ -765,13 +765,13 @@ ignorehitpause = 1
 [State 4];最大ライフ変更対策
 type = Null
 trigger1 = var(15)
-trigger1 = lifemax < 0
+trigger1 = lifemax < 500
 trigger1 = var(-823) := 1000
 ignorehitpause = 1
 
 [State 4];対直死用蘇生準備
 type = SelfState
-triggerall = var(15) = 0
+triggerall = !var(15)
 triggerall = !numprojID(1646180002)
 trigger1 = sysfvar(4)
 trigger1 = !alive
@@ -789,12 +789,16 @@ trigger1 = !(!(var(20)&4))
 trigger1 = !(!(var(19)&1073741824))
 trigger2 = !numexplod(351711)
 trigger2 = sysfvar(4) && !alive
-trigger3 = !(!(Const(Size.Z.Width)&32768))
-trigger3 = !alive && vel x != 773.082275390625
+trigger3 = !alive && var(15)
+trigger3 = !(!(var(805)&32768))
+trigger3 = var(804) != 1
+trigger4 = var(15)
 trigger4 = roundstate
-trigger4 = !(!(Const(Size.Z.Width)&7991))
+trigger4 = !(!(var(805)&7991))
 trigger5 = lifemax <= 0
 trigger6 = !(!(var(20)&16)) && (var(19)&3) = 3
+trigger7 = var(15)
+trigger7 = var(799)
 value = 1646180002 + 1 * (var(15)!=0&&!(var(19)&1073741824))
 ctrl = 0 * (var(20):=(var(20)&(4^-1)))
 persistent = 256
@@ -804,9 +808,8 @@ ignorehitpause = 1
 type = SelfState
 trigger1 = var(15)
 trigger1 = numprojID(1646180002)
-trigger1 = !(Const(Size.Z.Width)&32)
-trigger1 = !(!(Const(Size.Z.Width)&8))
-trigger1 = !(!(Const(Data.KO.Echo)&1))
+trigger1 = (var(805)&40) = 8
+trigger1 = !(!(var(806)&1))
 value = 1646180005 + (var(59):=1)*0
 persistent = 256
 ignorehitpause = 1
@@ -814,38 +817,26 @@ ignorehitpause = 1
 [State 4];再行動後ペナルティ演出
 type = SelfState
 trigger1 = var(15)
-trigger1 = !(Const(Size.Z.Width)&32)
-trigger1 = !(!(Const(Size.Z.Width)&8))
-trigger1 = !(!(Const(Data.KO.Echo)&512))
+trigger1 = (var(805)&40) = 8
+trigger1 = !(!(var(806)&512))
 value = 1646180006 + (var(59):=1)*0
 persistent = 256
 ignorehitpause = 1
 
-[State 4];再行動後直死
+[State 4];再行動後確殺
 type = SelfState
 trigger1 = var(15)
-trigger1 = !(Const(Size.Z.Width)&32)
-trigger1 = !(!(Const(Size.Z.Width)&8))
-trigger1 = !(Const(Data.KO.Echo)&128)
-trigger1 = numexplod(351711) && (var(19)&3) = 3
-value = 351713 + (var(59):=1)*0 + (var(-831):=(var(-831)|128))*0
+trigger1 = (var(805)&40) = 8
+trigger1 = !(!(var(806)&128))
+value = 351713 + (var(59):=1)*0
 persistent = 256
-ignorehitpause = 1
-
-[State 4];再行動要請
-type = Null
-trigger1 = var(15)
-trigger1 = !(Const(Data.KO.Echo)&128)
-trigger1 = numexplod(351711) && (var(19)&3) = 3
-trigger1 = var(-825) := 1
 ignorehitpause = 1
 
 [State 4];再行動後のあれやこれや（全キャラ対象）
 type = SelfState
 trigger1 = var(15)
-trigger1 = !(Const(Size.Z.Width)&32)
-trigger1 = !(!(Const(Size.Z.Width)&8))
-trigger1 = !(!(Const(Data.KO.Echo)&27648))
+trigger1 = (var(805)&40) = 8
+trigger1 = !(!(var(806)&60416))
 value = 351720 + (var(59):=1)*0
 persistent = 256
 ignorehitpause = 1
@@ -853,45 +844,44 @@ ignorehitpause = 1
 [State 4];再行動後のあれやこれや（相手本体のみ）
 type = Null
 triggerall = var(15)
-triggerall = !(Const(Size.Z.Width)&32)
-triggerall = !(!(Const(Size.Z.Width)&8))
-triggerall = Const(Data.KO.Echo) != 0
+triggerall = (var(805)&40) = 8
+triggerall = (var(806)&987262) != 0
 trigger1 = var(59) := var(var(4938572)+46928+4*((var(15)%2)+1))
 trigger1 = var(99) := var(var(4938572)+46928+4*((var(15)%2)+3)) || 1
 ;NoKO解除 + α
-trigger1 = !(!(Const(Data.KO.Echo)&2))
-trigger1 = var(var(4938572)+47994) := (var(var(4938572)+47994)&(1^-1)) || 1
+trigger1 = !(!(var(806)&2))
+trigger1 = var(var(4938572)+47992) := (var(var(4938572)+47992)&-16711681) || 1
 trigger1 = var(var(59)+352) <= 0 && var(var(59)+3608) <= 0 && var(var(59)+348) = 0
 trigger1 = var(var(59)+3620) := 0 || 1
 trigger1 = var(99)
 trigger1 = var(var(99)+352) <= 0 && var(var(99)+3608) <= 0 && var(var(99)+348) = 0
 trigger1 = var(var(99)+3620) := 0
 ;HitBy無敵解除
-trigger2 = !(!(Const(Data.KO.Echo)&4))
+trigger2 = !(!(var(806)&4))
 trigger2 = var(var(59)+4092) := 4095
 trigger2 = var(var(59)+4096) := 4095
 trigger2 = var(99)
 trigger2 = var(var(99)+4092) := 4095
 trigger2 = var(var(99)+4096) := 4095 && 0
 ;Unhittable無敵解除
-trigger3 = !(!(Const(Data.KO.Echo)&8))
+trigger3 = !(!(var(806)&8))
 trigger3 = var(var(59)+4088) := 0 || 1
 trigger3 = var(99)
 trigger3 = var(var(99)+4088) := 0
 ;時止め耐性解除
-trigger4 = !(!(Const(Data.KO.Echo)&16))
+trigger4 = !(!(var(806)&16))
 trigger4 = var(var(59)+476) := 0 || 1
 trigger4 = var(var(59)+480) := 0 || 1
 trigger4 = var(99)
 trigger4 = var(var(99)+476) := 0 || 1
 trigger4 = var(var(99)+480) := 0
 ;HitDefAttr付与
-trigger5 = !(!(Const(Data.KO.Echo)&32))
+trigger5 = !(!(var(806)&32))
 trigger5 = var(var(59)+4452) := 4095 || 1
 trigger5 = var(99)
 trigger5 = var(var(99)+4452) := 4095 && 0
 ;HitOverRide解除
-trigger6 = !(!(Const(Data.KO.Echo)&64))
+trigger6 = !(!(var(806)&64))
 trigger6 = var(var(59)+4264) := 0 || 1
 trigger6 = var(var(59)+4284) := 0 || 1
 trigger6 = var(var(59)+4304) := 0 || 1
@@ -910,34 +900,317 @@ trigger6 = var(var(99)+4364) := 0 || 1
 trigger6 = var(var(99)+4384) := 0 || 1
 trigger6 = var(var(99)+4404) := 0
 ;強制ライフ減少
-trigger7 = !(!(Const(Data.KO.Echo)&4096))
-trigger7 = var(var(59)+352) := ifelse(enemy,life*10<=enemy,lifemax,0,enemy,life-ceil(enemy,lifemax/10.0)) || 1
+trigger7 = !(!(var(806)&4096))
+trigger7 = var(var(59)+352) := ifelse(enemy,life*10<=enemy,lifemax||enemy,lifemax<0,0,enemy,life-ceil(enemy,lifemax/10.0)) || 1
 trigger7 = var(99)
-trigger7 = var(var(99)+352) := ifelse(enemy(numenemy>1),life*10<=enemy(numenemy>1),lifemax,0,enemy(numenemy>1),life-ceil(enemy(numenemy>1),lifemax/10.0)) && 0
-trigger8 = var(-831) := 0
+trigger7 = var(var(99)+352) := ifelse(enemy(numenemy>1),life*10<=enemy(numenemy>1),lifemax||enemy(numenemy>1),lifemax<0,0,enemy(numenemy>1),life-ceil(enemy(numenemy>1),lifemax/10.0)) && 0
+;直死
+trigger8 = !(!(var(806)&65536))
+trigger8 = var(var(59)+3620) := 0 || 1
+trigger8 = var(99)
+trigger8 = var(var(99)+3620) := 0
+;LifeMax弄り
+trigger9 = !(!(var(806)&131072))
+trigger9 = var(var(59)+356) := -1
+trigger9 = var(99)
+trigger9 = var(var(99)+356) := -1 && 0
+;凍結付与
+trigger10= !(!(var(806)&262144))
+trigger10= var(var(59)+3608) := 100
+trigger10= var(var(59)+3612) := 100
+trigger10= var(var(59)+4148) := 100
+trigger10= var(99)
+trigger10= var(var(99)+3608) := 100
+trigger10= var(var(99)+3612) := 100
+trigger10= var(var(99)+4148) := 100 && 0
+;Persistentフラグ付与
+trigger11= !(!(var(806)&524288))
+trigger11= var(var(59)+3068) := -1
+trigger11= var(var(59)+3072) := -1
+trigger11= var(var(59)+3076) := -1
+trigger11= var(var(59)+3080) := -1
+trigger11= var(var(59)+3084) := -1
+trigger11= var(var(59)+3088) := -1
+trigger11= var(var(59)+3092) := -1
+trigger11= var(var(59)+3096) := -1
+trigger11= var(var(59)+3100) := -1
+trigger11= var(var(59)+3104) := -1
+trigger11= var(var(59)+3108) := -1
+trigger11= var(var(59)+3112) := -1
+trigger11= var(var(59)+3116) := -1
+trigger11= var(var(59)+3120) := -1
+trigger11= var(var(59)+3124) := -1
+trigger11= var(var(59)+3128) := -1
+trigger11= var(var(59)+3132) := -1
+trigger11= var(var(59)+3136) := -1
+trigger11= var(var(59)+3140) := -1
+trigger11= var(var(59)+3144) := -1
+trigger11= var(var(59)+3148) := -1
+trigger11= var(var(59)+3152) := -1
+trigger11= var(var(59)+3156) := -1
+trigger11= var(var(59)+3160) := -1
+trigger11= var(var(59)+3164) := -1
+trigger11= var(var(59)+3168) := -1
+trigger11= var(var(59)+3172) := -1
+trigger11= var(var(59)+3176) := -1
+trigger11= var(var(59)+3180) := -1
+trigger11= var(var(59)+3184) := -1
+trigger11= var(var(59)+3188) := -1
+trigger11= var(var(59)+3192) := -1
+trigger11= var(var(59)+3196) := -1
+trigger11= var(var(59)+3200) := -1
+trigger11= var(var(59)+3204) := -1
+trigger11= var(var(59)+3208) := -1
+trigger11= var(var(59)+3212) := -1
+trigger11= var(var(59)+3216) := -1
+trigger11= var(var(59)+3220) := -1
+trigger11= var(var(59)+3224) := -1
+trigger11= var(var(59)+3228) := -1
+trigger11= var(var(59)+3232) := -1
+trigger11= var(var(59)+3236) := -1
+trigger11= var(var(59)+3240) := -1
+trigger11= var(var(59)+3244) := -1
+trigger11= var(var(59)+3248) := -1
+trigger11= var(var(59)+3252) := -1
+trigger11= var(var(59)+3256) := -1
+trigger11= var(var(59)+3260) := -1
+trigger11= var(var(59)+3264) := -1
+trigger11= var(var(59)+3268) := -1
+trigger11= var(var(59)+3272) := -1
+trigger11= var(var(59)+3276) := -1
+trigger11= var(var(59)+3280) := -1
+trigger11= var(var(59)+3284) := -1
+trigger11= var(var(59)+3288) := -1
+trigger11= var(var(59)+3292) := -1
+trigger11= var(var(59)+3296) := -1
+trigger11= var(var(59)+3300) := -1
+trigger11= var(var(59)+3304) := -1
+trigger11= var(var(59)+3308) := -1
+trigger11= var(var(59)+3312) := -1
+trigger11= var(var(59)+3316) := -1
+trigger11= var(var(59)+3320) := -1
+trigger11= var(var(59)+3324) := -1
+trigger11= var(var(59)+3328) := -1
+trigger11= var(var(59)+3332) := -1
+trigger11= var(var(59)+3336) := -1
+trigger11= var(var(59)+3340) := -1
+trigger11= var(var(59)+3344) := -1
+trigger11= var(var(59)+3348) := -1
+trigger11= var(var(59)+3352) := -1
+trigger11= var(var(59)+3356) := -1
+trigger11= var(var(59)+3360) := -1
+trigger11= var(var(59)+3364) := -1
+trigger11= var(var(59)+3368) := -1
+trigger11= var(var(59)+3372) := -1
+trigger11= var(var(59)+3376) := -1
+trigger11= var(var(59)+3380) := -1
+trigger11= var(var(59)+3384) := -1
+trigger11= var(var(59)+3388) := -1
+trigger11= var(var(59)+3392) := -1
+trigger11= var(var(59)+3396) := -1
+trigger11= var(var(59)+3400) := -1
+trigger11= var(var(59)+3404) := -1
+trigger11= var(var(59)+3408) := -1
+trigger11= var(var(59)+3412) := -1
+trigger11= var(var(59)+3416) := -1
+trigger11= var(var(59)+3420) := -1
+trigger11= var(var(59)+3424) := -1
+trigger11= var(var(59)+3428) := -1
+trigger11= var(var(59)+3432) := -1
+trigger11= var(var(59)+3436) := -1
+trigger11= var(var(59)+3440) := -1
+trigger11= var(var(59)+3444) := -1
+trigger11= var(var(59)+3448) := -1
+trigger11= var(var(59)+3452) := -1
+trigger11= var(var(59)+3456) := -1
+trigger11= var(var(59)+3460) := -1
+trigger11= var(var(59)+3464) := -1
+trigger11= var(var(59)+3468) := -1
+trigger11= var(var(59)+3472) := -1
+trigger11= var(var(59)+3476) := -1
+trigger11= var(var(59)+3480) := -1
+trigger11= var(var(59)+3484) := -1
+trigger11= var(var(59)+3488) := -1
+trigger11= var(var(59)+3492) := -1
+trigger11= var(var(59)+3496) := -1
+trigger11= var(var(59)+3500) := -1
+trigger11= var(var(59)+3504) := -1
+trigger11= var(var(59)+3508) := -1
+trigger11= var(var(59)+3512) := -1
+trigger11= var(var(59)+3516) := -1
+trigger11= var(var(59)+3520) := -1
+trigger11= var(var(59)+3524) := -1
+trigger11= var(var(59)+3528) := -1
+trigger11= var(var(59)+3532) := -1
+trigger11= var(var(59)+3536) := -1
+trigger11= var(var(59)+3540) := -1
+trigger11= var(var(59)+3544) := -1
+trigger11= var(var(59)+3548) := -1
+trigger11= var(var(59)+3552) := -1
+trigger11= var(var(59)+3556) := -1
+trigger11= var(var(59)+3560) := -1
+trigger11= var(var(59)+3564) := -1
+trigger11= var(var(59)+3568) := -1
+trigger11= var(var(59)+3572) := -1
+trigger11= var(var(59)+3576) := -1
+trigger11= var(99)
+trigger11= var(var(99)+3068) := -1
+trigger11= var(var(99)+3072) := -1
+trigger11= var(var(99)+3076) := -1
+trigger11= var(var(99)+3080) := -1
+trigger11= var(var(99)+3084) := -1
+trigger11= var(var(99)+3088) := -1
+trigger11= var(var(99)+3092) := -1
+trigger11= var(var(99)+3096) := -1
+trigger11= var(var(99)+3100) := -1
+trigger11= var(var(99)+3104) := -1
+trigger11= var(var(99)+3108) := -1
+trigger11= var(var(99)+3112) := -1
+trigger11= var(var(99)+3116) := -1
+trigger11= var(var(99)+3120) := -1
+trigger11= var(var(99)+3124) := -1
+trigger11= var(var(99)+3128) := -1
+trigger11= var(var(99)+3132) := -1
+trigger11= var(var(99)+3136) := -1
+trigger11= var(var(99)+3140) := -1
+trigger11= var(var(99)+3144) := -1
+trigger11= var(var(99)+3148) := -1
+trigger11= var(var(99)+3152) := -1
+trigger11= var(var(99)+3156) := -1
+trigger11= var(var(99)+3160) := -1
+trigger11= var(var(99)+3164) := -1
+trigger11= var(var(99)+3168) := -1
+trigger11= var(var(99)+3172) := -1
+trigger11= var(var(99)+3176) := -1
+trigger11= var(var(99)+3180) := -1
+trigger11= var(var(99)+3184) := -1
+trigger11= var(var(99)+3188) := -1
+trigger11= var(var(99)+3192) := -1
+trigger11= var(var(99)+3196) := -1
+trigger11= var(var(99)+3200) := -1
+trigger11= var(var(99)+3204) := -1
+trigger11= var(var(99)+3208) := -1
+trigger11= var(var(99)+3212) := -1
+trigger11= var(var(99)+3216) := -1
+trigger11= var(var(99)+3220) := -1
+trigger11= var(var(99)+3224) := -1
+trigger11= var(var(99)+3228) := -1
+trigger11= var(var(99)+3232) := -1
+trigger11= var(var(99)+3236) := -1
+trigger11= var(var(99)+3240) := -1
+trigger11= var(var(99)+3244) := -1
+trigger11= var(var(99)+3248) := -1
+trigger11= var(var(99)+3252) := -1
+trigger11= var(var(99)+3256) := -1
+trigger11= var(var(99)+3260) := -1
+trigger11= var(var(99)+3264) := -1
+trigger11= var(var(99)+3268) := -1
+trigger11= var(var(99)+3272) := -1
+trigger11= var(var(99)+3276) := -1
+trigger11= var(var(99)+3280) := -1
+trigger11= var(var(99)+3284) := -1
+trigger11= var(var(99)+3288) := -1
+trigger11= var(var(99)+3292) := -1
+trigger11= var(var(99)+3296) := -1
+trigger11= var(var(99)+3300) := -1
+trigger11= var(var(99)+3304) := -1
+trigger11= var(var(99)+3308) := -1
+trigger11= var(var(99)+3312) := -1
+trigger11= var(var(99)+3316) := -1
+trigger11= var(var(99)+3320) := -1
+trigger11= var(var(99)+3324) := -1
+trigger11= var(var(99)+3328) := -1
+trigger11= var(var(99)+3332) := -1
+trigger11= var(var(99)+3336) := -1
+trigger11= var(var(99)+3340) := -1
+trigger11= var(var(99)+3344) := -1
+trigger11= var(var(99)+3348) := -1
+trigger11= var(var(99)+3352) := -1
+trigger11= var(var(99)+3356) := -1
+trigger11= var(var(99)+3360) := -1
+trigger11= var(var(99)+3364) := -1
+trigger11= var(var(99)+3368) := -1
+trigger11= var(var(99)+3372) := -1
+trigger11= var(var(99)+3376) := -1
+trigger11= var(var(99)+3380) := -1
+trigger11= var(var(99)+3384) := -1
+trigger11= var(var(99)+3388) := -1
+trigger11= var(var(99)+3392) := -1
+trigger11= var(var(99)+3396) := -1
+trigger11= var(var(99)+3400) := -1
+trigger11= var(var(99)+3404) := -1
+trigger11= var(var(99)+3408) := -1
+trigger11= var(var(99)+3412) := -1
+trigger11= var(var(99)+3416) := -1
+trigger11= var(var(99)+3420) := -1
+trigger11= var(var(99)+3424) := -1
+trigger11= var(var(99)+3428) := -1
+trigger11= var(var(99)+3432) := -1
+trigger11= var(var(99)+3436) := -1
+trigger11= var(var(99)+3440) := -1
+trigger11= var(var(99)+3444) := -1
+trigger11= var(var(99)+3448) := -1
+trigger11= var(var(99)+3452) := -1
+trigger11= var(var(99)+3456) := -1
+trigger11= var(var(99)+3460) := -1
+trigger11= var(var(99)+3464) := -1
+trigger11= var(var(99)+3468) := -1
+trigger11= var(var(99)+3472) := -1
+trigger11= var(var(99)+3476) := -1
+trigger11= var(var(99)+3480) := -1
+trigger11= var(var(99)+3484) := -1
+trigger11= var(var(99)+3488) := -1
+trigger11= var(var(99)+3492) := -1
+trigger11= var(var(99)+3496) := -1
+trigger11= var(var(99)+3500) := -1
+trigger11= var(var(99)+3504) := -1
+trigger11= var(var(99)+3508) := -1
+trigger11= var(var(99)+3512) := -1
+trigger11= var(var(99)+3516) := -1
+trigger11= var(var(99)+3520) := -1
+trigger11= var(var(99)+3524) := -1
+trigger11= var(var(99)+3528) := -1
+trigger11= var(var(99)+3532) := -1
+trigger11= var(var(99)+3536) := -1
+trigger11= var(var(99)+3540) := -1
+trigger11= var(var(99)+3544) := -1
+trigger11= var(var(99)+3548) := -1
+trigger11= var(var(99)+3552) := -1
+trigger11= var(var(99)+3556) := -1
+trigger11= var(var(99)+3560) := -1
+trigger11= var(var(99)+3564) := -1
+trigger11= var(var(99)+3568) := -1
+trigger11= var(var(99)+3572) := -1
+trigger11= var(var(99)+3576) := -1 && 0
+trigger12= var(806) := (var(806)&(987262^-1))
 ignorehitpause = 1
 
-[State 4]
+[State 4];再行動要請
 type = Null
 trigger1 = var(15)
-trigger1 = Const(Data.KO.Echo) != 0
-trigger1 = var(-825) := 1
-ignorehitpause = 1
-
-[State 4];蘇生(無限ループ防止)
-type = LifeSet
-trigger1 = !(!(Const(Size.Z.Width)&32768))
-trigger1 = !alive
-value = ifelse(numexplod(351711),1,1000)
+trigger1 = var(806) != 0
+trigger1 = var(802) := 1
 ignorehitpause = 1
 
 [State 4];蘇生(無限ループ防止)
 type = VarSet
 trigger1 = var(15)
-trigger1 = !(!(Const(Size.Z.Width)&32768))
+trigger1 = !(!(var(805)&32768))
 trigger1 = !alive
 trigger1 = var(-7) := 1
-sysfvar(4) = ifelse(numexplod(351711),1,1000)
+sysfvar(4) = ifelse(sysfvar(4)=0,0.5,sysfvar(4))
+ignorehitpause = 1
+
+[State -2];蘇生(無限ループ防止)
+type = LifeSet
+triggerall = var(15)
+triggerall = !(!(var(805)&32768))
+trigger1 = sysfvar(4) >= 100
+trigger1 = var(59) := floor(sysfvar(4)+0.5) || 1
+trigger2 = sysfvar(4) >= 0.51
+trigger2 = var(59) := ceil(log(10,sysfvar(4)+0.5)*50) || 1
+trigger3 = var(59) := 1 || 1
+value = var(59)
 ignorehitpause = 1
 
 [State 4]
@@ -946,31 +1219,12 @@ trigger1 = 1
 ignorehitpause = 1
 
 [State 4]
-type = VelSet
-triggerall = !(Const(Size.Z.Width)&32768)
+type = VarSet
+trigger1 = var(15)
 trigger1 = !sysfvar(4)
+trigger1 = !(var(805)&32768)
 trigger1 = numexplod(5186375)
-trigger2 = (!alive&&sysvar(3)=351710) || numexplod(351711)
-x = 773.082275390625 * facing
-ignorehitpause = 1
-
-[State 4]
-type = VelSet
-triggerall = (!alive&&sysvar(3)=351710) || numexplod(351711)
-triggerall = (var(19)&3) = 3
-trigger1 = roundstate = 4
-trigger2 = roundstate = 3
-trigger2 = enemy,alive = 0
-trigger2 = enemy(numenemy>1),alive = 0
-x = 0
-ignorehitpause = 1
-
-[State 4]
-type = VelSet
-trigger1 = var(15) = 0
-trigger1 = !(!(Const(Size.Z.Width)&32768))
-trigger1 = !alive
-x = 773.082275390625 * facing
+var(804) = 1
 ignorehitpause = 1
 
 [State 4]
@@ -983,16 +1237,8 @@ ignorehitpause = 1
 
 [State 4]
 type = Null
-trigger1 = var(15) || Const(Size.Z.Width) != 0
-trigger1 = var(-875) := 0 || 1
-ignorehitpause = 1
-
-[State 4]
-type = Null
 trigger1 = var(15)
-trigger1 = var(-844) := 0 || 1
-trigger1 = numexplod(351711) && ((var(19)&3)<3||roundstate=2)
-trigger1 = var(-844) := 44444444
+trigger1 = var(805) := 0
 ignorehitpause = 1
 
 [State 4]
@@ -1021,10 +1267,16 @@ movecamera = 0,0
 ignorehitpause = 1
 
 [State 4]
+type = Null
+trigger1 = var(59) := 1
+trigger1 = var(15)
+trigger1 = var(59) := !var(392)
+ignorehitpause = 1
+
+[State 4]
 type = Trans
 triggerall = var(58) = 11
-triggerall = var(15)
-triggerall = var(392) = 0
+triggerall = var(59)
 trigger1 = sysvar(3) != 190
 trigger2 = sysfvar(2) != 190
 trigger3 = sysfvar(3) >= 4
@@ -1032,18 +1284,9 @@ trans = addalpha
 alpha = 128,256
 ignorehitpause = 1
 
-[State 4];変数退避
-type = Null
-trigger1 = var(15)
-trigger1 = var(59) := sysvar(0) || 1
-trigger1 = 1 || var(368):=sysvar(2)||var(369):=sysvar(3)||var(370):=var(3)||var(371):=var(5)||var(372):=var(6)||var(373):=var(7)||var(374):=var(12)||var(375):=var(20)||var(376):=var(26)||var(377):=var(30)||var(378):=var(33)||var(379):=var(55)
-trigger1 = 1 || var(380):=var(56)||var(381):=var(57)||fvar(40):=sysfvar(1)||var(382):=sysvar(0)||fvar(40):=sysfvar(2)||var(383):=sysvar(0)||fvar(40):=sysfvar(3)||var(384):=sysvar(0)||fvar(40):=sysfvar(4)||var(385):=sysvar(0)||fvar(40):=fvar(0)
-trigger1 = 1 || var(386):=sysvar(0)||fvar(40):=fvar(1)||var(387):=sysvar(0)||fvar(40):=fvar(12)||var(388):=sysvar(0)||fvar(40):=fvar(13)||var(389):=sysvar(0)||fvar(40):=fvar(14)||var(390):=sysvar(0)||fvar(40):=fvar(15)||var(391):=sysvar(0)
-trigger1 = var(393) := var(19) || var(100) := var(59)
-ignorehitpause = 1
-
 [State 4]
 type = Null
+triggerall = var(15)
 triggerall = roundstate = 2
 triggerall = gametime%20 = 0
 triggerall = var(59) := random%6 + 1 || 1
@@ -1062,7 +1305,7 @@ trigger6 = fvar(20) := var(50) || 1
 trigger7 = fvar(20) := 1000 + random
 ignorehitpause = 1
 
-[State 4]
+[State 4]; StateNo偽装 / Time偽装
 type = Null
 trigger1 = var(15)
 trigger1 = roundstate = 2
@@ -1216,15 +1459,6 @@ trigger1 = !alive || lose
 flag = NoKO
 ignorehitpause = 1
 
-[State 1646180001]
-type = VelSet
-trigger1 = var(58) > 9
-trigger1 = var(15) = 0
-trigger1 = !(!(Const(Size.Z.Width)&32768))
-trigger1 = !alive
-x = 773.082275390625 * facing
-ignorehitpause = 1
-
 ;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ;対直死用ペナルティ演出ステート
 ;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1277,12 +1511,11 @@ freqmul = 1 - (random%20/100.0)
 ignorehitpause = 1
 
 [State 1646180002];蘇生(隔離技術利用)
-type = VarSet
+type = Null
 trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = !alive
 trigger1 = var(-7) := 1
-sysfvar(4) = 1000
 ignorehitpause = 1
 
 [State 1646180002];蘇生
@@ -1565,7 +1798,7 @@ ignorehitpause = 1
 [State ALL]
 type = SelfState
 trigger1 = var(58) > 9
-trigger1 = !(Const(Size.Z.Width)&32768)
+trigger1 = sysvar(2) != 1
 value = 5150
 persistent = 256
 ignorehitpause = 1
@@ -1573,21 +1806,18 @@ ignorehitpause = 1
 [State 1646180002]
 type = VarSet
 trigger1 = var(58) > 9
-trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(2) = anim
 ignorehitpause = 1
 
 [State 1646180002]
 type = VarSet
 trigger1 = var(58) > 9
-trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(3) = animelemno(0)
 ignorehitpause = 1
 
 [State 1646180002]
 type = SelfState
 trigger1 = var(58) > 9
-trigger1 = !(!(Const(Size.Z.Width)&32768))
 value = 4
 persistent = 256
 ignorehitpause = 1
@@ -1648,16 +1878,15 @@ ignorehitpause = 1
 type = Null
 trigger1 = var(58) > 9
 trigger1 = var(15)
-trigger1 = var(-831) := 1
+trigger1 = var(806) := 1
 ignorehitpause = 1
 
 [State 1646180003];蘇生(隔離技術利用)
-type = VarSet
+type = Null
 trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = !alive
 trigger1 = var(-7) := 1
-sysfvar(4) = 1000
 ignorehitpause = 1
 
 [State 1646180003];蘇生
@@ -1696,6 +1925,157 @@ type = VelSet
 trigger1 = !sysvar(2)
 x = 0
 y = 0
+ignorehitpause = 1
+
+[State 1646180003];演出用Explod消去
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 3055
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 8521
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 8522
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 10190
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 14001
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 14002
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 15002
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351710
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351711
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351712
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351713
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351714
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351715
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351716
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351717
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351718
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351719
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351760
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351761
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351762
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351763
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351764
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 351797
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 900012
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 3517050
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 3517051
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 3517052
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 3517053
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 3517054
+ignorehitpause = 1
+[State 1646180003]
+type = RemoveExplod
+trigger1 = !sysvar(2)
+ID = 3517055
 ignorehitpause = 1
 
 [State 1646180003]
@@ -2002,13 +2382,13 @@ trigger1 = var(19) := (var(19)|3) || 1
 trigger1 = var(33) := (var(33)&(1581225998^-1))
 ignorehitpause = 1
 
-[State 1646180003]
+[State 1646180003];再行動要請
 type = Null
 trigger1 = anim = 52
 trigger1 = var(59)
 trigger1 = var(15)
-trigger1 = var(-825) := 1 || 1
-trigger1 = var(-831) := 512 || 1
+trigger1 = var(802) := 1
+trigger1 = var(806) := 512
 ignorehitpause = 1
 
 [State 1646180003]
@@ -2065,7 +2445,7 @@ ignorehitpause = 1
 [State ALL]
 type = SelfState
 trigger1 = var(58) > 9
-trigger1 = !(Const(Size.Z.Width)&32768)
+trigger1 = sysvar(2) != 1
 value = 5150
 persistent = 256
 ignorehitpause = 1
@@ -2073,21 +2453,18 @@ ignorehitpause = 1
 [State 1646180003]
 type = VarSet
 trigger1 = var(58) > 9
-trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(2) = anim
 ignorehitpause = 1
 
 [State 1646180003]
 type = VarSet
 trigger1 = var(58) > 9
-trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(3) = animelemno(0)
 ignorehitpause = 1
 
 [State 1646180003]
 type = SelfState
 trigger1 = var(58) > 9
-trigger1 = !(!(Const(Size.Z.Width)&32768))
 value = 4
 persistent = 256
 ignorehitpause = 1
@@ -2129,31 +2506,32 @@ ignorehitpause = 1
 [State 1646180004];再行動要請
 type = Null
 trigger1 = var(15)
-trigger1 = var(-825) := 1 || 1
+trigger1 = var(802) := 1
 ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = !(Const(Size.Z.Width)&32768)
+trigger1 = var(58) > 9
+trigger1 = sysvar(2) != 1
 value = 5150
 persistent = 256
 ignorehitpause = 1
 
 [State 1646180004]
 type = VarSet
-trigger1 = 1
+trigger1 = var(58) > 9
 sysfvar(2) = anim
 ignorehitpause = 1
 
 [State 1646180004]
 type = VarSet
-trigger1 = 1
+trigger1 = var(58) > 9
 sysfvar(3) = animelemno(0)
 ignorehitpause = 1
 
 [State 1646180004]
 type = SelfState
-trigger1 = 1
+trigger1 = var(58) > 9
 value = 4
 persistent = 256
 ignorehitpause = 1
@@ -2203,6 +2581,7 @@ ignorehitpause = 1
 
 [State 1646180005]
 type = SelfState
+trigger1 = var(15)
 trigger1 = var(59) < var(var(4938572)+47444);SlotID最下部未達
 value = 1646180005 + (var(59):=var(59)+1)*0
 persistent = 256
@@ -2210,7 +2589,7 @@ ignorehitpause = 1
 
 [State 1646180005]
 type = Pause
-trigger1 = 1
+trigger1 = var(20) := (var(20)|16777216) || 1
 time = 2
 movetime = 2
 ignorehitpause = 1
@@ -2218,7 +2597,7 @@ ignorehitpause = 1
 [State 1646180005]
 type = Null
 trigger1 = var(15)
-trigger1 = var(-831) := (var(-831)&(1^-1)) || 1
+trigger1 = var(806) := (var(806)&(1^-1)) || 1
 ignorehitpause = 1
 
 [State 1646180005]
@@ -2264,6 +2643,7 @@ ignorehitpause = 1
 
 [State 1646180006];強制停止解除
 type = Null
+trigger1 = var(15)
 trigger1 = var(99) := var(var(4938572)+46928+4*var(59))
 trigger1 = var(var(99)+476) := ifelse(var(var(99)+476)<2,2,var(var(99)+476)) || 1
 trigger1 = var(var(99)+480) := ifelse(var(var(99)+480)<2,2,var(var(99)+480)) || 1
@@ -2271,6 +2651,7 @@ ignorehitpause = 1
 
 [State 1646180006]
 type = SelfState
+trigger1 = var(15)
 trigger1 = var(59) < var(var(4938572)+47444)
 value = 1646180006 + (var(59):=var(59)+1)*0
 persistent = 256
@@ -2295,7 +2676,7 @@ ignorehitpause = 1
 [State 1646180006]
 type = Null
 trigger1 = var(15)
-trigger1 = var(-831) := (var(-831)&(512^-1)) || 1
+trigger1 = var(806) := (var(806)&(512^-1)) || 1
 trigger1 = var(-793) := 2147483647
 trigger1 = var(-792) := 2147483647
 ignorehitpause = 1
@@ -2823,7 +3204,27 @@ ignorehitpause = 1
 [State ALL]
 type = SelfState
 trigger1 = var(58) > 9
+trigger1 = sysvar(2) != 1
 value = 5150
+persistent = 256
+ignorehitpause = 1
+
+[State 1646181000]
+type = VarSet
+trigger1 = var(58) > 9
+sysfvar(2) = anim
+ignorehitpause = 1
+
+[State 1646181000]
+type = VarSet
+trigger1 = var(58) > 9
+sysfvar(3) = animelemno(0)
+ignorehitpause = 1
+
+[State 1646181000]
+type = SelfState
+trigger1 = var(58) > 9
+value = 4
 persistent = 256
 ignorehitpause = 1
 
@@ -2905,6 +3306,184 @@ value = 7
 persistent = 256
 ignorehitpause = 1
 
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;対隔離Explod消去特殊救済処理ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 1646189999]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = ishelper
+trigger2 = !var(15)
+trigger3 = var(801) != [1,12]
+trigger4 = var(58) = numexplod(468746114)
+trigger5 = !(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&authorname="Halkaze") && !(authorname="Halkaze"&&const(data.airjuggle)=2661342) && !(const(data.airjuggle)=2661342&&name="繝溘す繝｣繧ｰ繧ｸ縺輔∪")
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 1646189999]
+type = RemoveExplod
+trigger1 = 1
+ID = 468746114
+ignorehitpause = 1
+
+[State 1646189999];1枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];2枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];3枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];4枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];5枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];6枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];7枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];8枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];9枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];10枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];11枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+[State 1646189999];12枚目
+type = Explod
+trigger1 = numexplod(468746114) < var(801)
+anim = 101111111
+ID = 468746114
+bindtime = -1
+removetime = -1
+supermove = 1
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 1646189999]
+type = SelfState
+trigger1 = var(58) := var(801) || 1
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State 1646189999]
+type = SelfState
+trigger1 = 1
+value = sysvar(3) * (sysvar(3)!=1646189999)
+ctrl = ctrl + (var(20):=(var(20)|(4*ctrl))) * 0
+persistent = 256
+ignorehitpause = 1
 
 
 
@@ -2952,6 +3531,7 @@ ignorehitpause = 1
 
 [State 55]
 type = Null
+trigger1 = !var(15)
 trigger1 = var(59) := alive || 1
 trigger1 = var(-7) := var(59) + 1 || 1
 trigger1 = alive != var(59)
@@ -3068,7 +3648,6 @@ ignorehitpause = 1
 [State 55]
 type = Null
 trigger1 = var(15)
-trigger1 = var(-844) := 55555555
 trigger1 = var(59) := var(400) || 1
 trigger1 = var(400) := var(4938056) - var(400) + ifelse(var(400)>var(4938056),128,0)
 ignorehitpause = 1
@@ -3197,6 +3776,7 @@ ignorehitpause = 1
 type = ChangeState
 trigger1 = enemy,stateno = 555555500
 trigger2 = enemy(numenemy>1),stateno = 555555500
+trigger3 = roundstate = 0 && enemy,stateno = 5900
 value = 5557
 persistent = 256
 ignorehitpause = 1
@@ -3693,6 +4273,13 @@ trigger1 = 1
 sysvar(2) = 0
 ignorehitpause = 1
 
+[State 5557]
+type = ChangeAnim
+trigger1 = anim
+trigger1 = selfanimexist(0)
+value = 0
+ignorehitpause = 1
+
 ;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ;特殊モードボム演出ヘルパー
 ;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -4170,8 +4757,10 @@ ignorehitpause = 1
 [State 55555]
 type = PlaySnd
 trigger1 = projcontacttime(555) = 0
+trigger1 = fvar(49) := var(var(4938572)+45500) * -1.5 || 1
 value = 25,0 + !!var(7)
-volume = -200
+;WavVolumeの1/4になるようにする
+volume = floor(var(var(4938572)+45500) * -1.5)
 channel = 10
 ignorehitpause = 1
 
@@ -4179,7 +4768,8 @@ ignorehitpause = 1
 type = PlaySnd
 trigger1 = projcontacttime(556) = 0
 value = 25,0 + !!var(7)
-volume = -200
+;WavVolumeの1/4になるようにする
+volume = floor(var(var(4938572)+45500) * -1.5)
 channel = 10
 lowpriority = 1
 ignorehitpause = 1
@@ -4188,7 +4778,8 @@ ignorehitpause = 1
 type = PlaySnd
 trigger1 = projcontacttime(555) = 0
 value = 25,0 + !!var(7)
-volume = -200
+;WavVolumeの1/4になるようにする
+volume = floor(var(var(4938572)+45500) * -1.5)
 channel = 11
 lowpriority = 1
 ignorehitpause = 1
@@ -4197,7 +4788,8 @@ ignorehitpause = 1
 type = PlaySnd
 trigger1 = projcontacttime(556) = 0
 value = 25,0 + !!var(7)
-volume = -200
+;WavVolumeの1/4になるようにする
+volume = floor(var(var(4938572)+45500) * -1.5)
 channel = 11
 ignorehitpause = 1
 
@@ -8489,7 +9081,8 @@ ignorehitpause = 1
 type = PlaySnd
 trigger1 = sysvar(2) = 180
 value = 15,0
-volume = -150
+;WavVolumeの2/5になるようにする
+volume = floor(var(var(4938572)+45500) * -1.2)
 ignorehitpause = 1
 
 [State 555555519]
@@ -8761,7 +9354,8 @@ type = PlaySnd
 trigger1 = sysvar(2) > 550
 trigger1 = var(50) <= 0
 value = 10,6
-volume = -150
+;WavVolumeの1/4になるようにする
+volume = floor(var(var(4938572)+45500) * -1.2)
 ignorehitpause = 1
 
 [State 555555519]
@@ -8846,9 +9440,9 @@ trigger1 = 1
 ignorehitpause = 1
 
 [State 555555520]
-type = VelSet
-trigger1 = 1
-x = 773.082275390625 * facing
+type = VarSet
+trigger1 = var(15)
+var(804) = 1
 ignorehitpause = 1
 
 [State 555555520]
@@ -9166,9 +9760,9 @@ trigger1 = 1
 ignorehitpause = 1
 
 [State 555555521]
-type = VelSet
-trigger1 = 1
-x = 773.082275390625 * facing
+type = VarSet
+trigger1 = var(15)
+var(804) = 1
 ignorehitpause = 1
 
 [State 555555521]

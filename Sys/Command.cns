@@ -556,31 +556,21 @@ trigger1 = ishelper
 persistent = 256
 ignorehitpause = 1
 
-[State -3];Šu—£‹Zp—˜—p‰Â”\«Šm”F + ©ƒXƒƒbƒg‚h‚cæ“¾
-type = Null
-trigger1 = var(15) := 0 || 1
-trigger1 = numexplod(468746114) = 5 || (!(!(var(19)&3))&&numexplod(468746114)=[10,11])
-trigger1 = var(59) := alive || 1
-trigger1 = var(-7) := var(59) + 1 || 1
-trigger1 = alive != var(59)
-trigger1 = var(-7) := var(59) || 1
-trigger1 = var(15) := var(-910) || 1
-ignorehitpause = 1
-
-[State -3];‘Ş”ğ•Ï”C•œ
-type = Null
-trigger1 = roundstate
-trigger1 = var(15)
-trigger1 = numexplod(468746114) = [10,11]
-trigger1 = 1 || var(102):=var(368)||var(103):=var(369)||var(3):=var(370)||var(5):=var(371)||var(6):=var(372)||var(7):=var(373)||var(12):=var(374)||var(20):=var(375)||var(26):=var(376)||var(30):=var(377)||var(33):=var(378)||var(55):=var(379)
-trigger1 = 1 || var(106):=var(382)||var(107):=var(383)||var(108):=var(384)||var(109):=var(385)||var(60):=var(386)||var(61):=var(387)||var(72):=var(388)||var(73):=var(389)||var(74):=var(390)||var(75):=var(391)||var(19):=var(393)
-trigger1 = var(380) != 0 && var(381) != 0
-trigger1 = 1 || var(56):=var(380)||var(57):=var(381)
-ignorehitpause = 1
-
 [State -3]
 type = Null
 trigger1 = var(59) := numexplod(468746114)
+ignorehitpause = 1
+
+[State -3];Šu—£‹Zp—˜—p‰Â”\«Šm”F + ©ƒXƒƒbƒg‚h‚cæ“¾
+type = Null
+triggerall = !var(15)
+trigger1 = var(59) = 5 || (!(!(var(19)&3))&&var(59)=[10,11])
+trigger1 = var(15) := alive || 1
+trigger1 = var(-7) := var(15) + 1 || 1
+trigger1 = alive != var(15)
+trigger1 = var(-7) := var(15) || 1
+trigger1 = var(15) := var(-910) || 1
+trigger2 = var(15) := 0
 ignorehitpause = 1
 
 [State -3];•ÛŒ¯
@@ -641,7 +631,7 @@ value = 55
 persistent = 256
 ignorehitpause = 1
 
-[State -3];1~4P,7~9P,10PÚGŠ´’m
+[State -3];1~4P,7~9P,10~11PÚGŠ´’m
 type = Null
 trigger1 = movetype = H && !(var(20)&128)
 trigger1 = var(20) := (var(20)|2097152)
@@ -702,10 +692,9 @@ ignorehitpause = 1
 
 [State -1];ˆ—ƒXƒLƒbƒv
 type = SelfState
-triggerall = var(58) > 9
-triggerall = !(Const(Size.Z.Width)&32)
-trigger1 = Const(Size.Z.Width) != 0
-trigger2 = !(!(Const(Size.Z.Width)&32768))
+trigger1 = var(58) > 9
+trigger1 = var(15)
+trigger1 = !(var(805)&32) && var(805)
 value = 4
 persistent = 256
 ignorehitpause = 1
@@ -995,6 +984,36 @@ ignorehitpause = 1
 ;---------------------------------------
 ;•KE‹Z
 
+[State -1,‚i‚Q‚Q‚b]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(var(19)&512)
+triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+trigger1 = var(58) < 5 && (command="Skill_04_C")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_04_C"
+var(8) = 1410
+ignorehitpause = 1
+
+[State -1,‚i‚Q‚Q‚a]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(var(19)&512)
+triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+trigger1 = var(58) < 5 && (command="Skill_04_B")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_04_B"
+var(8) = 1400
+ignorehitpause = 1
+
 [State -1,‚Q‚Q‚b]
 type = VarSet
 triggerall = var(8) = -1
@@ -1127,8 +1146,10 @@ triggerall = ifelse(var(58)<5,var(6)>0,sysfvar(4)!=0)
 triggerall = fvar(14) >= 400
 triggerall = (!(!(var(59)&512))&&(var(58)>5||movecontact||movereversed)) || (var(58)>5&&!(!(var(20)&4))) || (var(58)<5&&(sysvar(3)=[120,159]))
 trigger1 = var(58) < 5 && (command="reigeki")
+trigger1 = var(27) := 10 || 1
 trigger2 = var(58) > 5
 trigger2 = helper(157900000),command = "reigeki"
+trigger2 = var(27) := 11 || 1
 var(8) = 900 + ((var(20):=(var(20)&(128^-1)))&&0)
 ignorehitpause = 1
 
@@ -1734,13 +1755,17 @@ trigger4 = var(30) := (var(30)&(1610612736^-1)) || 1
 trigger4 = var(30) := (var(30)|(536870912*2)) || 1
 trigger5 = ((var(30)&1610612736)/536870912) = 1
 trigger5 = power = powermax
-trigger5 = gametime%60 = 0
-trigger5 = random < 10 * (4-fvar(39)) * (((var(19)&224)/32)/6)
+trigger5 = gametime%(60-40*!!(var(58)>9)) = 0
+trigger5 = random < (10+20*!!(var(58)>9)) * (4-fvar(39)) * (((var(19)&224)/32)/6) * (!!(life<lifemax*(enemynear(!enemynear,alive&&numenemy>1),life/enemynear(!enemynear,alive&&numenemy>1),lifemax))*2+1)
 trigger5 = var(30) := (var(30)&(1610612736^-1)) || 1
 trigger5 = var(30) := (var(30)|(536870912*2)) || 1
 trigger6 = ((var(30)&1610612736)/536870912) = 1
 trigger6 = ((var(19)&224)/32) > 4
 trigger6 = !(!(var(33)&536870912)) || !(!(var(30)&262144)) || (sysfvar(1)>2000&&!(!(var(30)&-2147483648))&&life<lifemax)
+trigger6 = var(30) := (var(30)&(1610612736^-1)) || 1
+trigger6 = var(30) := (var(30)|(536870912*2)) || 1
+trigger6 = ((var(30)&1610612736)/536870912) = 1
+trigger6 = sysfvar(1) > 36000
 trigger6 = var(30) := (var(30)&(1610612736^-1)) || 1
 trigger6 = var(30) := (var(30)|(536870912*2)) || 1
 ;‰ñ”ğ¨’ÊíA’´•K
@@ -1931,134 +1956,195 @@ trigger18= fvar(14) >= 400 + ((((var(30)&1572864)/524288)+ifelse(var(58)>9,1,!(!
 trigger18= fvar(4) = [-5,30]
 trigger18= random < 20 * ((var(19)&224)/32) * (power*2/powermax) * ifelse(enemynear(!enemynear,alive&&numenemy>1),life<200,3,1)
 trigger18= var(32) := 4096
+;‡F¨‡S
+trigger19= !(!(var(32)&512))
+trigger19= (var(32)%8) = 6
+trigger19= fvar(14) >= 200
+trigger19= var(32) := 4194304
 ;‡G¨‡E
-trigger19= !(!(var(32)&1024))
-trigger19= (var(32)%8) = 1
-trigger19= sysvar(2) = 1
-trigger19= !(var(20)&4096)
-trigger19= enemynear(!enemynear,alive&&numenemy>1),pos y = 0 || (fvar(5)+enemynear(!enemynear,alive&&numenemy>1),const(size.mid.pos.y)=[-60,0])
-trigger19= random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
-trigger19= var(32) := 256
-;‡H¨‡R
-trigger20= !(!(var(32)&2048))
+trigger20= !(!(var(32)&1024))
 trigger20= (var(32)%8) = 1
-trigger20= movecontact = 1 && ((var(58)>5)||(!hitpausetime&&!(!(var(59)&1))))
-trigger20= moveguarded = 1 || random < 40 * (fvar(14)/1000) * ((var(19)&224)/32)
-trigger20= var(32) := 2097152
-;‡K¨‡P
-trigger21= !(!(var(32)&16384))
+trigger20= sysvar(2) = 1
+trigger20= !(var(20)&4096)
+trigger20= enemynear(!enemynear,alive&&numenemy>1),pos y = 0 || (fvar(5)+enemynear(!enemynear,alive&&numenemy>1),const(size.mid.pos.y)=[-60,0])
+trigger20= random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger20= var(32) := 256
+;‡H¨‡R
+trigger21= !(!(var(32)&2048))
 trigger21= (var(32)%8) = 1
-trigger21= movehit = 1 && ((var(58)>5)||(!hitpausetime&&!(!(var(59)&1))))
-trigger21= fvar(14) >= 200
-trigger21= fvar(4) = [5,60]
-trigger21= random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
-trigger21= var(32) := 524288
-;‡K¨‡O
+trigger21= movecontact = 1 && ((var(58)>5)||(!hitpausetime&&!(!(var(59)&1))))
+trigger21= moveguarded = 1 || random < 40 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger21= var(32) := 2097152
+;‡K¨‡P
 trigger22= !(!(var(32)&16384))
 trigger22= (var(32)%8) = 1
 trigger22= movehit = 1 && ((var(58)>5)||(!hitpausetime&&!(!(var(59)&1))))
-trigger22= var(30) := (var(30)|512) || 1
-trigger22= var(32) := 262144
+trigger22= fvar(14) >= 200
+trigger22= fvar(4) = [5,60]
+trigger22= random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger22= var(32) := 524288
+;‡K¨‡O
+trigger23= !(!(var(32)&16384))
+trigger23= (var(32)%8) = 1
+trigger23= movehit = 1 && ((var(58)>5)||(!hitpausetime&&!(!(var(59)&1))))
+trigger23= var(30) := (var(30)|512) || 1
+trigger23= var(32) := 262144
 ;‡M¨‡J
-trigger23= !(!(var(32)&65536))
-trigger23= (var(32)%8) = 2
-trigger23= sysvar(2) = 1
-trigger23= power >= 2000 || power = powermax
-trigger23= fvar(4) = [0,130]
-trigger23= random < 20 * ((var(19)&224)/32) * (power*2/powermax) * ifelse(enemynear(!enemynear,alive&&numenemy>1),life<200,3,1)
-trigger23= var(32) := 8192
-;‡M¨‡M
 trigger24= !(!(var(32)&65536))
 trigger24= (var(32)%8) = 2
 trigger24= sysvar(2) = 1
-trigger24= fvar(6) > 64 && fvar(14) >= 400
-trigger24= random < 100 * ((var(19)&224)/32)
-trigger24= var(32) := 65536
-;‡M¨‡B
+trigger24= power >= 2000 || power = powermax
+trigger24= fvar(4) = [0,130]
+trigger24= random < 20 * ((var(19)&224)/32) * (power*2/powermax) * ifelse(enemynear(!enemynear,alive&&numenemy>1),life<200,3,1)
+trigger24= var(32) := 8192
+;‡M¨‡M
 trigger25= !(!(var(32)&65536))
 trigger25= (var(32)%8) = 2
 trigger25= sysvar(2) = 1
-trigger25= var(32) := 32
-;‡N¨‡D
-trigger26= !(!(var(32)&131072))
-trigger26= (var(32)%8) = 1
+trigger25= fvar(6) > 64 && fvar(14) >= 400
+trigger25= random < 100 * ((var(19)&224)/32)
+trigger25= var(32) := 65536
+;‡M¨‡B
+trigger26= !(!(var(32)&65536))
+trigger26= (var(32)%8) = 2
 trigger26= sysvar(2) = 1
-trigger26= fvar(10) < 80
-trigger26= fvar(14) < 400 || random < 150 * ((var(19)&224)/32)
-trigger26= var(32) := 128
-;‡N¨‡C
+trigger26= var(32) := 32
+;‡N¨‡D
 trigger27= !(!(var(32)&131072))
 trigger27= (var(32)%8) = 1
 trigger27= sysvar(2) = 1
-trigger27= fvar(10) <= 150 && fvar(14) >= 400
-trigger27= var(32) := 64
-;‡N¨‡J
+trigger27= fvar(10) < 80
+trigger27= fvar(14) < 400 || random < 150 * ((var(19)&224)/32)
+trigger27= var(32) := 128
+;‡N¨‡C
 trigger28= !(!(var(32)&131072))
 trigger28= (var(32)%8) = 1
 trigger28= sysvar(2) = 1
-trigger28= fvar(10) > 150
-trigger28= var(32) := 8192
-;‡O¨‡K
-trigger29= !(!(var(32)&262144))
+trigger28= fvar(10) <= 150 && fvar(14) >= 400
+trigger28= var(32) := 64
+;‡N¨‡J
+trigger29= !(!(var(32)&131072))
 trigger29= (var(32)%8) = 1
-trigger29= movehit = 1 && ((var(58)>5)||(!hitpausetime&&!(!(var(59)&1))))
-trigger29= !(var(30)&512)
-trigger29= fvar(14) >= 400
-trigger29= random < 150 * (fvar(14)/1000) * ((var(19)&224)/32)
-trigger29= var(32) := 16384
-;‡P¨‡M
-trigger30= !(!(var(32)&524288))
+trigger29= sysvar(2) = 1
+trigger29= fvar(10) > 150
+trigger29= var(32) := 8192
+;‡O¨‡K
+trigger30= !(!(var(32)&262144))
 trigger30= (var(32)%8) = 1
-trigger30= sysvar(2) = 1
-trigger30= fvar(6) > 64 && fvar(14) >= 400
-trigger30= random < 50 * (fvar(14)/1000) * ((var(19)&224)/32)
-trigger30= var(32) := 65536
-;‡P¨‡O
+trigger30= movehit = 1 && ((var(58)>5)||(!hitpausetime&&!(!(var(59)&1))))
+trigger30= !(var(30)&512)
+trigger30= fvar(14) >= 400
+trigger30= random < 150 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger30= var(32) := 16384
+;‡P¨‡M
 trigger31= !(!(var(32)&524288))
 trigger31= (var(32)%8) = 1
 trigger31= sysvar(2) = 1
-trigger31= random < 100 * ((var(19)&224)/32)
-trigger31= var(32) := 262144
-;‡Q¨‡O
-trigger32= !(!(var(32)&1048576))
+trigger31= fvar(6) > 64 && fvar(14) >= 400
+trigger31= random < 50 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger31= var(32) := 65536
+;‡P¨‡O
+trigger32= !(!(var(32)&524288))
 trigger32= (var(32)%8) = 1
 trigger32= sysvar(2) = 1
-trigger32= random < 30 * ((var(19)&224)/32)
+trigger32= random < 100 * ((var(19)&224)/32)
 trigger32= var(32) := 262144
-;‡Q¨‡@
+;‡Q¨‡O
 trigger33= !(!(var(32)&1048576))
-trigger33= (var(32)%8) = 2
+trigger33= (var(32)%8) = 1
 trigger33= sysvar(2) = 1
 trigger33= random < 30 * ((var(19)&224)/32)
-trigger33= var(32) := 8
-;‡Q¨‡K
+trigger33= var(32) := 262144
+;‡Q¨‡@
 trigger34= !(!(var(32)&1048576))
 trigger34= (var(32)%8) = 2
 trigger34= sysvar(2) = 1
-trigger34= fvar(14) >= 200
-trigger34= random < 150 * (fvar(14)/1000) * ((var(19)&224)/32)
-trigger34= var(32) := 16384
-;‡Q¨‡R
+trigger34= random < 30 * ((var(19)&224)/32)
+trigger34= var(32) := 8
+;‡Q¨‡K
 trigger35= !(!(var(32)&1048576))
 trigger35= (var(32)%8) = 2
 trigger35= sysvar(2) = 1
-trigger35= var(32) := 2097152
+trigger35= fvar(14) >= 200
+trigger35= random < 150 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger35= var(32) := 16384
+;‡Q¨‡R
+trigger36= !(!(var(32)&1048576))
+trigger36= (var(32)%8) = 2
+trigger36= sysvar(2) = 1
+trigger36= var(32) := 2097152
+;‡S¨‡G
+trigger37= !(!(var(32)&4194304))
+trigger37= (var(32)%8) = 1
+trigger37= sysvar(2) = 1
+trigger37= fvar(10) < 150
+trigger37= random < 70 * ((var(19)&224)/32)
+trigger37= var(32) := 1024
+;‡S¨‡L
+trigger38= !(!(var(32)&4194304))
+trigger38= (var(32)%8) = 1
+trigger38= sysvar(2) = 1
+trigger38= fvar(14) >= 200
+trigger38= fvar(10) < 70
+trigger38= var(32) := 32768
+;‡S¨‡D
+trigger39= !(!(var(32)&4194304))
+trigger39= (var(32)%8) = 1
+trigger39= sysvar(2) = 1
+trigger39= fvar(10) < 140
+trigger39= var(32) := 128
 ignorehitpause = 1
 
 [State -1,ƒRƒ“ƒ{’†~]
 type = VarSet
 triggerall = !(!(var(19)&512))
 triggerall = gametime%((7-((var(19)&224)/32))*10+1) = 0
+;”í’e
 trigger1 = movetype = H
+;‘Šè‚ªs“®‰Â”\‚É
 trigger2 = enemynear(!enemynear,alive&&numenemy>1),movetype = A || (enemynear(!enemynear,alive&&numenemy>1),movetype=I&&enemynear(!enemynear,alive&&numenemy>1),ctrl)
+;‘Šè‚ªó‚¯gó‘Ô‚É
 trigger3 = enemynear(!enemynear,alive&&numenemy>1),stateno = [5200,5299]
+;’áAIƒ‰ƒ“ƒ_ƒ€
 trigger4 = ((var(19)&224)/32) < 5
 trigger4 = random < (5-((var(19)&224)/32)) * 1
+;‡I—¹
 trigger5 = roundstate != 2
+;“–g
 trigger6 = var(58) < 5
 trigger6 = movereversed
-trigger7 = !(!(var(32)&8)) && sysvar(3) != [200,203]
-trigger8 = var(58) > 6 && !(var(32)&4096) && sysvar(3) = 900
+;—ìŒ‚ƒLƒƒƒ“ƒZƒ‹i‹¶—pˆ—j
+trigger7 = var(58) > 6 && !(var(32)&4096) && sysvar(3) = 900
+;‡@i—\’èŠO‚Ìs“®j
+trigger8 = !(!(var(32)&8))
+trigger8 = sysvar(3) != [200,203]
+;‡Ei—‰ºj
+trigger9 = !(!(var(32)&256))
+trigger9 = (var(32)%8) < 4
+trigger9 = statetype != A
+;‡Fi—‰ºA—ì—ÍŒÍŠ‰j
+trigger10= !(!(var(32)&512))
+trigger10= statetype != A || ((var(32)%8)=6&&(fvar(14)<200))
+;‡Gi—‰ºj
+trigger11= !(!(var(32)&1024))
+trigger11= (var(32)%8) = [1,2]
+trigger11= statetype != A
+;‡Ki‹óU‚èj
+trigger12= !(!(var(32)&16384))
+trigger12= (var(32)%8) = 1
+trigger12= anim = 1001
+;‡Ni‚·‚×‚Ä‚ÌğŒ‚ğ–‚½‚³‚È‚¢j
+trigger13= !(!(var(32)&131072))
+trigger13= (var(32)%8) = 1
+trigger13= sysvar(2) > 1 || ((fvar(10)=[80,150])&&fvar(14)<400)
+;‡Ri—‰ºj
+trigger14= !(!(var(32)&2097152))
+trigger14= (var(32)%8) = [1,3]
+trigger14= statetype != A
+;‡Si—‰ºA•ÇÛ‚Å‚È‚¢j
+trigger12= !(!(var(32)&4194304))
+trigger12= (var(32)%8) = 0
+trigger12= statetype != A || sysvar(2) > 1 || fvar(10) > 140
 var(32) = 0
 ignorehitpause = 1
 
@@ -2073,6 +2159,7 @@ triggerall = !(var(20)&128)
 triggerall = fvar(39) >= 4
 triggerall = teammode = Single
 triggerall = !(var(33)&1073741824)
+triggerall = var(34) < sysfvar(1)
 trigger1 = !(!(var(33)&536870912)) || !(!(var(30)&262144)) || (sysfvar(1)>6000&&!(!(var(30)&-2147483648))&&life<lifemax)
 trigger2 = roundno > 1 && (var(55)%100) > ((var(55)/100)%100);Ÿ‚¿‰z‚µ
 trigger2 = life<(0.1*lifemax)||lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax)-life>0.6*lifemax||(lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax)>life&&sysfvar(1)>8000)
@@ -2172,6 +2259,49 @@ trigger2 = ((var(30)&6291456)/2097152)>=3&&((enemynear(!enemynear,alive&&numenem
 var(8) = 351705 * ifelse(fvar(14)>=600+((var(30)&6291456)/2097152)*200+400*(((var(30)&1610612736)/536870912)=0&&var(58)>6)&&random<500+80*(fvar(14)/1000)*((var(19)&224)/32),-1,1) + (fvar(32):=3) * 0
 ignorehitpause = 1
 
+[State -1,‚i‚Q‚Q‚bi‹¶‚`‚h—pj]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(!(var(19)&512))
+triggerall = var(58) > 6
+triggerall = roundstate = 2
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 600
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+triggerall = (vel y >= 0 && pos y <= -10) || pos y <= -30
+triggerall = ((var(19)&224)/32) <= 5 || ((var(30)&1610612736)/536870912) != 2
+triggerall = (fvar(4)=[0,40+2*enemynear(!enemynear,alive&&numenemy>1),vel x]) || abs(var(6)) + abs(var(7)) = 0
+triggerall = random < floor(0.0001875 * fvar(14) * fvar(14) - 37.5) * ((var(19)&224)/32)
+trigger1 = inguarddist && ((enemy,numproj+enemy(numenemy>1),numproj)>4||(enemynear(!enemynear,alive&&numenemy>1),movetype!=A&&p2movetype=A&&(enemy,numhelper+enemy(numenemy>1),numhelper>0)))
+trigger2 = enemynear(!enemynear,alive&&numenemy>1),movetype = A
+var(8) = 1410
+ignorehitpause = 1
+
+[State -1,‚i‚Q‚Q‚ai‹¶‚`‚h—pj]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(!(var(19)&512))
+triggerall = var(58) > 6
+triggerall = roundstate = 2
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6)
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+triggerall = enemynear(!enemynear,alive&&numenemy>1),statetype != L
+triggerall = (vel y >= 0 && pos y <= -10) || pos y <= -30
+triggerall = (fvar(4)=[0,66+2*enemynear(!enemynear,alive&&numenemy>1),vel x]) || ((var(30)&1610612736)/536870912) = 2 || abs(var(6)) + abs(var(7)) = 0
+triggerall = ((var(19)&224)/32) > 5 || random < ((var(19)&224)/32) * 100 + (1+(((var(30)&1610612736)/536870912)=2))
+trigger1 = inguarddist && ((enemy,numproj+enemy(numenemy>1),numproj)>4||(enemynear(!enemynear,alive&&numenemy>1),movetype!=A&&p2movetype=A&&(enemy,numhelper+enemy(numenemy>1),numhelper>0)))
+trigger1 = random < 80 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger2 = enemynear(!enemynear,alive&&numenemy>1),movetype = A
+trigger2 = random < 80 * (fvar(14)/1000) * ((var(19)&224)/32)
+trigger3 = var(58) > 9
+trigger3 = !(!(var(59)&8))
+trigger3 = random < 120 * (fvar(14)/1000) * ((var(19)&224)/32)
+var(8) = 1400
+ignorehitpause = 1
+
 [State -1,—ìŒ‚]
 type = VarSet
 triggerall = var(8) = -1
@@ -2186,8 +2316,17 @@ triggerall = ((fvar(4)<50)&&(fvar(5)=[-50,50])) || gethitvar(hitcount) > (9-((va
 triggerall = ((var(19)&224)/32) > 2 || random < 15 * (fvar(14)/1000) * ((var(19)&224)/32)
 triggerall = ((var(19)&224)/32) < 3 || random < 75 * (fvar(14)/1000) * (((var(19)&224)/32)-1) * ((150-fvar(4))/150) - 90 || (abs(var(6))+abs(var(7))=0&&((var(30)&1610612736)/536870912)=0&&var(58)>6)
 triggerall = inguarddist || statetype != A || var(58) > 6
-trigger1 = (sysvar(3)=[150,155]) || (var(9)=[120,155]) || (abs(var(6))+abs(var(7))=0&&var(58)>6&&!(!(var(59)&512))&&((sysvar(3)=[200,1399])||(sysvar(3)=[351700,351709])))
-trigger2 = (sysvar(3)=[5000,5299]) || (var(9)=[5000,5299]) || (!(!(var(59)&8))&&var(58)>9)
+trigger1 = (sysvar(3)=[150,155]) || (var(9)=[120,155]) || (sysvar(3)=[5000,5299]) || (var(9)=[5000,5299])
+trigger1 = var(27) := 20
+trigger2 = var(58) > 6
+trigger2 = !(!(var(59)&512)) && ((sysvar(3)=[200,1499])||(sysvar(3)=[351700,351709]))
+trigger2 = abs(var(6)) + abs(var(7)) = 0
+trigger2 = ((var(30)&1610612736)/536870912) = 0 || ifelse(var(58)<10,((var(30)&1610612736)/536870912)=2,var(32)=0)
+trigger2 = var(27) := 21
+trigger3 = var(58) > 9
+trigger3 = !(!(var(59)&8))
+trigger3 = abs(var(6)) + abs(var(7)) < 4
+trigger3 = var(27) := 22 || 1
 var(8) = 900 + ((var(20):=(var(20)&(128^-1)))&&0)
 ignorehitpause = 1
 
@@ -2202,11 +2341,13 @@ triggerall = fvar(14) >= 400
 triggerall = !(!(var(59)&512)) || !(!(var(20)&4))
 triggerall = sysvar(3) != 900 && !(var(30)&1024)
 triggerall = ((var(19)&224)/32) > 3
-triggerall = abs(var(6)) + abs(var(7)) < 100
-trigger1 = !(!(var(59)&512)) && ((sysvar(3)=[200,1399])||(sysvar(3)=[351700,351709]))
+triggerall = abs(var(6)) + abs(var(7)) < 13
+trigger1 = !(!(var(59)&512)) && ((sysvar(3)=[200,1499])||(sysvar(3)=[351700,351709]))
 trigger1 = random < (((var(19)&224)/32)-3) * (20*(!!inguarddist)+50*!!(enemynear,movetype=A||P2movetype=A)*(1+((150-fvar(4))/150))+10*(enemynear,numproj)+20*(enemy,numhelper+ifelse(numenemy>1,enemy(numenemy>1),numhelper,0)))
+trigger1 = var(27) := 30 || 1
 trigger2 = !(!(var(59)&8)) && enemynear,movetype != H
 trigger2 = random < (((var(19)&224)/32)-2) * (20*(!!inguarddist)+50*!!(enemynear,movetype=A||P2movetype=A)*(1+((150-fvar(4))/150))+10*(enemynear,numproj)+20*(enemy,numhelper+ifelse(numenemy>1,enemy(numenemy>1),numhelper,0)))
+trigger2 = var(27) := 31 || 1
 var(8) = 900 + ((var(20):=(var(20)&(128^-1)))&&0)
 ignorehitpause = 1
 
@@ -2261,10 +2402,10 @@ triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&64))
 triggerall = sysvar(3) != 100 && sysvar(3) != 105
 triggerall = (var(58)>6) || random < 80 * ((var(19)&224)/32)
-triggerall = !(var(58)>6) || random < 250 + (abs(var(6))+abs(var(7))<=0) * 60 * ((var(19)&224)/32) + ((enemynear(!enemynear,alive&&numenemy>1),movetype=A)||(enemy,numproj+enemy(numenemy>1),numproj>0)) * 60 * ((var(19)&224)/32)
+triggerall = !(var(58)>6) || random < (250-200*!!(var(58)>9)) + (abs(var(6))+abs(var(7))<=0) * 60 * ((var(19)&224)/32) + ((enemynear(!enemynear,alive&&numenemy>1),movetype=A)||(enemy,numproj+enemy(numenemy>1),numproj>0)) * 60 * ((var(19)&224)/32)
 triggerall = enemynear(!enemynear,alive&&numenemy>1),vel x < 3
 triggerall = enemynear(!enemynear,alive&&numenemy>1),movetype = A || (((sysvar(3)=[120,155])||(var(9)=[120,155]))&&enemynear(!enemynear,alive&&numenemy>1),movetype=I)
-triggerall = enemynear(!enemynear,alive&&numenemy>1),hitdefattr=SCA,AT || (enemynear(!enemynear,alive&&numenemy>1),stateno=[200,699])
+triggerall = enemynear(!enemynear,alive&&numenemy>1),hitdefattr=SCA,AT || (enemynear(!enemynear,alive&&numenemy>1),stateno=[200,699]) || var(58) > 6
 trigger1 = inguarddist && ((enemy,numproj+enemy(numenemy>1),numproj)>0||(enemynear(!enemynear,alive&&numenemy>1),movetype!=A&&p2movetype=A&&(enemy,numhelper+enemy(numenemy>1),numhelper>0)))
 trigger2 = (fvar(4)=[0,80]) && fvar(11) > 50
 var(8) = 105
@@ -2366,7 +2507,7 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&32))
 triggerall = (var(58)>6) || ((((var(19)&224)/32)<6||fvar(11)<=50)&&random<50)
-triggerall = !(var(58)>6) || random < 10 * (1+(fvar(11)<=50)) * ((var(19)&224)/32)
+triggerall = !(var(58)>6) || random < (10-6*!!(var(58)>9)) * (1+(fvar(11)<=50)) * ((var(19)&224)/32)
 triggerall = fvar(5) >= -80 + 2 * enemynear(!enemynear,alive&&numenemy>1),vel x
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),movetype = A
 trigger2 = (sysvar(3)=[150,155]) || (var(9)=[120,155])
@@ -2493,7 +2634,7 @@ triggerall = fvar(4) < 30
 triggerall = (!(!(var(20)&4))&&statetype=S) || (sysvar(3)=230&&(movecontact||movereversed))
 triggerall = enemynear(!enemynear,alive&&numenemy>1),statetype != L
 triggerall = fvar(4) = [0,30+2*enemynear(!enemynear,alive&&numenemy>1),vel x]
-triggerall = fvar(5) > -50
+triggerall = fvar(5) > -20
 triggerall = ((var(19)&224)/32) > 1
 triggerall = fvar(39) := enemynear(!enemynear,alive&&numenemy>1),vel x || 1
 triggerall = random < abs(((var(19)&224)/32)*100-(((var(19)&224)/32)/4)*200-abs(((var(19)&224)/32)-4)*200+50) * ifelse(fvar(39)<=0,1,2/(fvar(39)+!fvar(39)))
@@ -2683,7 +2824,7 @@ triggerall = statetype = A
 triggerall = !(!(var(20)&4)) || ((sysvar(3)=[500,510])&&(movecontact||movereversed))
 trigger1 = !(!(var(32)&512))
 trigger1 = (var(32)%8) = 5
-trigger1 = var(32) := 0 || 1
+trigger1 = var(32) := var(32) + 1 || 1
 trigger2 = !(!(var(32)&2097152))
 trigger2 = (var(32)%8) = 3
 trigger2 = var(32) := ifelse(enemynear(!enemynear,alive&&numenemy>1),pos y=0,var(32)+1,0) || 1
@@ -2769,6 +2910,20 @@ trigger1 = fvar(4) = [0,46]
 trigger1 = !(!(var(32)&32768))
 trigger1 = (var(32)%8) = 0
 var(8) = 1010 + (var(32):=0) * 0
+ignorehitpause = 1
+
+[State -1,‚i‚Q‚Q‚b]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(!(var(19)&512))
+triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+trigger1 = !(!(var(32)&4194304))
+trigger1 = (var(32)%8) = 0
+var(8) = 1410 + (var(32):=var(32)+1) * 0
 ignorehitpause = 1
 
 [State -1,Š^•„uŒ³’©‚ÌÔŠ^v]
@@ -2917,6 +3072,7 @@ triggerall = fvar(14) >= 400
 triggerall = (!(!(var(59)&512))&&(var(58)>5)) || (var(58)>5&&!(!(var(20)&4))) || (var(58)<5&&(sysvar(3)=[120,159]))
 trigger1 = !(!(var(32)&4096))
 trigger1 = (var(32)%8) = 0
+trigger1 = var(27) := 40 || 1
 var(8) = 900 + ((var(20):=(var(20)&(128^-1)))&&0) + (var(32):=var(32)+1) * 0
 ignorehitpause = 1
 
@@ -3072,7 +3228,7 @@ triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256)) || sysvar(3) = 100
 triggerall = fvar(32) != 4
 triggerall = var(58) < 6 || (!((var(30)&1610612736)/536870912)&&(fvar(14)>=400||abs(var(6))+abs(var(7))>50)) || ((var(30)&1610612736)/536870912) = 1
-triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*(fvar(39)-fvar(30))>130) && fvar(10) > 170
+triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*(fvar(39)-fvar(30))>130) && fvar(10) > 170
 trigger1 = (var(58)<5&&((var(19)&224)/32)<6) || var(58) > 6
 trigger1 = random < 20 * (fvar(14)/1000) * ((var(19)&224)/32) * (power*2/powermax) * ifelse(enemynear(!enemynear,alive&&numenemy>1),life<200,2,1) * (1+(var(58)>6))
 trigger2 = ((var(19)&224)/32) > 5 && var(58) < 5
@@ -3097,7 +3253,7 @@ triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256)) || sysvar(3) = 100
 triggerall = fvar(32) != 5
 triggerall = var(58) < 6 || (!((var(30)&1610612736)/536870912)&&(fvar(14)>=400||abs(var(6))+abs(var(7))>50)) || ((var(30)&1610612736)/536870912) = 1
-triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*(fvar(39)-fvar(30))>90) && fvar(10) > 130
+triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*(fvar(39)-fvar(30))>90) && fvar(10) > 130
 trigger1 = (var(58)<5&&((var(19)&224)/32)<6) || var(58) > 6
 trigger1 = random < 10 * (fvar(14)/1000) * ((var(19)&224)/32) * (power*2/powermax) * ifelse(enemynear(!enemynear,alive&&numenemy>1),life<200,2,1) * (1+(var(58)>6))
 trigger2 = ((var(19)&224)/32) > 5 && var(58) < 5
@@ -3121,6 +3277,7 @@ triggerall = sysvar(3) != 900 && var(9) != 900 && !(var(30)&1024)
 trigger1 = (fvar(4)**2+(fvar(5)+const(size.mid.pos.y)-enemynear(!enemynear,alive&&numenemy>1),const(size.mid.pos.y))**2)**0.5 < 52
 trigger1 = ((var(19)&224)/32) > 2 || random < 15 * (fvar(14)/1000) * ((var(19)&224)/32)
 trigger1 = ((var(19)&224)/32) < 3 || random < 75 * (fvar(14)/1000) * (((var(19)&224)/32)-1) - 90
+trigger1 = var(27) := 50 || 1
 var(8) = 900 + ((var(20):=(var(20)&(128^-1)))&&0)
 ignorehitpause = 1
 
@@ -3147,8 +3304,8 @@ triggerall = var(58) < 6 || ((var(30)&1610612736)/536870912) || fvar(14) >= 400
 triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || (sysvar(3)=230&&(movecontact||movereversed)) || sysvar(3) = 100
-trigger1 = (fvar(5)+ifelse(fvar(30)>40,0,40-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>40,0,40-fvar(30)))) >= 0
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>40,0,40-fvar(30))=[0,80]) || fvar(10) < 120
+trigger1 = (fvar(5)+ifelse(fvar(30)>40,0,40-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>40,0,40-fvar(30)))) >= 0
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>40,0,40-fvar(30))=[0,80]) || fvar(10) < 120
 trigger1 = random < 100 * ((1500-fvar(14))/1000) * ((var(19)&224)/32)
 var(8) = 240 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
@@ -3166,8 +3323,8 @@ triggerall = !(var(20)&128)
 triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6) && !(((var(30)&1610612736)/536870912)=2&&(power>=(ceil(.3*((var(33)&112)/16))+!(((var(33)&112)/16)%2))*1000))
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128)) || sysvar(3) = 100
-trigger1 = (fvar(5)+ifelse(fvar(30)>15,0,15-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>15,0,15-fvar(30)))) >= 0
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>15,0,15-fvar(30))=[-30,30]) || fvar(10) < 70
+trigger1 = (fvar(5)+ifelse(fvar(30)>15,0,15-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>15,0,15-fvar(30)))) >= 0
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>15,0,15-fvar(30))=[-30,30]) || fvar(10) < 70
 trigger1 = random < 20 * (fvar(14)/1000) * ((var(19)&224)/32) + 100 * (fvar(10)<70||fvar(11)<50)
 var(8) = 1300
 ignorehitpause = 1
@@ -3186,7 +3343,7 @@ triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128)) || sysvar(3) = 100
 triggerall = numhelper(20060) = 0
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>12,0,12-fvar(30))=[70,150])
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>12,0,12-fvar(30))=[70,150])
 trigger1 = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
 var(8) = 1100
 ignorehitpause = 1
@@ -3205,7 +3362,7 @@ triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128)) || sysvar(3) = 100
 triggerall = numhelper(20060) = 0
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>12,0,12-fvar(30))=[150,230])
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>12,0,12-fvar(30))=[150,230])
 trigger1 = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
 var(8) = 1110
 ignorehitpause = 1
@@ -3223,9 +3380,28 @@ triggerall = !(var(20)&128)
 triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6) && !(((var(30)&1610612736)/536870912)=2&&(power>=(ceil(.3*((var(33)&112)/16))+!(((var(33)&112)/16)%2))*1000))
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || !(!(var(59)&1024)) || sysvar(3) = 100
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>7,0,7-fvar(30))>230)
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>7,0,7-fvar(30))>230)
 trigger1 = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
 var(8) = 300 + ((var(20):=(var(20)&(134217728^-1)))&&0)
+ignorehitpause = 1
+
+[State -1,‚i‚Q‚Q‚b]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(!(var(19)&512))
+triggerall = roundstate = 2
+triggerall = var(32) = 0
+triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno = [5110,5119]
+triggerall = fvar(39) > 29
+triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6) && !(((var(30)&1610612736)/536870912)=2&&(power>=(ceil(.3*((var(33)&112)/16))+!(((var(33)&112)/16)%2))*1000))
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+trigger1 = fvar(6) = [0,ceil(140+0.5*fvar(39)*enemynear(!enemynear,alive&&numenemy>1),hitvel x)]
+trigger1 = enemynear(!enemynear,alive&&numenemy>1),pos y >= -35
+trigger1 = random < 120 * (fvar(14)/1000) * ((var(19)&224)/32)
+var(8) = 1410
 ignorehitpause = 1
 
 [State -1,‚i‚Q‚a]
@@ -3243,7 +3419,7 @@ triggerall = statetype = A
 triggerall = !(!(var(20)&4)) && !(!(!(var(20)&4096))&&var(58)>6&&((var(19)&224)/32)=7)
 triggerall = numhelper(20050) = 0
 trigger1 = fvar(5) + enemynear(!enemynear,alive&&numenemy>1),const(size.mid.pos.y) = [-60,60]
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>17,0,17-fvar(30))=[-70,30])
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>17,0,17-fvar(30))=[-70,30])
 trigger1 = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
 var(8) = 620 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
@@ -3263,7 +3439,7 @@ triggerall = statetype = A
 triggerall = !(!(var(20)&4)) && !(!(!(var(20)&4096))&&var(58)>6&&((var(19)&224)/32)=7)
 triggerall = numhelper(20040) = 0
 trigger1 = fvar(5) + enemynear(!enemynear,alive&&numenemy>1),const(size.mid.pos.y) = [-60,60]
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>17,0,17-fvar(30))=[40,140])
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>17,0,17-fvar(30))=[40,140])
 trigger1 = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
 var(8) = 720 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
@@ -3292,7 +3468,7 @@ triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58
 triggerall = statetype = A
 triggerall = !(!(var(20)&4)) && !(!(!(var(20)&4096))&&var(58)>6&&((var(19)&224)/32)=7)
 trigger1 = fvar(5) + enemynear(!enemynear,alive&&numenemy>1),const(size.mid.pos.y) = [-60,60]
-trigger1 = fvar(4) - (enemynear(!enemynear,alive&&numenemy>1),vel x) * ifelse(fvar(30)>17,0,17-fvar(30)) > 120
+trigger1 = fvar(4) - (enemynear(!enemynear,alive&&numenemy>1),hitvel x) * ifelse(fvar(30)>17,0,17-fvar(30)) > 120
 trigger1 = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
 var(8) = 600 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
@@ -3373,17 +3549,17 @@ triggerall = !(!(var(19)&512))
 triggerall = roundstate = 2
 triggerall = var(32) = 0
 triggerall = !(var(30)&1024) && !(var(30)&2048)
-triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno != [5100,5120]
+triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno = [120,155]
 triggerall = enemynear(!enemynear,alive&&numenemy>1),movetype = H
 triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = ifelse(var(58)<5,var(6)>0,sysfvar(4)!=0)
 triggerall = fvar(14) >= 400
 triggerall = (!(!(var(59)&512))&&(var(58)>5)) || (var(58)>5&&!(!(var(20)&4))) || (var(58)<5&&(sysvar(3)=[120,159]))
 triggerall = sysvar(3) != 900 && var(9) != 900
-trigger1 = enemynear(!enemynear,alive&&numenemy>1),stateno = [120,155]
 trigger1 = (fvar(4)**2+(fvar(5)+const(size.mid.pos.y)-enemynear(!enemynear,alive&&numenemy>1),const(size.mid.pos.y))**2)**0.5 < 52
 trigger1 = ((var(19)&224)/32) > 2 || random < 15 * (fvar(14)/1000) * ((var(19)&224)/32)
 trigger1 = ((var(19)&224)/32) < 3 || random < 75 * (fvar(14)/1000) * (((var(19)&224)/32)-1) - 90
+trigger1 = var(27) := 60 || 1
 var(8) = 900 + ((var(20):=(var(20)&(128^-1)))&&0)
 ignorehitpause = 1
 
@@ -3412,8 +3588,8 @@ triggerall = var(58) < 6 || ((var(30)&1610612736)/536870912) || fvar(14) >= 400
 triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || (sysvar(3)=230&&(movecontact||movereversed)) || sysvar(3) = 100
-triggerall = (fvar(5)+ifelse(fvar(30)>40,0,40-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>40,0,40-fvar(30)))) >= 0
-triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>40,0,40-fvar(30))=[0,80]) || fvar(10) < 120
+triggerall = (fvar(5)+ifelse(fvar(30)>40,0,40-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>40,0,40-fvar(30)))) >= 0
+triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>40,0,40-fvar(30))=[0,80]) || fvar(10) < 120
 triggerall = random < 50 * ((1500-fvar(14))/1000) * ((var(19)&224)/32)
 triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno = [120,155]
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),gethitvar(hittime) + enemynear(!enemynear,alive&&numenemy>1),gethitvar(hitshaketime) > 40
@@ -3437,8 +3613,8 @@ triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128)) || sysvar(3) = 100
 triggerall = enemynear(!enemynear,alive&&numenemy>1),pos y = 0
-triggerall = (fvar(5)+ifelse(fvar(30)>13,0,13-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>13,0,13-fvar(30)))) >= 0
-triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>13,0,13-fvar(30))=[-40,40]) || fvar(10) < 80
+triggerall = (fvar(5)+ifelse(fvar(30)>13,0,13-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>13,0,13-fvar(30)))) >= 0
+triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>13,0,13-fvar(30))=[-40,40]) || fvar(10) < 80
 triggerall = random < 50 * (fvar(14)/1000) * ((var(19)&224)/32) + 100 * (fvar(10)<70||fvar(11)<50)
 triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno = [120,155]
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),gethitvar(hittime) + enemynear(!enemynear,alive&&numenemy>1),gethitvar(hitshaketime) > 15
@@ -3470,8 +3646,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || ((sysvar(3)=[200,201])&&(movecontact||movereversed)) || sysvar(3) = 100
-triggerall = (fvar(5)+ifelse(fvar(30)>28,0,28-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>28,0,28-fvar(30)))) >= 0
-triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>28,0,28-fvar(30))=[0,30]) || fvar(10) < 70
+triggerall = (fvar(5)+ifelse(fvar(30)>28,0,28-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>28,0,28-fvar(30)))) >= 0
+triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>28,0,28-fvar(30))=[0,30]) || fvar(10) < 70
 triggerall = random < 60 * ((1500-fvar(14))/1000) * ((var(19)&224)/32)
 triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno = [120,155]
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),gethitvar(hittime) + enemynear(!enemynear,alive&&numenemy>1),gethitvar(hitshaketime) > 30
@@ -3502,8 +3678,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || sysvar(3) = 100
-triggerall = (fvar(5)+ifelse(fvar(30)>32,0,32-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>32,0,32-fvar(30)))) >= -55
-triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>32,0,32-fvar(30))=[0,40]) || fvar(10) < 80
+triggerall = (fvar(5)+ifelse(fvar(30)>32,0,32-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>32,0,32-fvar(30)))) >= -55
+triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>32,0,32-fvar(30))=[0,40]) || fvar(10) < 80
 triggerall = random < 70 * ((1500-fvar(14))/1000) * ((var(19)&224)/32)
 trigger1 = (enemynear(!enemynear,alive&&numenemy>1),stateno=[120,155]) && enemynear(!enemynear,alive&&numenemy>1),gethitvar(hittime) + enemynear(!enemynear,alive&&numenemy>1),gethitvar(hitshaketime) > 35
 trigger2 = (projcontacttime(12300)<10&&numprojID(12300)>2) || projcontacttime(12310) = [1,10]
@@ -3526,9 +3702,9 @@ triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || sysvar(3) = 100
 triggerall = numhelper(20040) = 0
 triggerall = random < 40 * (fvar(14)/1000) * abs(cos(((fvar(4)-75)*Pi/160))) * ((var(19)&224)/32)
-triggerall = enemynear(!enemynear,alive&&numenemy>1),pos y > -70 && enemynear(!enemynear,alive&&numenemy>1),vel y >= 0
+triggerall = enemynear(!enemynear,alive&&numenemy>1),pos y > -70 && enemynear(!enemynear,alive&&numenemy>1),hitvel y >= 0
 trigger1 = fvar(4) > 80 && ((projguardedtime(12300)<10&&numprojID(12300)>2)||(projguardedtime(12310)=[1,10]))
-trigger2 = fvar(4) > const(velocity.run.fwd.x) * 25 + (enemynear(!enemynear,alive&&numenemy>1),vel x) * ifelse(fvar(30)>25,0,25-fvar(30))
+trigger2 = fvar(4) > const(velocity.run.fwd.x) * 25 + (enemynear(!enemynear,alive&&numenemy>1),hitvel x) * ifelse(fvar(30)>25,0,25-fvar(30))
 var(8) = 400
 ignorehitpause = 1
 
@@ -3545,8 +3721,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4))||(sysvar(3)=230&&!(!(var(59)&2048))) || sysvar(3) = 100
-trigger1 = (fvar(5)+ifelse(fvar(30)>3,0,3-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>3,0,3-fvar(30)))) >= 15
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>3,0,3-fvar(30))=[0,10]) || fvar(10) < 50
+trigger1 = (fvar(5)+ifelse(fvar(30)>3,0,3-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>3,0,3-fvar(30)))) >= 15
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>3,0,3-fvar(30))=[0,10]) || fvar(10) < 50
 trigger1 = random < 80 * ((var(19)&224)/32)
 var(8) = 230
 ignorehitpause = 1
@@ -3565,7 +3741,7 @@ triggerall = !(var(20)&128)
 triggerall = fvar(4) < 30
 triggerall = (!(!(var(20)&4))&&statetype=S) || (sysvar(3)=230&&(movecontact||movereversed)) || sysvar(3) = 100
 trigger1 = !(enemynear(!enemynear,alive&&numenemy>1),stateno=[120,155])
-trigger1 = (fvar(5)+ifelse(fvar(30)>4,0,4-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>4,0,4-fvar(30)))) >= -50
+trigger1 = (fvar(5)+ifelse(fvar(30)>4,0,4-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>4,0,4-fvar(30)))) >= -50
 trigger1 = random < 80 * ((var(19)&224)/32)
 var(8) = 200
 ignorehitpause = 1
@@ -3584,8 +3760,8 @@ triggerall = !(var(20)&128)
 triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6) && !(((var(30)&1610612736)/536870912)=2&&(power>=(ceil(.3*((var(33)&112)/16))+!(((var(33)&112)/16)%2))*1000))
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || sysvar(3) = 100
-trigger1 = (fvar(5)+ifelse(fvar(30)>10,0,10-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>10,0,10-fvar(30)))) >= -50
-trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>10,0,10-fvar(30))=[0,40]) || fvar(10) < 80
+trigger1 = (fvar(5)+ifelse(fvar(30)>10,0,10-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>10,0,10-fvar(30)))) >= -50
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>10,0,10-fvar(30))=[0,40]) || fvar(10) < 80
 trigger1 = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
 var(8) = 320
 ignorehitpause = 1
@@ -3601,12 +3777,12 @@ triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno != [5100,5120]
 triggerall = enemynear(!enemynear,alive&&numenemy>1),movetype = H
 triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
-triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6) && !(((var(30)&1610612736)/536870912)=2&&(power>=(ceil(.3*((var(33)&112)/16))+!(((var(33)&112)/16)%2))*1000))
+triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || sysvar(3) = 100
-triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>23,0,23-fvar(30))) < 35 && (fvar(6)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>23,0,23-fvar(30))) > 35 || fvar(10) < 80
-triggerall = (fvar(5)+ifelse(fvar(30)>23,0,23-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>23,0,23-fvar(30)))) >= -70
-triggerall = random < 100 * (fvar(14)/1000) * ((var(19)&224)/32)
+triggerall = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>23,0,23-fvar(30))) < 35 && (fvar(6)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>23,0,23-fvar(30))) > 35 || fvar(10) < 80
+triggerall = (fvar(5)+ifelse(fvar(30)>23,0,23-fvar(30))*(enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>23,0,23-fvar(30)))) >= -70
+triggerall = random < 50 * (fvar(14)/1000) * ((var(19)&224)/32) * ceil(fvar(30)/20)
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),gethitvar(hittime) + enemynear(!enemynear,alive&&numenemy>1),gethitvar(hitshaketime) > 25
 trigger2 = projcontacttime(12300) < 10 && numprojID(12300) > 2
 var(8) = 420
@@ -3626,8 +3802,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&16)) || sysvar(3) = 100
-trigger1 = fvar(4) + 2.5 * 12 - enemynear(!enemynear,alive&&numenemy>1),vel x * ifelse(fvar(30)>15,0,15-fvar(30)) < 25
-trigger1 = enemynear(!enemynear,alive&&numenemy>1),pos y + ifelse(fvar(30)>15,0,15-fvar(30)) * (enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>15,0,15-fvar(30))) = [-82,-45]
+trigger1 = fvar(4) + 2.5 * 12 - enemynear(!enemynear,alive&&numenemy>1),hitvel x * ifelse(fvar(30)>15,0,15-fvar(30)) < 25
+trigger1 = enemynear(!enemynear,alive&&numenemy>1),pos y + ifelse(fvar(30)>15,0,15-fvar(30)) * (enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>15,0,15-fvar(30))) = [-82,-45]
 trigger1 = random < 90 * ((var(19)&224)/32)
 var(8) = 40 + ((var(20):=(var(20)&(3^-1)))&&0)
 ignorehitpause = 1
@@ -3646,8 +3822,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&32)) || sysvar(3) = 100
-trigger1 = (fvar(4)-enemynear(!enemynear,alive&&numenemy>1),vel x*ifelse(fvar(30)>12,0,12-fvar(30))=[-25,25]) || fvar(10) < 50
-trigger1 = enemynear(!enemynear,alive&&numenemy>1),pos y + ifelse(fvar(30)>12,0,12-fvar(30)) * (enemynear(!enemynear,alive&&numenemy>1),vel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>12,0,12-fvar(30))) = [-120,-50]
+trigger1 = (fvar(4)-enemynear(!enemynear,alive&&numenemy>1),hitvel x*ifelse(fvar(30)>12,0,12-fvar(30))=[-25,25]) || fvar(10) < 50
+trigger1 = enemynear(!enemynear,alive&&numenemy>1),pos y + ifelse(fvar(30)>12,0,12-fvar(30)) * (enemynear(!enemynear,alive&&numenemy>1),hitvel y+.5*enemynear(!enemynear,alive&&numenemy>1),gethitvar(yaccel)*ifelse(fvar(30)>12,0,12-fvar(30))) = [-120,-50]
 trigger1 = random < 90 * ((var(19)&224)/32)
 var(8) = 40 + ((var(20):=(var(20)|2))&&0) + ((var(20):=(var(20)&(1^-1)))&&0)
 ignorehitpause = 1
@@ -3666,10 +3842,29 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = A
 triggerall = !(!(var(20)&4)) || (sysvar(3)=500&&fvar(38)<6&&!(!(var(59)&2048)))
-trigger1 = (fvar(4)-enemynear(!enemynear,alive&&numenemy>1),vel x*ifelse(fvar(30)>6,0,6-fvar(30))<30) || fvar(10) < 60
+trigger1 = (fvar(4)-enemynear(!enemynear,alive&&numenemy>1),hitvel x*ifelse(fvar(30)>6,0,6-fvar(30))<30) || fvar(10) < 60
 trigger1 = fvar(5) + ifelse(fvar(30)>6,0,6-fvar(30)) * (enemynear,vel y+.5*enemynear,gethitvar(yaccel)*ifelse(fvar(30)>6,0,6-fvar(30))) + enemynear,const(size.mid.pos.y) = [-50,20]
 trigger1 = random < 120 * ((var(19)&224)/32)
 var(8) = 500
+ignorehitpause = 1
+
+[State -1,‚i‚Q‚Q‚a]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(!(var(19)&512))
+triggerall = roundstate = 2
+triggerall = var(32) = 0
+triggerall = enemynear(!enemynear,alive&&numenemy>1),stateno != [5100,5120]
+triggerall = fvar(5) > -25 && enemynear(!enemynear,alive&&numenemy>1),pos y < 0
+triggerall = fvar(30) > 15
+triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6)
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+trigger1 = (fvar(6)-(enemynear(!enemynear,alive&&numenemy>1),hitvel x)*ifelse(fvar(30)>29,0,29-fvar(30))=[0,64])
+trigger1 = random < 90 * (fvar(14)/1000) * ((var(19)&224)/32) * (1+(var(58)>6)) * ceil(fvar(30)/30)
+var(8) = 1400
 ignorehitpause = 1
 
 [State -1,‚Sƒ_ƒbƒVƒ…]
@@ -3766,7 +3961,7 @@ triggerall = statetype = S || statetype = C || statetype = A
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 triggerall = fvar(4) > 0
 triggerall = (pos y=[-140,0]) && (fvar(5)=[-100,40])
-triggerall = random < 8 * (fvar(14)/1000) * ((var(19)&224)/32) * (power*2/powermax) * ifelse(enemynear(!enemynear,alive&&numenemy>1),life<200,2,1) * (1+(var(58)>6)) * (1+(((var(30)&1610612736)/536870912)=2))
+triggerall = random < 7 * (fvar(14)/1000) * ((var(19)&224)/32) * (power*2/powermax) * ifelse(enemynear(!enemynear,alive&&numenemy>1),life<200,2,1) * (1+(var(58)>6)) * (1+(((var(30)&1610612736)/536870912)=2))
 ;‰ñ”ğƒ‚[ƒh’†
 trigger1 = var(58) > 6 && ((var(30)&1610612736)/536870912) = 0
 trigger1 = fvar(14) >= 400 || abs(var(6)) + abs(var(7)) > 50
@@ -3785,7 +3980,7 @@ ignorehitpause = 1
 
 [State -1,Š^•„uŒ³’©‚ÌÔŠ^v]
 type = VarSet
-triggerall = var(8) = -1
+triggerall = var(8) = -1 || (((var(30)&1610612736)/536870912)=2&&var(58)>9&&((var(19)&224)/32)>=6)
 triggerall = !(!(var(19)&512))
 triggerall = roundstate = 2
 triggerall = var(32) = 0
@@ -3816,7 +4011,7 @@ ignorehitpause = 1
 
 [State -1,Š^ëëuÖ‚Ìë‚ç‚é‚é‚Í‰å‚ä‚¦‚Év]
 type = VarSet
-triggerall = var(8) = -1
+triggerall = var(8) = -1 || (((var(30)&1610612736)/536870912)=2&&var(58)>9&&((var(19)&224)/32)>=6)
 triggerall = !(!(var(19)&512))
 triggerall = roundstate = 2
 triggerall = var(32) = 0
@@ -3850,7 +4045,7 @@ ignorehitpause = 1
 
 [State -1,u“y’…_‚Ì’¸“_v]
 type = VarSet
-triggerall = var(8) = -1
+triggerall = var(8) = -1 || (((var(30)&1610612736)/536870912)=2&&var(58)>9&&((var(19)&224)/32)>=6)
 triggerall = !(!(var(19)&512))
 triggerall = roundstate = 2
 triggerall = var(32) = 0
@@ -3990,6 +4185,44 @@ trigger1 = enemynear(!enemynear,alive&&numenemy>1),numproj = 0
 trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>12,0,12-fvar(30))=[150,230])
 trigger1 = random < 2 * (fvar(14)/1000) * ((var(19)&224)/32) * (1+(var(58)>6))
 var(8) = 1110
+ignorehitpause = 1
+
+[State -1,‚i‚Q‚Q‚b]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(!(var(19)&512))
+triggerall = roundstate = 2
+triggerall = var(32) = 0
+triggerall = fvar(39) = 0
+triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6) && !(((var(30)&1610612736)/536870912)=2&&(power>=(ceil(.3*((var(33)&112)/16))+!(((var(33)&112)/16)%2))*1000))
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+trigger1 = !inguarddist
+trigger1 = enemynear(!enemynear,alive&&numenemy>1),movetype = I
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>29,0,29-fvar(30))=[0,40])
+trigger1 = random < 5 * (fvar(14)/1000) * ((var(19)&224)/32) * (1+(var(58)>6))
+var(8) = 1410
+ignorehitpause = 1
+
+[State -1,‚i‚Q‚Q‚a]
+type = VarSet
+triggerall = var(8) = -1
+triggerall = !(!(var(19)&512))
+triggerall = roundstate = 2
+triggerall = var(32) = 0
+triggerall = fvar(39) = 0
+triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
+triggerall = !(var(20)&128)
+triggerall = fvar(14) >= 200 + 400 * (((var(30)&1610612736)/536870912)=0&&var(58)>6) && !(((var(30)&1610612736)/536870912)=2&&(power>=(ceil(.3*((var(33)&112)/16))+!(((var(33)&112)/16)%2))*1000))
+triggerall = statetype = A
+triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
+trigger1 = !inguarddist
+trigger1 = enemynear(!enemynear,alive&&numenemy>1),movetype = I
+trigger1 = (fvar(4)-(enemynear(!enemynear,alive&&numenemy>1),vel x)*ifelse(fvar(30)>29,0,29-fvar(30))=[0,64])
+trigger1 = random < 7 * (fvar(14)/1000) * ((var(19)&224)/32) * (1+(var(58)>6))
+var(8) = 1400
 ignorehitpause = 1
 
 [State -1,‚iƒ_ƒbƒVƒ…]

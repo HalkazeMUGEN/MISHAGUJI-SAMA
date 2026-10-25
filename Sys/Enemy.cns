@@ -36,6 +36,19 @@ hitdefpersist = 1
 movehitpersist = 1
 hitcountpersist = 1
 
+[State 1141514113];自分本体（対隔離Explod消去）
+type = SelfState
+triggerall = !ishelper
+triggerall = var(15)
+triggerall = var(58) != numexplod(468746114)
+triggerall = var(801) = [1,12]
+trigger1 = name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && authorname = "Halkaze"
+trigger2 = authorname = "Halkaze" && const(data.airjuggle) = 2661342
+trigger3 = const(data.airjuggle) = 2661342 && name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
+value = 1646189999
+persistent = 256
+ignorehitpause = 1
+
 [State 1141514113];自分本体（特殊カラー）
 type = SelfState
 triggerall = !ishelper

@@ -93,10 +93,30 @@ trigger1 =  ( 0 )                           ;1：使用不可 / 0：使用可能
                                                                                               
                                                                                               
                                                                                               
+                                                                                              [State -2]
+                                                                                              type=Null
+                                                                                              triggerall=!ishelper
+;５
+;ＡＩ「決死結界」使用抑制時間（1P-4P,7P-11Pで有効）
+;デフォルト設定：5000
+                                                                                              trigger2=var(34)!=[0,999999]
+;---------------------------------------------------------------------
+trigger1=var(34):= ( 5000 )            ;使用抑制時間を入力（0-999999）
+;---------------------------------------------------------------------
+                                                                                              trigger2=var(34):=0
+;---------------------------------------------------------------------
+;     ※範囲を越えて入力した場合は 0 に設定されます
+;---------------------------------------------------------------------
+                                                                                              ignorehitpause=1
+                                                                                              
+                                                                                              
+                                                                                              
+                                                                                              
+                                                                                              
                                                                                               
                                                                                               [State -2]
                                                                                               type=Null
-;５
+;６
 ;「決死結界」強化（1P-4P,7P-9Pで有効）
 ;デフォルト設定：0
                                                                                               triggerall=!ishelper
@@ -112,7 +132,7 @@ trigger1 =  ( 0 )                                   ;1：強化 / 0：通常
                                                                                               
                                                                                               [State -2]
                                                                                               type=Null
-;６
+;７
 ;TU回復設定（7P-11Pで有効）
 ;デフォルト設定：0
                                                                                               triggerall=!ishelper
@@ -128,7 +148,7 @@ trigger1=var(59):= ( 0 )            ;1：ＴＵ回復あり / 0：ＴＵ回復なし
                                                                                               triggerall=!ishelper
                                                                                               trigger1=var(59):=0||1
                                                                                               trigger1=(palno=[7,9])&&(var(58)=0||var(58)=palno)
-;７
+;８
 ;被弾可能回数設定（7P-9Pで有効）
 ;デフォルト設定：floor(4.5*(palno-7)+1) ※ 7P:1 , 8P:5 , 9P:10
                                                                                               trigger1=!numexplod(1646180091)
@@ -148,7 +168,7 @@ trigger1=var(59):= ( floor(4.5*(palno-7)+1) )  ;被弾回数を入力（0-99）
                                                                                               [State -2]
                                                                                               type=Null
                                                                                               trigger1=!ishelper
-;８
+;９
 ;スキル強化スイッチ（7P-9Pで有効）
 ;デフォルト設定：1
                                                                                               trigger1=var(58)=[7,9]
@@ -164,7 +184,7 @@ trigger1 =  ( 1 )                   ;1：開始レベル１ / 0：開始レベル０
                                                                                               type=Null
                                                                                               trigger1=!ishelper
                                                                                               trigger1=var(58)=[7,11]
-;９
+;１０
 ;ゲージ自動上昇設定（7P-11Pで有効）
 ;デフォルト設定：1
                                                                                               trigger1=var(59):=0||1
@@ -181,6 +201,22 @@ trigger1=1||var(59):= ( 1 )          ;ゲージ自動上昇設定を入力 （0-3）
                                                                                               ignorehitpause=1
                                                                                               
                                                                                               
+                                                                                              [State -2]
+                                                                                              type=Null
+                                                                                              trigger1=!ishelper
+;１１
+;広範囲攻撃耐性スイッチ（10P,11Pで有効）
+;デフォルト設定：1
+                                                                                              trigger1=var(19):=(var(19)&(134217728^-1))||1
+;---------------------------------------------------------------------
+trigger1 =  ( 1 )                 ;1：広範囲攻撃耐性あり / 0：耐性なし
+;---------------------------------------------------------------------
+                                                                                              trigger1=var(19):=(var(19)|134217728)||1
+                                                                                              ignorehitpause=1
+                                                                                              
+                                                                                              
+                                                                                              
+                                                                                              
                                                                                               
                                                                                               
                                                                                               
@@ -188,7 +224,7 @@ trigger1=1||var(59):= ( 1 )          ;ゲージ自動上昇設定を入力 （0-3）
                                                                                               [State -2]
                                                                                               type=Null
                                                                                               triggerall=!ishelper
-;１０
+;１２
 ;隔離攻撃利用可否（この設定を0にした場合は以降の設定は無視されます）
 ;デフォルト設定：1
                                                                                               trigger2=var(59):=2
@@ -204,7 +240,7 @@ trigger1 = ( 1 )          ;1：隔離技術の使用を許可する / 0：許可しない
                                                                                               triggerall=var(19):=(var(19)&(3^-1))||1
                                                                                               triggerall=var(59)=1
                                                                                               trigger2=var(59)=[0,2]
-;１１
+;１３
 ;開始時隔離水準設定
 ;デフォルト設定：0
                                                                                               trigger2=var(19):=(var(19)|(var(59)+1))||1
@@ -216,7 +252,21 @@ trigger1=0&&var(59):= ( 0 )             ;開始時の隔離水準を入力（0-2）
 ;     ※範囲を越えて入力した場合は 2 に設定されます
 ;---------------------------------------------------------------------
                                                                                               ignorehitpause=1
+                                                                                              [State -2]
+                                                                                              type=Null
+                                                                                              triggerall=!ishelper&&!numexplod(468746114)&&!roundstate
+                                                                                              triggerall=((!var(10)||((teammode=turns)&&!roundsexisted&&roundno!=1))||(!ishometeam&&teamside=1&&!roundsexisted))
+                                                                                              triggerall=var(19):=(var(19)&2147483647)||1
+                                                                                              triggerall=!(!(var(19)&3))
+;１４
+;被強隔離時隔離攻撃強化設定
+;デフォルト設定：1
                                                                                               
+;---------------------------------------------------------------------
+trigger1= ( 1 )                     ;1：隔離攻撃強化あり / 0：強化なし
+;---------------------------------------------------------------------
+                                                                                              trigger1=var(19):=(var(19)|-2147483648)
+                                                                                              ignorehitpause=1
                                                                                               [State -2]
                                                                                               type=Null
                                                                                               triggerall=!ishelper&&!numexplod(468746114)&&!roundstate
@@ -224,7 +274,7 @@ trigger1=0&&var(59):= ( 0 )             ;開始時の隔離水準を入力（0-2）
                                                                                               triggerall=var(19):=(var(19)&(15364^-1))||1
                                                                                               triggerall=!(!(var(19)&3))
                                                                                               trigger3=0&&var(19):=(var(19)|(1024*var(59)))
-;１２
+;１５
 ;隔離水準上昇設定集
                                                                                               trigger5=0&&var(19):=(var(19)|(4096*var(59)))
 ;敗北後隔離水準上昇（デフォルト設定：1）
@@ -457,8 +507,7 @@ ignorehitpause = 1
 
 [State -2];試合ごとに初期化（初期値が０以外のもの）
 type = Null
-triggerall = var(59) := numexplod(468746114) || 1
-triggerall = var(59) = 0
+triggerall = !(var(59):=numexplod(468746114))
 triggerall = roundstate = 0 && ((!var(10)||((teammode=turns)&&!roundsexisted&&roundno!=1))||(!ishometeam&&teamside=1&&!roundsexisted))
 trigger1 = var(3) := ID
 trigger1 = numpartner
@@ -493,29 +542,6 @@ trigger1 = fvar(13) := pos y || 1
 trigger1 = fvar(14) := 1000 || 1
 trigger1 = fvar(15) := 1 || 1
 trigger1 = fvar(38) := 0 || 1
-ignorehitpause = 1
-
-[State -2];隔離技術利用可能性確認 + 自スロットＩＤ取得
-type = Null
-trigger1 = var(15) := 0 || 1
-trigger1 = numexplod(468746114) = 5 || (!(!(var(19)&3))&&numexplod(468746114)=[10,11])
-trigger1 = var(59) := alive || 1
-trigger1 = var(-7) := var(59) + 1 || 1
-trigger1 = alive != var(59)
-trigger1 = var(-7) := var(59) || 1
-trigger1 = var(15) := var(-910) || 1
-ignorehitpause = 1
-
-[State -2];退避変数修復
-type = Null
-trigger1 = roundstate
-trigger1 = var(15)
-trigger1 = numexplod(468746114) = [10,11]
-trigger1 = var(-149) != 0
-trigger1 = 1 || var(102):=var(368)||var(103):=var(369)||var(3):=var(370)||var(5):=var(371)||var(6):=var(372)||var(7):=var(373)||var(12):=var(374)||var(20):=var(375)||var(26):=var(376)||var(30):=var(377)||var(33):=var(378)||var(55):=var(379)
-trigger1 = 1 || var(106):=var(382)||var(107):=var(383)||var(108):=var(384)||var(109):=var(385)||var(60):=var(386)||var(61):=var(387)||var(72):=var(388)||var(73):=var(389)||var(74):=var(390)||var(75):=var(391)||var(19):=var(393)
-trigger1 = var(380) != 0 && var(381) != 0
-trigger1 = 1 || var(56):=var(380)||var(57):=var(381)
 ignorehitpause = 1
 
 [State -2]
@@ -744,21 +770,75 @@ ignorehitpause = 1
 
 [State -2];PalNoを変数に保存
 type = VarSet
-trigger1 = numexplod(468746114) = [1,12]
-var(58) = numexplod(468746114)
+trigger1 = (var(59):=numexplod(468746114)) = [1,12]
+var(58) = var(59)
 ignorehitpause = 1
 
 [State -2];例外発生
 type = RemoveExplod
-trigger1 = numexplod(468746114) != [1,13]
+trigger1 = var(59) != [1,13]
 ID = 468746114
 ignorehitpause = 1
 
 [State -2];異常事態発生
 type = VarSet
-trigger1 = numexplod(468746114) != [1,12]
+triggerall = var(15)
+trigger1 = var(59) != [1,12]
+trigger2 = var(58) != [1,12]
+var(58) = var(801)
+ignorehitpause = 1
+
+[State -2];異常事態発生
+type = VarSet
+triggerall = !var(15)
+trigger1 = var(59) != [1,12]
 trigger2 = var(58) != [1,12]
 var(58) = 11
+ignorehitpause = 1
+
+[State -2];隔離技術利用可能性確認 + 自スロットＩＤ取得
+type = Null
+triggerall = !var(15)
+triggerall = !roundstate
+trigger1 = var(58) = 5 || (!(!(var(19)&3))&&var(58)=[10,11])
+trigger1 = var(15) := alive || 1
+trigger1 = var(-7) := var(15) + 1 || 1
+trigger1 = alive != var(15)
+trigger1 = var(-7) := var(15) || 1
+trigger1 = var(15) := var(-910) || 1
+trigger2 = !(var(19)&3) && var(58) = [10,11]
+trigger2 = var(800) := 1
+trigger2 = var(803) := 1 && 0
+trigger3 = var(15) := 0 || 1
+ignorehitpause = 1
+
+[State -2];隔離利用HelperMax取得
+type = Null
+trigger1 = var(15)
+trigger1 = !roundstate && !roundsexisted
+trigger1 = var(3) := var(var(4938572)+48576) || 1
+ignorehitpause = 1
+
+[State -2];隔離疑似宣告無効化フラグ / 確殺検知中自殺フラグリセット 
+type = Null
+trigger1 = var(15)
+trigger1 = var(800) := 0 || 1
+trigger1 = !var(805) || (var(805)&32)
+trigger1 = var(803) := !(var(19)&-2147483648) || 1
+trigger1 = var(804) := 0 || 1
+ignorehitpause = 1
+
+[State -2];再行動要請フラグリセット
+type = Null
+trigger1 = var(15)
+trigger1 = var(802) := 0
+ignorehitpause = 1
+
+[State -2];最大ライフ変更対策
+type = Null
+trigger1 = var(15)
+trigger1 = lifemax < 500 || lifemax > 1000
+trigger1 = var(-823) := 1000
 ignorehitpause = 1
 
 [State -2];AI起動設定
@@ -912,7 +992,7 @@ ignorehitpause = 1
 type = Pause
 trigger1 = gametime
 trigger1 = var(58) = 5 || var(58) > 9
-trigger1 = var(15) = 0
+trigger1 = !var(15)
 time = 2147483647
 movetime = 2147483647
 ignorehitpause = 1
@@ -921,28 +1001,10 @@ ignorehitpause = 1
 type = SuperPause
 trigger1 = gametime
 trigger1 = var(58) = 5 || var(58) > 9
-trigger1 = var(15) = 0
+trigger1 = !var(15)
 anim = -1
 time = 2147483647
 movetime = 2147483647
-darken = 0
-p2defmul = 1
-unhittable = 0
-ignorehitpause = 1
-
-[State -2];時止め無視
-type = Pause
-trigger1 = var(58) = 5 || var(58) > 9
-trigger1 = var(15)
-time = 0
-ignorehitpause = 1
-
-[State -2];時止め無視
-type = SuperPause
-trigger1 = var(58) = 5 || var(58) > 9
-trigger1 = var(15)
-anim = -1
-time = 0
 darken = 0
 p2defmul = 1
 unhittable = 0
@@ -1147,8 +1209,9 @@ ignorehitpause = 1
 [State -2]
 type = LifeSet
 triggerall = var(58) > 9
+triggerall = var(15)
 triggerall = roundstate
-triggerall = !(Const(Size.Z.Width)&32) && (Const(Size.Z.Width)!=0||!(!(Const(Size.Z.Width)&32768)))
+triggerall = !(var(805)&32) && var(805)
 trigger1 = sysfvar(4) >= 100
 trigger1 = var(59) := floor(sysfvar(4)+0.5) || 1
 trigger2 = sysfvar(4) >= 0.51
@@ -1161,10 +1224,9 @@ ignorehitpause = 1
 
 [State -2];処理スキップ
 type = SelfState
-triggerall = var(58) > 9
-triggerall = !(Const(Size.Z.Width)&32)
-trigger1 = Const(Size.Z.Width) != 0
-trigger2 = !(!(Const(Size.Z.Width)&32768))
+trigger1 = var(58) > 9
+trigger1 = var(15)
+trigger1 = !(var(805)&32) && var(805)
 value = 4
 persistent = 256
 ignorehitpause = 1
@@ -1387,7 +1449,6 @@ triggerall = !numexplod(1646180080)
 triggerall = !numexplod(1646180081)
 triggerall = numprojID(895353553) = 2
 trigger1 = var(58) < 10
-trigger1 = 0
 trigger1 = (var(6)||var(7)) && !(!(var(20)&2097152)) && movereversed != 1 && gethitvar(groundtype)
 trigger1 = !((sysvar(3)=[351705,351706])&&!(!(var(20)&2048)))
 trigger2 = var(58) > 9
@@ -1876,6 +1937,7 @@ ignorehitpause = 1
 type = VarSet
 triggerall = var(58) > 9
 trigger1 = roundstate < 2
+trigger2 = var(58) = 11
 trigger2 = numprojID(4684616)
 sysfvar(4) = lifemax
 ignorehitpause = 1
@@ -2014,8 +2076,7 @@ triggerall = gethitvar(damage) > 0
 triggerall = numprojID(895353553) = 2
 triggerall = !(!(var(20)&2097152)) || !(var(20)&512)
 triggerall = enemy(0),life > 0 || enemy(numenemy>1),life > 0
-triggerall = enemy(0),alive = 1 || enemy(numenemy>1),alive = 1
-triggerall = (enemy(0),palno=[1,12]) && (enemy(numenemy>1),palno=[1,12])
+triggerall = enemy(0),alive || enemy(numenemy>1),alive
 triggerall = var(59) = 0
 triggerall = !((sysvar(3)=[351705,351706])&&!(!(var(20)&2048)))
 ;敵本体ＨｉｔＤｅｆ
@@ -2137,6 +2198,7 @@ ignorehitpause = 1
 [State -2];無敵時間増加(10~11P)
 type = VarAdd
 trigger1 = var(58) = [10,11]
+trigger1 = (var(19)&134217728)
 trigger1 = numhelper(510908551) = 1 && numhelper(510908552) = 1 
 trigger1 = gametime%12 = 4
 trigger1 = var(59) := (var(23)&522240) / 2048 || 1
@@ -2144,7 +2206,7 @@ trigger1 = var(59) := (var(59)-(((var(59)&(-2))/2)&85)) || 1
 trigger1 = var(59) := ((var(59)&51)+(((var(59)&(-4))/4)&51)) || 1
 trigger1 = var(59) := ((var(59)&15)+((var(59)&(-16))/16)) || 1
 trigger1 = var(59) > 4
-var(7) = 25 * (var(59)-4) * ifelse(var(58)=11,4,1) * ifelse(((var(19)&7168)/1024)>=6,2,1)
+var(7) = 25 * (var(59)-4) * ifelse(var(58)=11,4,1)
 ignorehitpause = 1
 
 [State -2]
@@ -2169,7 +2231,7 @@ ignorehitpause = 1
 type = VarAdd
 trigger1 = var(58) = 10
 trigger1 = !(!(var(20)&2097152)) || !(var(20)&512)
-trigger1 = var(6) = 0 && var(7) = 0
+trigger1 = !var(6) && !var(7)
 trigger1 = !((sysvar(3)=[351705,351706])&&!(!(var(20)&2048)))
 trigger1 = numhelper(157900000) = 1
 trigger1 = numhelper(510908551) = 1 && numhelper(510908552) = 1 
@@ -2177,8 +2239,7 @@ trigger1 = var(59) > 0
 trigger1 = roundstate = 2 && !(!(var(20)&16))
 trigger1 = enemynear,movetype = A || p2movetype = A
 trigger1 = enemynear,life > 0 && p2life > 0
-trigger1 = enemynear,alive = 1
-trigger1 = enemynear,palno = [1,12]
+trigger1 = enemynear,alive
 trigger1 = fvar(39) := (ifelse(sysfvar(4)>900,30,sysfvar(4)**0.5)/30)**ifelse(1.0*enemy(!enemy,alive&&numenemy>1),life/var(13+(!enemy,alive&&numenemy>1))*lifemax-life>=0.9*lifemax&&(var(19)&3)<3,1.5,1) || 1
 sysfvar(4) = -ifelse(var(59)>100,100,var(59)) * fvar(39)
 ignorehitpause = 1
@@ -2285,7 +2346,16 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = var(58) != 5
 trigger1 = numexplod(351713)
-sysfvar(4) = !!alive
+sysfvar(4) = ifelse(!alive,0,ifelse(var(58)>9,0.5,1))
+ignorehitpause = 1
+
+[State -2];隔離攻撃（隔離水準２決死結界の完全封殺用）
+type = Null
+trigger1 = var(15)
+trigger1 = var(58) = [10,11]
+trigger1 = (var(19)&3) = 3
+trigger1 = numexplod(351711)
+trigger1 = var(806) := (var(806)|128)
 ignorehitpause = 1
 
 ;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -3564,10 +3634,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（文字）
+[State -2];耐性時間表示（文字）
 type = Explod
 trigger1 = teamside = 1
 trigger1 = var(58) > 9
+trigger1 = (var(19)&134217728)
 trigger1 = roundstate = 2
 trigger1 = !numexplod(351711)
 anim = 90100
@@ -3584,10 +3655,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（千の位）
+[State -2];耐性時間表示（千の位）
 type = Explod
 triggerall = teamside = 1
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3608,10 +3680,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（百の位）
+[State -2];耐性時間表示（百の位）
 type = Explod
 triggerall = teamside = 1
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3632,10 +3705,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（十の位）
+[State -2];耐性時間表示（十の位）
 type = Explod
 triggerall = teamside = 1
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3656,10 +3730,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（一の位）
+[State -2];耐性時間表示（一の位）
 type = Explod
 triggerall = teamside = 1
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3680,10 +3755,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（文字）
+[State -2];耐性時間表示（文字）
 type = Explod
 trigger1 = teamside = 2
 trigger1 = var(58) > 9
+trigger1 = (var(19)&134217728)
 trigger1 = roundstate = 2
 trigger1 = !numexplod(351711)
 anim = 90100
@@ -3700,10 +3776,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（千の位）
+[State -2];耐性時間表示（千の位）
 type = Explod
 triggerall = teamside = 2
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3724,10 +3801,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（百の位）
+[State -2];耐性時間表示（百の位）
 type = Explod
 triggerall = teamside = 2
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3748,10 +3826,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（十の位）
+[State -2];耐性時間表示（十の位）
 type = Explod
 triggerall = teamside = 2
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3772,10 +3851,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];耐性時間表示表示（一の位）
+[State -2];耐性時間表示（一の位）
 type = Explod
 triggerall = teamside = 2
 triggerall = var(58) > 9
+triggerall = (var(19)&134217728)
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3842,6 +3922,7 @@ trigger6 = projhittime(12620) = 0
 trigger7 = projhittime(13100) = 0
 trigger8 = projhittime(13301) = 0
 trigger9 = projhittime(13311) = 0
+trigger10= projhittime(14311) = 0
 value = 5,5
 channel = 25
 ignorehitpause = 1
