@@ -7588,10 +7588,10 @@ ignorehitpause = 1
 
 [State 333033333]
 type = TargetLifeAdd
-triggerall = root,var(58) != 6 && root,var(58) != 12
+triggerall = root,var(58) >= 10
 trigger1 = numtarget
-trigger1 = (root,var(19)&7168)/1024 >= 6
-trigger1 = enemy(!enemy,alive&&numenemy>1),life > root,var(4)
+trigger1 = (root,var(19)&3) > 2
+trigger1 = enemy(!enemy,alive&&numenemy>1),life - root,var(4) > 0
 value = -(enemy(!enemy,alive&&numenemy>1),life-root,var(4))
 absolute = 1
 ignorehitpause = 1

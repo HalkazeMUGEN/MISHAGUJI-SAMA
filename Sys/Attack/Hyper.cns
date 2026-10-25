@@ -2931,9 +2931,16 @@ ignorehitpause = 1
 type = AssertSpecial
 trigger1 = anim = 3060
 trigger1 = animelemno(0) > 4
+flag = NoFG
+flag2 = NoMusic
+ignorehitpause = 1
+
+[State 351706]; タイマー停止（試合時間2分以降はオフ）
+type = AssertSpecial
+trigger1 = anim = 3060
+trigger1 = animelemno(0) > 4
+trigger1 = sysfvar(1) < 12000
 flag = TimerFreeze
-flag2 = NoFG
-flag3 = NoMusic
 ignorehitpause = 1
 
 [State 351706]
