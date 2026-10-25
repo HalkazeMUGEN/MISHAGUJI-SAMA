@@ -1,0 +1,2443 @@
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;ヘルパー削除ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 011111111]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];ヘルパーのみ通す
+type = ChangeState
+trigger1 = !ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 011111111]
+type = DestroySelf
+trigger1 = 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;迷子センター
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 1141514113]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State 1141514113];自分本体（特殊カラー）
+type = SelfState
+triggerall = !ishelper
+triggerall = var(58) = 5
+trigger1 = name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && authorname = "Halkaze"
+trigger2 = authorname = "Halkaze" && const(data.airjuggle) = 2661342
+trigger3 = const(data.airjuggle) = 2661342 && name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];自分本体
+type = SelfState
+triggerall = !ishelper
+trigger1 = name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && authorname = "Halkaze"
+trigger2 = authorname = "Halkaze" && const(data.airjuggle) = 2661342
+trigger3 = const(data.airjuggle) = 2661342 && name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
+value = sysvar(3)*(sysvar(3)!=1141514113)
+ctrl = ctrl + (var(20):=(var(20)|(4*ctrl))) * 0
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113]
+type = AssertSpecial
+trigger1 = 1
+flag = NoJuggleCheck
+ignorehitpause = 1
+
+[State 1141514113];探査ヘルパー召喚ヘルパー
+type = ChangeState
+trigger1 = ishelper(const(size.shadowoffset))
+trigger1 = const(size.shadowoffset) = 571863719
+value = 100000010
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];本体間者ヘルパー
+type = ChangeState
+trigger1 = ishelper(alive)
+trigger1 = alive = 571863730
+value = 101111101
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];間者ヘルパー
+type = ChangeState
+trigger1 = ishelper(const(size.shadowoffset))
+trigger1 = const(size.shadowoffset) = [571863720,571863724]
+value = 110111111
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];間者生成用枠埋ヘルパー
+type = ChangeState
+trigger1 = ishelper(const(size.shadowoffset))
+trigger1 = const(size.shadowoffset) = 571863799
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];味方ヘルパー
+type = SelfState
+triggerall = ishelper(const(size.shadowoffset))
+trigger1 = root,name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && root,authorname = "Halkaze"
+trigger2 = root,authorname = "Halkaze" && root,const(data.airjuggle) = 2661342
+trigger3 = root,const(data.airjuggle) = 2661342 && root,name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
+value = 11111
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];低カラー時に敵ヘルパーが迷い込んだ場合
+type = ChangeState
+triggerall = ishelper
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 6
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 12 || teamside = 1
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];敵ヘルパー
+type = ChangeState
+triggerall = ishelper
+trigger1 = name != "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && const(data.airjuggle) != 2661342
+trigger2 = name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
+trigger2 = enemy,name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
+trigger2 = teamside = 2
+trigger2 = root,var(58) = 12
+value = 101111111
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];潜入型から生成されたヘルパー
+type = SelfState
+triggerall = ishelper
+trigger1 = root,name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && root,authorname = "Halkaze"
+trigger2 = root,authorname = "Halkaze" && root,const(data.airjuggle) = 2661342
+trigger3 = root,const(data.airjuggle) = 2661342 && root,name = "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
+value = 210000099
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];低カラー時に敵が迷い込んだ場合（特殊処理）
+type = ChangeState
+triggerall = !ishelper
+triggerall = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),sysvar(3) = 351705
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 6
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 12
+value = 3517050
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];低カラー時に敵が迷い込んだ場合（特殊処理）
+type = ChangeState
+triggerall = !ishelper
+triggerall = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),sysvar(3) = 351710
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 6
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 12
+value = 3517062
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];低カラー時に敵が迷い込んだ場合
+type = SelfState
+triggerall = !ishelper
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 6
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),var(58) != 12 || teamside = 1
+value = 5030
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113]
+type = Helper
+trigger1 = !ishelper
+trigger1 = name != "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && const(data.airjuggle) != 2661342
+trigger1 = numhelper(571863719) + numhelper(571863720) + numhelper(571863721) + numhelper(571863722) + numhelper(571863723) + numhelper(571863730) + numhelper(571863730) = 0
+name = ""
+ID = 571863731
+size.shadowoffset = 571863731
+stateno = 571863000 + random
+helpertype = normal
+keyctrl = 0
+pausemovetime = 2147483647
+supermovetime = 2147483647
+ignorehitpause = 1
+
+[State 1141514113];敵本体（生存時）
+type = ChangeState
+trigger1 = !ishelper
+trigger1 = name != "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && const(data.airjuggle) != 2661342
+trigger1 = alive && hitpausetime
+value = 150941102
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];敵本体（生存時）
+type = ChangeState
+trigger1 = !ishelper
+trigger1 = name != "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && const(data.airjuggle) != 2661342
+trigger1 = alive
+value = 150941103
+persistent = 256
+ignorehitpause = 1
+
+[State 1141514113];敵本体（死亡時）
+type = SelfState
+trigger1 = !ishelper
+trigger1 = name != "繝溘す繝｣繧ｰ繧ｸ縺輔∪" && const(data.airjuggle) != 2661342
+value = 5030
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;霊撃用補正リセットステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 901]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 901]
+type = StateTypeSet
+trigger1 = 1
+movetype = H
+ignorehitpause = 1
+
+[State 901]
+type = StateTypeSet
+trigger1 = statetype = L
+statetype = S
+ignorehitpause = 1
+
+[State 901]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 901]
+type = NotHitBy
+trigger1 = 1
+value = 
+time = 1
+ignorehitpause = 1
+
+[State 901]
+type = NotHitBy
+trigger1 = 1
+value2 = 
+time = 1
+ignorehitpause = 1
+
+[State 901]
+type = DefenceMulSet
+trigger1 = 1
+value = 1.0
+ignorehitpause = 1
+
+[State 901]
+type = SelfState
+trigger1 = 1
+value = 5000 + (statetype=C) * 10 + (statetype=A) * 20
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必当身投げ先
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517050]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517050,1]
+type = VelSet
+trigger1 = movetype != H
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 3517050,2]
+type = ChangeAnim
+trigger1 = anim != [5000,5120]
+value = anim
+
+[State 3517050,3]
+type = StateTypeSet
+trigger1 = 1
+physics = N
+ignorehitpause = 1
+
+[State 3517050,4]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517050,5]
+type = NotHitBy
+trigger1 = 1
+value = 
+time = 1
+ignorehitpause = 1
+
+[State 3517050,6]
+type = NotHitBy
+trigger1 = 1
+value2 = 
+time = 1
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 0
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 1
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 2
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 3
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 4
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 5
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 6
+ignorehitpause = 1
+
+[State 3517050]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 7
+ignorehitpause = 1
+
+[State 3517050,7]
+type = NotHitBy
+trigger1 = anim = [5000,5020]
+trigger2 = hitpausetime
+trigger3 = movetype != H
+trigger4 = vel y < 0
+value = SCA
+time = 1
+ignorehitpause = 1
+
+[State 3517050,8]
+type = ChangeAnim
+triggerall = gametime%10 = 0
+trigger1 = enemy(0),numexplod(3517050) || enemy(numenemy>1),numexplod(3517050)
+trigger2 = enemy(0),numexplod(3517051) || enemy(numenemy>1),numexplod(3517051)
+trigger3 = enemy(0),numexplod(3517052) || enemy(numenemy>1),numexplod(3517052)
+trigger4 = enemy(0),numexplod(3517053) || enemy(numenemy>1),numexplod(3517053)
+trigger5 = enemy(0),numexplod(3517054) || enemy(numenemy>1),numexplod(3517054)
+value = 5000 * selfanimexist(5000)
+ignorehitpause = 1
+
+[State 3517050,9]
+type = ChangeAnim
+triggerall = gametime%10 = 0
+triggerall = random%2 = 0 || !selfanimexist(5000)
+trigger1 = enemy(0),numexplod(3517050) || enemy(numenemy>1),numexplod(3517050)
+trigger2 = enemy(0),numexplod(3517051) || enemy(numenemy>1),numexplod(3517051)
+trigger3 = enemy(0),numexplod(3517052) || enemy(numenemy>1),numexplod(3517052)
+trigger4 = enemy(0),numexplod(3517053) || enemy(numenemy>1),numexplod(3517053)
+trigger5 = enemy(0),numexplod(3517054) || enemy(numenemy>1),numexplod(3517054)
+value = 5010 * selfanimexist(5010)
+ignorehitpause = 1
+
+[State 3517050,10]
+type = StateTypeSet
+trigger1 = anim = 5000 || anim = 5010
+trigger2 = !selfanimexist(5000) && !selfanimexist(5010)
+movetype = H
+ignorehitpause = 1
+
+[State 3517050,11]
+type = ChangeAnim
+trigger1 = anim = 5000 || anim = 5010
+trigger2 = !selfanimexist(5000) && !selfanimexist(5010)
+value = anim
+ignorehitpause = 1
+
+[State 3517050,12];レベル０～３
+type = LifeAdd
+triggerall = gametime%10 = 0
+trigger1 = enemy(0),numexplod(3517050) || enemy(numenemy>1),numexplod(3517050)
+trigger2 = enemy(0),numexplod(3517051) || enemy(numenemy>1),numexplod(3517051)
+trigger3 = enemy(0),numexplod(3517052) || enemy(numenemy>1),numexplod(3517052)
+trigger4 = enemy(0),numexplod(3517053) || enemy(numenemy>1),numexplod(3517053)
+value = -1 * ifelse(10>floor(lifemax/100.0),10,floor(lifemax/100.0))
+absolute = 1
+kill = 0
+ignorehitpause = 1
+
+[State 3517050,13];レベルＭＡＸ
+type = LifeAdd
+trigger1 = gametime%10 = 0
+trigger1 = enemy(0),numexplod(3517054) || enemy(numenemy>1),numexplod(3517054)
+value = -1 * ifelse(10>floor(lifemax/100.0),10,floor(lifemax/100.0)) - 1 * ifelse(4>floor(lifemax/250.0),4,floor(lifemax/250.0))
+absolute = 1
+kill = 0
+ignorehitpause = 1
+
+[State 3517050,14];レベル１
+type = PowerAdd
+trigger1 = enemy(0),numexplod(3517051) || enemy(numenemy>1),numexplod(3517051)
+trigger1 = gametime%10 = 0
+value = -1 * ifelse(30>floor(powermax/100.0),30,floor(powermax/100.0))
+ignorehitpause = 1
+
+[State 3517050,15];レベル２
+type = PowerAdd
+trigger1 = enemy(0),numexplod(3517052) || enemy(numenemy>1),numexplod(3517052)
+trigger1 = gametime%10 = 0
+value = -2 * ifelse(30>floor(powermax/100.0),30,floor(powermax/100.0))
+ignorehitpause = 1
+
+[State 3517050,16];レベル３
+type = PowerAdd
+trigger1 = enemy(0),numexplod(3517053) || enemy(numenemy>1),numexplod(3517053)
+trigger1 = gametime%10 = 0
+value = -3 * ifelse(30>floor(powermax/100.0),30,floor(powermax/100.0))
+ignorehitpause = 1
+
+[State 3517050,17];レベルＭＡＸ
+type = PowerAdd
+trigger1 = enemy(0),numexplod(3517054) || enemy(numenemy>1),numexplod(3517054)
+trigger1 = gametime%10 = 0
+value = -4 * ifelse(30>floor(powermax/100.0),30,floor(powermax/100.0))
+ignorehitpause = 1
+
+[State 3517050,18];レベル０～ＭＡＸ
+type = LifeAdd
+trigger1 = (anim!=5030&&anim!=5051&&anim!=41) || (!selfanimexist(5030)&&anim!=41)
+trigger1 = enemy(0),numexplod(3517055) || enemy(numenemy>1),numexplod(3517055)
+value = -1 * ifelse(100>floor(lifemax/10.0),100,floor(lifemax/10.0)) - (enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),numexplod(3517055)-1) * ifelse(20>floor(lifemax/50.0),20,floor(lifemax/50.0))
+absolute = 1
+ignorehitpause = 1
+
+[State 3517050,19];レベル１～２
+type = PowerAdd
+trigger1 = (anim!=5030&&anim!=5051&&anim!=41) || (!selfanimexist(5030)&&anim!=41)
+trigger1 = (enemy(0),numexplod(3517055)=[2,3]) || (enemy(numenemy>1),numexplod(3517055)=[2,3])
+value = -1 * ifelse(150>floor(powermax/20.0),150,floor(powermax/20.0))
+ignorehitpause = 1
+
+[State 3517050,20];レベル３～ＭＡＸ
+type = PowerAdd
+trigger1 = (anim!=5030&&anim!=5051&&anim!=41) || (!selfanimexist(5030)&&anim!=41)
+trigger1 = enemy(0),numexplod(3517055) > 3 || enemy(numenemy>1),numexplod(3517055) > 3
+value = -1 * ifelse(200>floor(powermax/15.0),200,floor(powermax/15.0))
+ignorehitpause = 1
+
+[State 3517050,21]
+type = StateTypeSet
+trigger1 = (anim!=5030&&anim!=5051&&anim!=41) || (!selfanimexist(5030)&&anim!=41)
+trigger1 = enemy(0),numexplod(3517055) || enemy(numenemy>1),numexplod(3517055)
+statetype = A
+ignorehitpause = 1
+
+[State 3517050,22]
+type = VelAdd
+trigger1 = anim = 5030 || anim = 5051 || anim = 5060 || anim = 5061
+trigger2 = !selfanimexist(5030) && anim = 41
+y = ifelse(const(movement.yaccel)>0,const(movement.yaccel),0.44)
+ignorehitpause = 1
+
+[State 3517050,23]
+type = VelSet
+trigger1 = enemy(0),numexplod(3517055) || enemy(numenemy>1),numexplod(3517055)
+x = 0
+y = -20
+ignorehitpause = 1
+
+[State 3517050,24]
+type = PosFreeze
+trigger1 = enemy(0),numexplod(3517055) || enemy(numenemy>1),numexplod(3517055)
+ignorehitpause = 1
+
+[State 3517050,25]
+type = ChangeAnim
+trigger1 = (anim!=5030&&anim!=5051&&anim!=41) || (!selfanimexist(5030)&&anim!=41)
+trigger1 = enemy(0),numexplod(3517055) || enemy(numenemy>1),numexplod(3517055)
+trigger2 = anim = 5030 || anim = 5051 || (!selfanimexist(5030)&&anim=41)
+value = selfanimexist(5030)*(5030+(selfanimexist(5051))*21) + !selfanimexist(5030) * 41
+ignorehitpause = 1
+
+[State 3517050,26]
+type = ChangeAnim
+trigger1 = anim = 5030 || (!selfanimexist(5030)&&anim!=41)
+trigger1 = vel y >= 0
+trigger1 = selfanimexist(5060)
+value = 5060
+ignorehitpause = 1
+
+[State 3517050,27]
+type = ChangeAnim
+trigger1 = anim = 5051 || (!selfanimexist(5030)&&anim!=41)
+trigger1 = vel y >= 0
+trigger1 = selfanimexist(5061)
+value = 5061
+ignorehitpause = 1
+
+[State 3517050,28]
+type = PlaySnd
+triggerall = vel y > 0 && pos y + vel y >= 0
+trigger1 = anim = 5030 || anim = 5060 || anim = 5051 || anim = 5061
+trigger2 = !selfanimexist(5030) && anim = 41
+value = F7,2
+ignorehitpause = 1
+
+[State 3517050,29]
+type = ChangeAnim
+triggerall = vel y > 0 && pos y + vel y >= 0
+trigger1 = anim = 5030 || anim = 5060 || anim = 5051 || anim = 5061
+trigger2 = !selfanimexist(5030) && anim = 41
+value = selfanimexist(5100) * 5100 + !selfanimexist(5100) * 47
+ignorehitpause = 1
+
+[State 3517050,30]
+type = StateTypeSet
+trigger1 = anim = 5100 || (!selfanimexist(5100)&&anim=47)
+statetype = S
+ignorehitpause = 1
+
+[State 3517050,31]
+type = VelSet
+trigger1 = anim = 5100 || (!selfanimexist(5100)&&anim=47)
+y = 0
+ignorehitpause = 1
+
+[State 3517050,32]
+type = PosSet
+trigger1 = anim = 5100 || (!selfanimexist(5100)&&anim=47)
+y = 0
+ignorehitpause = 1
+
+[State 3517050]
+type = HitFallDamage
+trigger1 = anim = 5100 || (!selfanimexist(5100)&&anim=47)
+ignorehitpause = 1
+
+[State 3517050,33]
+type = SelfState
+trigger1 = anim = 5100 || (!selfanimexist(5100)&&anim=47)
+value = 5100 * selfanimexist(5100)
+ctrl = !selfanimexist(5100)
+persistent = 256
+ignorehitpause = 1
+
+[State 3517050,34]
+type = PlayerPush
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517050,35]
+type = PosSet
+trigger1 = time > 512
+trigger2 = time > 360
+trigger2 = vel y = -20
+y = 0
+ignorehitpause = 1
+
+[State 3517050,36]
+type = VelSet
+trigger1 = time > 512
+trigger2 = time > 360
+trigger2 = vel y = -20
+y = 0
+ignorehitpause = 1
+
+[State 3517050,37]
+type = SelfState
+trigger1 = time > 512
+trigger2 = time > 360
+trigger2 = vel y = 0
+value = 5030 * selfanimexist(5030)
+ctrl = !selfanimexist(5030)
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必当身投げ先（ＯＴＨＫ用）
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517051]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];本体は上のステートへ
+type = ChangeState
+trigger1 = !ishelper
+value = 3517050
+persistent = 256
+ignorehitpause = 1
+
+[State ALL];敵ヘルパーのみ通す
+type = ChangeState
+trigger1 = !ishelper
+trigger2 = ishelper&&(root,name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||root,const(data.airjuggle)=2661342)
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517051];当身されて来た訳でないなら消去
+type = ChangeState
+trigger1 = !movereversed
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+
+[State 3517051]
+type = AssertSpecial
+trigger1 = 1
+flag = Invisible
+flag2 = NoShadow
+ignorehitpause = 1
+
+[State 3517051]
+type = PlayerPush
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517051]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+ignorehitpause = 1
+
+[State 3517051];OTHK用本命Proj
+type = Projectile
+trigger1 = !root,numprojID(33517050)
+attr = SCA,AA,AT,AP
+hitonce = 0
+projID = 33517050
+projanim = anim
+p1stateno = prevstateno
+postype = p2
+offset = 0,500
+hitflag = MAFD
+priority = 7,H
+projpriority = 2147483647
+guard.dist = 0
+hitsound = -1
+guardsound = -1
+sparkno = -1
+projremove = 0
+projhits = 1
+projremovetime = 30
+numhits = 0
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517051];OTHK用復帰Proj
+type = Projectile
+trigger1 = !root,numprojID(33517051)
+attr = SCA,AA,AT,AP
+hitonce = 0
+projID = 33517051
+projanim = -1
+projremanim = anim
+p1stateno = 5035
+postype = p2
+offset = 0,500
+hitflag = MAFD
+priority = 7,H
+projpriority = 2147483647
+guard.dist = 0
+hitsound = -1
+guardsound = -1
+sparkno = -1
+projremove = 1
+projhits = 10
+projmisstime = 1
+projremovetime = 50
+numhits = 0
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517051]
+type = ChangeState
+trigger1 = root,numprojID(33517051)
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用ワイヤー吹っ飛ばされステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517040]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517040]
+type = StateTypeSet
+trigger1 = statetype = C
+trigger2 = statetype = L
+statetype = S
+ignorehitpause = 1
+
+[State 3517040]
+type = StateTypeSet
+trigger1 = 1
+movetype = H
+physics = N
+ignorehitpause = 1
+
+[State 3517040]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517040]
+type = NotHitBy
+trigger1 = 1
+value = 
+time = 1
+ignorehitpause = 1
+
+[State 3517040]
+type = NotHitBy
+trigger1 = 1
+value2 = 
+time = 1
+ignorehitpause = 1
+
+[State 3517040]
+type = DefenceMulSet
+trigger1 = 1
+value = 1.0
+ignorehitpause = 1
+
+[State 3517040]
+type = VelSet
+trigger1 = !time
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 3517040];hitshaketime再現
+type = NotHitBy
+trigger1 = time < 15
+value = SCA
+time = 1
+ignorehitpause = 1
+
+[State 3517040]
+type = ChangeAnim
+trigger1 = time < 15
+value = selfanimexist(5002) * 5002
+ignorehitpause = 1
+
+[State 3517040]
+type = VelSet
+trigger1 = time >= 15
+x = -14
+ignorehitpause = 1
+
+[State 3517040]
+type = ChangeAnim
+trigger1 = anim = 5002
+trigger1 = time >= 15
+trigger1 = !animtime
+value = 5007
+ignorehitpause = 1
+
+[State 3517040]
+type = PlayerPush
+trigger1 = time >= 15
+value = 0
+ignorehitpause = 1
+
+[State 3517040]
+type = ScreenBound
+trigger1 = time >= 15
+value = 1
+movecamera = 1,1
+ignorehitpause = 1
+
+[State 3517040]
+type = PlaySnd
+trigger1 = backedgebodydist < 10
+value = F7,2
+pan = 0
+ignorehitpause = 1
+
+[State 3517040]
+type = PosAdd
+trigger1 = backedgebodydist < 10
+x = vel x
+ignorehitpause = 1
+
+[State 3517040]
+type = VelSet
+trigger1 = backedgebodydist < 10
+x = 0
+ignorehitpause = 1
+
+[State 3517040]
+type = ChangeState
+trigger1 = backedgebodydist < 10
+trigger2 = time > 600
+value = 3517041
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用壁激突後ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517041]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517041]
+type = StateTypeSet
+trigger1 = 1
+statetype = A
+movetype = H
+ignorehitpause = 1
+
+[State 3517041]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517041]
+type = NotHitBy
+trigger1 = 1
+value = 
+time = 1
+ignorehitpause = 1
+
+[State 3517041]
+type = NotHitBy
+trigger1 = 1
+value2 = 
+time = 1
+ignorehitpause = 1
+
+[State 3517041]
+type = DefenceMulSet
+trigger1 = 1
+value = 1.0
+ignorehitpause = 1
+
+[State 3517041]
+type = VelSet
+trigger1 = 1
+x = 1
+y = -6
+ignorehitpause = 1
+
+[State 3517041]
+type = SelfState
+trigger1 = 1
+value = 5035
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用補正リセットステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517042]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517042]
+type = StateTypeSet
+trigger1 = 1
+movetype = H
+ignorehitpause = 1
+
+[State 3517042]
+type = StateTypeSet
+trigger1 = statetype = L
+statetype = S
+ignorehitpause = 1
+
+[State 3517042]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517042]
+type = NotHitBy
+trigger1 = 1
+value = 
+time = 1
+ignorehitpause = 1
+
+[State 3517042]
+type = NotHitBy
+trigger1 = 1
+value2 = 
+time = 1
+ignorehitpause = 1
+
+[State 3517042]
+type = DefenceMulSet
+trigger1 = 1
+value = 1.0
+ignorehitpause = 1
+
+[State 3517042]
+type = SelfState
+trigger1 = 1
+value = 5000 + (statetype=C) * 10 + (statetype=A) * 20
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用無敵付与ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517043]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517043]
+type = NotHitBy
+trigger1 = 1
+value2 = SCA
+time = 155 + const(data.liedown.time)
+ignorehitpause = 1
+
+[State 3517043]
+type = DefenceMulSet
+trigger1 = 1
+value = 1.0
+ignorehitpause = 1
+
+[State 3517043]
+type = SelfState
+trigger1 = 1
+value = 5000 + (statetype=C) * 10 + (statetype=A) * 20
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用無敵解除用ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517044]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517044]
+type = NotHitBy
+trigger1 = 1
+value = 
+time = 1
+ignorehitpause = 1
+
+[State 3517044]
+type = NotHitBy
+trigger1 = 1
+value2 = 
+time = 1
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 0
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 1
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 2
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 3
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 4
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 5
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 6
+ignorehitpause = 1
+
+[State 3517044]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 7
+ignorehitpause = 1
+
+[State 3517044]
+type = DefenceMulSet
+trigger1 = 1
+value = 1.0
+ignorehitpause = 1
+
+[State 3517044]
+type = SelfState
+trigger1 = time > 10
+value = 5035
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用即死待機ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517060]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517060]
+type = StateTypeSet
+trigger1 = statetype = L
+statetype = S
+ignorehitpause = 1
+
+[State 3517060]
+type = StateTypeSet
+trigger1 = 1
+physics = N
+ignorehitpause = 1
+
+[State 3517060]
+type = PosFreeze
+trigger1 = 1
+ignorehitpause = 1
+
+[State 3517060]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517060]
+type = NotHitBy
+trigger1 = 1
+value = ,HA,HT,HP
+time = 1
+ignorehitpause = 1
+
+[State 3517060]
+type = NotHitBy
+trigger1 = 1
+value2 = ,HA,HT,HP
+time = 1
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 0
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 1
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 2
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 3
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 4
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 5
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 6
+ignorehitpause = 1
+
+[State 3517060]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 7
+ignorehitpause = 1
+
+[State 3517060]
+type = AssertSpecial
+trigger1 = 1
+flag = NoKO
+ignorehitpause = 1
+
+[State 3517060]
+type = LifeAdd
+trigger1 = 1
+value = -ceil(lifemax/1000.0)
+absolute = 1
+ignorehitpause = 1
+
+[State 3517060]
+type = ChangeState
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),numexplod(351766)
+value = 3517061
+persistent = 256
+ignorehitpause = 1
+
+[State 3517060]
+type = ChangeState
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),numexplod(351767)
+value = 3517062
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用即死ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517061]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517061]
+type = StateTypeSet
+trigger1 = statetype = L
+statetype = S
+ignorehitpause = 1
+
+[State 3517061]
+type = StateTypeSet
+trigger1 = 1
+physics = N
+ignorehitpause = 1
+
+[State 3517060]
+type = PosFreeze
+trigger1 = 1
+ignorehitpause = 1
+
+[State 3517061]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517061]
+type = NotHitBy
+trigger1 = 1
+value = ,HA,HT,HP
+time = 1
+ignorehitpause = 1
+
+[State 3517061]
+type = NotHitBy
+trigger1 = 1
+value2 = ,HA,HT,HP
+time = 1
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 0
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 1
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 2
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 3
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 4
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 5
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 6
+ignorehitpause = 1
+
+[State 3517061]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 7
+ignorehitpause = 1
+
+[State 3517061]
+type = AssertSpecial
+trigger1 = roundstate > 2
+trigger1 = !alive
+flag = NoKOSnd
+flag2 = Invisible
+flag3 = NoShadow
+ignorehitpause = 1
+
+[State 3517061]
+type = LifeSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517061]
+type = ChangeAnim
+trigger1 = time
+trigger1 = selfanimexist(130+(statetype=C)*1+(statetype=A)*2)
+value = 130 + (statetype=C) * 1 + (statetype=A) * 2
+ignorehitpause = 1
+
+[State 3517061]
+type = SelfState
+trigger1 = roundstate = 2
+trigger1 = time > 60
+trigger1 = statetype != L
+value = 140
+persistent = 256
+ignorehitpause = 1
+
+[State 3517061]
+type = StateTypeSet
+trigger1 = roundstate = 3
+statetype = S
+movetype = I
+ignorehitpause = 1
+
+[State 3517061]
+type = CtrlSet
+trigger1 = roundstate = 3
+value = 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必用超即死用凍結付与ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517062]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State 3517062]
+type = ChangeState
+trigger1 = ishelper
+value = 3517063
+persistent = 256
+ignorehitpause = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517062]
+type = StateTypeSet
+trigger1 = statetype = L
+statetype = S
+ignorehitpause = 1
+
+[State 3517062]
+type = StateTypeSet
+trigger1 = 1
+physics = N
+ignorehitpause = 1
+
+[State 3517062]
+type = PosFreeze
+trigger1 = 1
+ignorehitpause = 1
+
+[State 3517062]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517062]
+type = NotHitBy
+trigger1 = 1
+value = ,HA,HT,HP
+time = 1
+ignorehitpause = 1
+
+[State 3517062]
+type = NotHitBy
+trigger1 = 1
+value2 = ,HA,HT,HP
+time = 1
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 0
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 1
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 2
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 3
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 4
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 5
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 6
+ignorehitpause = 1
+
+[State 3517062]
+type = HitOverRide
+trigger1 = 1
+attr = 
+slot = 7
+ignorehitpause = 1
+
+[State 3517062]
+type = AssertSpecial
+trigger1 = roundstate > 2
+trigger1 = !alive
+flag = NoKOSnd
+flag2 = Invisible
+flag3 = NoShadow
+ignorehitpause = 1
+
+[State 3517062]
+type = LifeSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517062]
+type = ChangeState
+trigger1 = hitpausetime
+trigger1 = alive
+value = 1646184415
+persistent = 256
+ignorehitpause = 1
+
+[State 3517062]
+type = StateTypeSet
+trigger1 = !hitpausetime
+trigger1 = roundstate >= 2
+trigger1 = alive
+movetype = A
+ignorehitpause = 1
+
+[State 3517062]
+type = ChangeAnim2
+trigger1 = !hitpausetime
+trigger1 = roundstate >= 2
+trigger1 = alive
+value = 111111
+ignorehitpause = 1
+
+[State 3517062]
+type = HitDef
+trigger1 = !hitpausetime
+trigger1 = roundstate >= 2
+trigger1 = alive
+attr = SCA,AA,AT,AP
+pausetime = 3,1
+hitflag = MAFD
+priority = 7,H
+numhits = 0
+guard.dist = 0
+hitsound = -1
+guardsound = -1
+sparkno = -1
+ignorehitpause = 1
+
+[State 3517062]
+type = ChangeAnim
+trigger1 = time
+trigger1 = selfanimexist(130+(statetype=C)*1+(statetype=A)*2)
+value = 130 + (statetype=C) * 1 + (statetype=A) * 2
+ignorehitpause = 1
+
+[State 3517062]
+type = SelfState
+trigger1 = roundstate = 2
+trigger1 = time > 60
+trigger1 = statetype != L
+value = 140
+persistent = 256
+ignorehitpause = 1
+
+[State 3517062]
+type = StateTypeSet
+trigger1 = roundstate = 3
+trigger1 = !alive
+statetype = S
+movetype = I
+ignorehitpause = 1
+
+[State 3517062]
+type = CtrlSet
+trigger1 = roundstate = 3
+trigger1 = !alive
+value = 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必超即死OTHK
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517063]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State 3517063]
+type = ChangeState
+trigger1 = !ishelper
+value = 3517062
+persistent = 256
+ignorehitpause = 1
+
+[State ALL];敵ヘルパーのみ通す
+type = ChangeState
+trigger1 = !ishelper
+trigger2 = ishelper&&(root,name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||root,const(data.airjuggle)=2661342)
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+;[State 3517063];当身されて来た訳でないなら消去
+;type = ChangeState
+;trigger1 = !movereversed
+;value = 011111111
+;persistent = 256
+;ignorehitpause = 1
+
+[State 3517063]
+type = AssertSpecial
+trigger1 = 1
+flag = Invisible
+flag2 = NoShadow
+ignorehitpause = 1
+
+[State 3517063]
+type = PlayerPush
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517063]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+ignorehitpause = 1
+
+[State 3517063];OTHK用復帰Proj
+type = Projectile
+trigger1 = !root,numprojID(33517050)
+attr = S,NA
+hitonce = 0
+projID = 33517051
+projanim = anim
+p1stateno = 5035
+postype = p2
+offset = 0,500
+hitflag = MAFD
+priority = 7,H
+projpriority = 2147483647
+guard.dist = 0
+hitsound = -1
+guardsound = -1
+sparkno = -1
+projremove = 1
+projhits = 2
+projmisstime = 25
+projremovetime = 50
+numhits = 0
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517063];OTHK用本命Proj
+type = Projectile
+trigger1 = !root,numprojID(33517050)
+attr = S,NA
+hitonce = 0
+projID = 33517050
+projanim = anim
+p1stateno = prevstateno
+postype = p2
+offset = 0,500
+hitflag = MAFD
+priority = 7,H
+projpriority = 2147483647
+guard.dist = 0
+hitsound = -1
+guardsound = -1
+sparkno = -1
+projremove = 0
+projhits = 2
+projmisstime = 1
+projremovetime = 30
+numhits = 0
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517063]
+type = ChangeState
+trigger1 = root,numprojID(33517051)
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;アーマー殺し用特定属性無敵付与ステート
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517080]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵本体のみを通す
+type = ChangeState
+trigger1 = !ishelper&&(name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||const(data.airjuggle)=2661342)
+trigger1 = var(58) = [5,12]
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517080]
+type = StateTypeSet
+trigger1 = 1
+movetype = H
+physics = N
+ignorehitpause = 1
+
+[State 3517080]
+type = StateTypeSet
+trigger1 = statetype = L
+statetype = S
+ignorehitpause = 1
+
+[State 3517080]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517080]
+type = NotHitBy
+trigger1 = time < 126
+value = SCA
+time = 1
+ignorehitpause = 1
+
+[State 3517080]
+type = NotHitBy
+trigger1 = time < 126
+value2 = SCA
+time = 1
+ignorehitpause = 1
+
+[State 3517080]
+type = NotHitBy
+trigger1 = time > 125
+value = 
+time = 1
+ignorehitpause = 1
+
+[State 3517080]
+type = NotHitBy
+trigger1 = time > 125
+value2 = 
+time = 1
+ignorehitpause = 1
+
+[State 3517080]
+type = DefenceMulSet
+trigger1 = 1
+value = 1.0
+ignorehitpause = 1
+
+[State 3517080]
+type = ChangeAnim
+trigger1 = time < 126
+value = anim
+ignorehitpause = 1
+
+[State 3517080]
+type = ChangeAnim
+trigger1 = time > 125
+trigger1 = alive
+trigger1 = !animtime
+trigger1 = anim = [5000,5050]
+trigger1 = selfanimexist(anim+5)
+value = anim + 5
+ignorehitpause = 1
+
+[State 3517080]
+type = PalFx
+trigger1 = time < 100
+trigger2 = time = [100,125]
+trigger2 = gametime%2 = 0
+time = 1
+add = 50,186,255
+ignorehitpause = 1
+
+[State 3517080]
+type = VelSet
+trigger1 = time = 0
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 3517080]
+type = VelAdd
+trigger1 = time > 50
+trigger1 = pos y < 0
+y = 0.35
+ignorehitpause = 1
+
+[State 3517080]
+type = PosSet
+trigger1 = pos y + vel y >= 0
+y = 0
+ignorehitpause = 1
+
+[State 3517080]
+type = VelSet
+trigger1 = pos y + vel y >= 0
+y = 0
+ignorehitpause = 1
+
+[State 3517080]
+type = SelfState
+trigger1 = time > 150
+value = 0 + (statetype=C) * 11 + (statetype=A) * 52
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必混線タゲステ先
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517100]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL];敵ヘルパーのみ通す
+type = ChangeState
+trigger1 = !ishelper
+trigger2 = ishelper&&(root,name="繝溘す繝｣繧ｰ繧ｸ縺輔∪"||root,const(data.airjuggle)=2661342)
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517100]
+type = StateTypeSet
+trigger1 = 1
+statetype = S
+movetype = I
+physics = N
+ignorehitpause = 1
+
+[State 3517100]
+type = CtrlSet
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517100]
+type = AssertSpecial
+trigger1 = 1
+flag = Invisible
+flag2 = NoShadow
+ignorehitpause = 1
+
+[State 3517100]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+ignorehitpause = 1
+
+[State 3517100]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 3517100]
+type = PlayerPush
+trigger1 = 1
+value = 0
+ignorehitpause = 1
+
+[State 3517100]
+type = ScreenBound
+trigger1 = 1
+value = 0
+movecamera = 0,0
+ignorehitpause = 1
+
+[State 3517100]
+type = ChangeState
+trigger1 = ishelper(const(size.shadowoffset))
+trigger1 = const(size.shadowoffset) = 351710000
+value = 3517101
+persistent = 256
+ignorehitpause = 1
+
+[State 3517100]
+type = Helper
+trigger1 = !root,numprojID(33517100)
+trigger1 = !enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),numprojID(33517101)
+name = "SHOOTER"
+ID = 351710000
+size.shadowoffset = 351710000
+size.height = anim
+stateno = 351710000 + random
+helpertype = normal
+keyctrl = 0
+pos = 0,500
+pausemovetime = 2147483647
+supermovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517100]
+type = Projectile
+trigger1 = root,numprojID(33517100) = 0
+attr = ,N
+guard.dist = 0
+projID = 33517100
+projanim = -1
+projremove = 0
+projremovetime = 0
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+offset = 0,-33517100
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517100]
+type = ChangeState
+trigger1 = 1
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必混線間者Anim探査ステート①
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517101]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper(const(size.shadowoffset))
+trigger2 = const(size.shadowoffset) != 351710000
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517101]
+type = ChangeState
+trigger1 = var(4)
+value = 3517102
+persistent = 256
+ignorehitpause = 1
+
+[State 3517101];未使用Animナンバー探査
+type = ChangeState
+trigger1 = !selfanimexist(571863720+var(5))
+trigger1 = (var(4):=571863720+var(5)) && 0
+trigger2 = selfanimexist(571863720+var(5))
+trigger2 = var(5) := var(5) + 1 || 1
+trigger2 = var(5) < 1000
+trigger3 = selfanimexist(571863720+var(5))
+trigger3 = var(4) := (571000000+random*100+random) && 0
+value = stateno
+persistent = 256
+ignorehitpause = 1
+
+[State 3517101];変数初期化
+type = VarRangeSet
+trigger1 = var(2) := 1 || 1
+trigger1 = var(6) := 1 || 1
+trigger1 = var(7) := 0 || 1
+trigger1 = var(8) := 0 || 1
+first = 20
+last = 59
+value = -1
+ignorehitpause = 1
+
+[State 3517101];変数初期化
+type = VarSet
+trigger1 = 1
+sysvar(3) = -1
+ignorehitpause = 1
+
+[State 3517101]
+type = ChangeState
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),sysvar(3) != 351710
+trigger2 = root,lose
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必混線間者Anim探査ステート②
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517102]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper(const(size.shadowoffset))
+trigger2 = const(size.shadowoffset) != 351710000
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517102]
+type = ChangeState
+trigger1 = var(8)
+trigger1 = var(9) := 0 || 1
+value = 3517104 - 1*(gametime%11=0)
+persistent = 256
+ignorehitpause = 1
+
+[State 3517102];Anim総数検索
+type = ChangeAnim2
+trigger1 = !var(8)
+value = 571860001 + var(6)
+ignorehitpause = 1
+
+[State 3517102]
+type = ChangeAnim
+trigger1 = !var(8)
+value = var(4)
+ignorehitpause = 1
+
+[State 3517102]
+type = ChangeAnim2
+trigger1 = !var(8)
+value = anim
+ignorehitpause = 1
+
+[State 3517102]
+type = VarSet
+triggerall = !var(8)
+trigger1 = anim = 571860001
+trigger1 = var(6) := var(6) - 1 || 1
+trigger2 = anim = 571862400
+var(8) = 1
+ignorehitpause = 1
+
+[State 3517102]
+type = Null
+trigger1 = !var(8)
+trigger1 = var(6) := var(6) + 1
+ignorehitpause = 1
+
+[State 3517102]
+type = ChangeState
+trigger1 = !var(8)
+trigger1 = var(7) < 1000
+trigger1 = var(7) := var(7) + 1
+value = stateno
+persistent = 256
+ignorehitpause = 1
+
+[State 3517102]
+type = Null
+trigger1 = !var(8)
+trigger1 = var(7) := 0 || 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必混線間者Anim探査ステート③
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517103]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper(const(size.shadowoffset))
+trigger2 = const(size.shadowoffset) != 351710000
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517103]
+type = ChangeState
+trigger1 = sysvar(2)
+value = 3517105
+persistent = 256
+ignorehitpause = 1
+
+[State 3517103]
+type = ChangeAnim2
+trigger1 = 1
+value = 571860000 + var(2)
+ignorehitpause = 1
+
+[State 3517103]
+type = ChangeAnim
+trigger1 = var(2) := ifelse(var(2)=var(6),1,var(2)+1) || 1
+value = var(4)
+ignorehitpause = 1
+
+[State 3517103]
+type = ChangeAnim2
+trigger1 = var(10) := 1 || 1
+trigger1 = !(animelem=1,>=0)
+trigger1 = var(10) := 0 || 1
+value = anim
+ignorehitpause = 1
+
+[State 3517103];無効なAnimなら再調査
+type = ChangeState
+trigger1 = !var(10) || anim < 0
+trigger1 = var(5) < 1000
+trigger1 = var(5) := var(5) + 1 || 1
+value = stateno
+persistent = 256
+ignorehitpause = 1
+
+[State 3517103]
+type = Projectile
+trigger1 = var(10)
+trigger1 = var(20+var(9)) := root,numprojID(33517500+var(9)) || 1
+trigger1 = !root,numprojID(33517500+var(9))
+attr = S,SP
+projID = 33517500 + var(9)
+projanim = anim
+p1stateno = ifelse(random%2,110,115)
+postype = p2
+offset = 0,500
+hitflag = MAFD
+priority = 7,H
+projpriority = 2147483647
+guard.dist = 0
+hitsound = -1
+guardsound = -1
+sparkno = -1
+projremove = 1
+projhits = 1
+projremovetime = 10
+numhits = 0
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517103]
+type = Null
+trigger1 = var(10)
+trigger1 = root,numprojID(33517500+var(9)) = 1
+trigger1 = var(20+var(9)) != root,numprojID(33517500+var(9))
+trigger1 = var(20+var(9)) := anim || 1
+trigger2 = var(20+var(9)) := -1 || 1
+trigger2 = var(2) := ifelse(var(2)=1,var(6),var(2)-1) || 1
+ignorehitpause = 1
+
+[State 3517103]
+type = ChangeState
+trigger1 = var(10)
+trigger1 = var(9) := var(9) + 1 || 1
+trigger1 = var(9) < 40
+value = stateno
+persistent = 256
+ignorehitpause = 1
+
+[State 3517103]
+type = Null
+trigger1 = var(5) := 0 || 1
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必混線間者Anim探査ステート④
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517104]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper(const(size.shadowoffset))
+trigger2 = const(size.shadowoffset) != 351710000
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517104]
+type = ChangeState
+trigger1 = sysvar(2)
+;trigger1 = enemy,numexplod
+value = 3517105
+persistent = 256
+ignorehitpause = 1
+
+[State 3517104]
+type = VarSet
+trigger1 = var(20+var(9)) != -1
+trigger1 = root,numprojID(33517500+var(9)) = 0
+sysvar(3) = var(20+var(9))
+ignorehitpause = 1
+
+[State 3517104]
+type = VarSet
+trigger1 = sysvar(3) >= 0
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State 3517104]
+type = VarSet
+trigger1 = sysvar(2)
+sysvar(4) = gametime%11
+ignorehitpause = 1
+
+[State 3517104]
+type = ChangeState
+trigger1 = var(9) := var(9) + 1 || 1
+trigger1 = var(9) < 40
+value = stateno
+persistent = 256
+ignorehitpause = 1
+
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+;超必混線アーマー貫通砲
+;━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[Statedef 3517105]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper(const(size.shadowoffset))
+trigger2 = const(size.shadowoffset) != 351710000
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State 3517105]
+type = Null
+trigger1 = var(19) := ifelse((random%3),ifelse((random%2),110,115),5210) || 1
+ignorehitpause = 1
+
+[State 3517105]
+type = Null
+triggerall = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),numexplod(351716)
+trigger1 = root,alive && root,gethitvar(fall.damage)
+trigger1 = var(19) := ifelse((random%3),ifelse((random%2),5080,5081),5110) || 1
+trigger2 = root,stateno != 5150
+trigger2 = !root,alive
+trigger2 = var(19) := 5150 || 1
+ignorehitpause = 1
+
+[State 3517105]
+type = Projectile
+trigger1 = var(19) != -1
+;trigger1 = root,numprojID(33517051) = 0
+attr = SCA,AA,AT,AP
+numhits = 0
+guard.dist = 0
+projID = 33517051
+projanim = sysvar(3)
+p1stateno = var(19)
+offset = 0,0
+hitflag = MAFD
+priority = 7,H
+projpriority = 2147483647
+hitsound = -1
+guardsound = -1
+sparkno = -1
+projremove = 1
+projhits = 1
+projremovetime = sysvar(4)
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 3517105]
+type = ChangeState
+trigger1 = enemy(enemy(0),name!="繝溘す繝｣繧ｰ繧ｸ縺輔∪"&&numenemy>1),sysvar(3) != 351710
+value = 011111111
+persistent = 256
+ignorehitpause = 1
+

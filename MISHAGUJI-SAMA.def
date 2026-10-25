@@ -1,0 +1,88 @@
+﻿
+[Info]
+name = "ミシャグジさま"             ;キャラの名前
+displayname = "MISHAGUJI-SAMA"      ;表示されるキャラの名前
+versiondate   = 3,4,2015            ;キャラの製作開始日
+latestversion = 7,5,2021            ;キャラの最終更新日
+mugenversion = 11,22,2000           ;キャラが動くmugenのバージョン
+author = "Halkaze"                  ;キャラの製作者名
+pal.defaults = 1,2,3,4              ;敵としてでるキャラのパレット
+
+[Files]
+st       = OPTION.cns
+st0      = Sys/MISHAGUJI-SAMA.cns
+st1      = Sys/Attack/Normal.cns
+st2      = Sys/Attack/Super.cns
+st3      = Sys/Attack/Hyper.cns
+st4      = Sys/Helper.cns
+st5      = Sys/Enemy.cns
+st6      = Sys/Null_1.cns
+st7      = Sys/Special.cns
+st8      = Sys/Common.txt
+
+;隔離技術を使用したくない場合は下の行の先頭に「;」をつけてください
+st9      = Sys/Code.bin
+
+cmd      = Sys/Command.cns
+stcommon = 
+cns      = Sys/MISHAGUJI-SAMA.cns
+sprite   = Res/MISHAGUJI-SAMA.sff
+anim     = Res/MISHAGUJI-SAMA.air
+sound    = Res/MISHAGUJI-SAMA.snd
+
+;通常カラー
+pal1     = Res/Act/Lunatic.act
+pal2     = Res/Act/Hard.act
+pal3     = Res/Act/Hina.act
+pal4     = Res/Act/Aya.act
+;STGモード
+pal5     = Res/Act/Extra.act
+;狂カラー１
+pal7     = Res/Act/Phantasm.act
+pal8     = Res/Act/Phantasm.act
+pal9     = Res/Act/Phantasm.act
+;狂カラー２
+pal10    = Res/Act/Lunatic.act
+;耐久テストカラー
+pal11    = Res/Act/Extra.act
+
+;デフォルトのカラー指定は上記のようになっていますが、
+;その他にもいくつかあるので1P~4Pまでは自由に変更可能です。
+;7P以降のカラーでは他のエフェクトとの兼ね合いから非推奨です。
+;※色の変更によって性能が変わることはありません
+
+;Default
+;	いつもの格好。普通が一番。
+
+;Reimu
+;	巫女風。２Ｐカラーはありません。
+;Aki
+;	秋神風。芋の香りに添えてお使いください。
+;Hina
+;	厄神風。厄いときにどうぞ。
+;Nitori
+;	水神風。アメニモマケズ。
+;Aya
+;	風神風。カゼニモマケズ。
+
+;Easy
+;	簡単そうな見た目。目にも易しい。
+;Normal
+;	普通そうな見た目。常識的。
+;Hard
+;	難しそうな見た目。侮り難い。
+;Lunatic
+;	狂人向けの見た目。月人宛て。
+;Phantasm
+;	現実離れな見た目。夢見心地。
+;Extra
+;	尋常でない見た目。番外編。
+
+;MISHAGUJI-SAMA
+;	睛ｱ螻雎ﾚｱｷｱ・莖｢ｱﾇｱa
+;	羂､鬢・ﾞ､ｻ､隍ｦ､ﾋ｡｣
+;	逾溘ｉ繧後∪縺帙ｓ繧医≧縺ｫ縲・
+;	腑Τ・!ｶ盂]・ｾΤ鯛!ｴ盂%・・ｱ・
+
+
+

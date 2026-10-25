@@ -1,0 +1,931 @@
+;������������������������������������������������������������������
+;�K�{�f�[�^�Q
+;������������������������������������������������������������������
+
+;�����̂Ȃ����ڂɂ��Ă͕ύX���Ȃ��ł�������
+
+[Data]
+
+Life              = 1000;             ���C�t�̍ő�l
+Power             = 3000;             �p���[�̍ő�l
+Attack            = 100;              �U����
+Defence           = 100;              �����
+Fall.Defence_up   = 0
+Liedown.Time      = 15
+AirJuggle         = 2661342
+SparkNo           = -1
+Guard.SparkNo     = -1
+KO.Echo           = 0
+Volume            = 0
+IntPersistIndex   = 0
+FloatPersistIndex = 0
+
+;������������������������������������������������������������������
+;�L�����̃T�C�Y
+;������������������������������������������������������������������
+[Size]
+Xscale           = 1.0
+Yscale           = 1.0
+Ground.Back      = 13
+Ground.Front     = 13
+Air.Back         = 13
+Air.Front        = 13
+Height           = 80;                �����i���̍����ȏ�Ŕ�щz����j
+Attack.Dist      = 90;                Hitdef�̃f�t�H�K�[�h�\�͈�
+Proj.Attack.dist = 90;                Proj�̃f�t�H�K�[�h�\�͈�
+Proj.Doscale     = 0
+Head.Pos         = 0, -70;            ���̈ʒu
+Mid.Pos          = 0, -45;            �����̈ʒu
+ShadowOffset     = 0
+Draw.Offset      = 0,0
+Z.Width          = 0
+
+;������������������������������������������������������������������
+;�ړ����x
+;������������������������������������������������������������������
+[Velocity]
+Walk.Fwd     = 2.5;                   �O����
+Walk.Back    = -1.2;                  ������
+Run.Fwd      = 6.4, 0;                �O�_�b�V��
+Run.Back     = -4.5,-3.8;             �o�b�N�X�e�b�v
+Jump.Neu     = 0,-8.8;                �W�����v
+Jump.Back    = -2.5;                  ���W�����v
+Jump.Fwd     = 2.5;                   �O�W�����v
+RunJump.Back = -4,-8.7;               �󒆃o�b�N�X�e�b�v
+RunJump.Fwd  = 4,-8.7;                �󒆑O�_�b�V��
+AirJump.Neu  = 0,-10.2;               �󒆃W�����v
+AirJump.Back = -2.5;                  �󒆌��W�����v
+AirJump.Fwd  = 2.5;                   �󒆑O�W�����v
+
+;������������������������������������������������������������������
+;���̑��̒萔
+;������������������������������������������������������������������
+[Movement]
+AirJump.Num     = 0
+AirJump.Height  = 35;                 �󒆃W�����v���̍���
+Yaccel          = .44;                �d�͉����x
+Stand.Friction  = .85;                ������Ԃł̖��C�W��
+Crouch.Friction = .82;                ���Ⴊ�ݏ�Ԃł̖��C�W��
+
+
+
+
+
+
+
+
+
+
+
+
+
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;������������������������������������������������������������������������������
+;�����������������������������̐�ŉ_�ɘM��Ȃ����ƁB��������������������������
+;������������������������������������������������������������������������������
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹ۊ^�^�^�^�^�^�^�^�^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹ۊ^�^�^�^�^�^�^�^�^�^�^�۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹ۊ^�۹۹۹ۊ^�۹۹۹ۊ^�۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹ۊ^�۹۹۹ۊ^�۹۹۹ۊ^�۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹ۊ^�۹۹۹ۊ^�۹۹۹ۊ^�۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹ۊ^�۹۹۹ۊ^�۹۹۹ۊ^�ۊ^�^�^�^�^�^�^�^�^�^�^�^�۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹ۊ^�^�^�^�^�^�^�^�^�^�^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹�^�^�^�^�^�^�^�^�^�^۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹ۊ^�۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�۹۹ۊ^�۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹ۊ^�^�^�^�^�^�^�^�^�^�^�^�^�^�^�^�^�^�^�^�۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹ۊ^�^�^�^�^�۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹ۊ^�^�^�۹۹۹۹۹۹۹۹۹ۊ^�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹�
+;�۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹۹ہc��?
+
+;������������������������������������������������������������������
+;���Ԑ؂�
+;������������������������������������������������������������������
+
+[Statedef 170]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper&&name!="ミシャグジさま"&&const(data.airjuggle)!=2661342
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = stateno != sysvar(3)
+sysvar(2) = 0
+ignorehitpause = 1
+
+[State ALL]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 170,1]
+type = SelfState
+trigger1 = roundstate != 4 && (roundstate||numenemy)
+value = 0 + ((var(20):=(var(20)|4))&&0)
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+[State 170,2]
+type = StateTypeSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(5) := (var(5)&(63^-1)) || 1
+trigger1 = var(5) := (var(5)|1) || 1
+trigger1 = var(5) := (var(5)|8) || 1
+statetype = S
+movetype = I
+physics = S
+ignorehitpause = 1
+
+[State 170,3]
+type = CtrlSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(20) := (var(20)&(4^-1)) || 1
+value = 0
+ignorehitpause = 1
+
+[State 170,4]
+type = ChangeAnim
+trigger1 = sysvar(2) = 0
+value = 170 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 170,5]
+type = AssertSpecial
+triggerall = sysvar(2) <= 70
+trigger1 = var(58) != [10,11]
+trigger2 = win
+trigger3 = roundstate > 3
+trigger4 = !numexplod(1646180000)
+trigger5 = !numexplod(1646180000) && numexplod(351711)
+flag = RoundNotOver
+ignorehitpause = 1
+
+[State 170,6]
+type = VelSet
+trigger1 = sysvar(2) = 0
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 170,7]
+type = NotHitBy
+trigger1 = var(58) = [1,4]
+trigger2 = var(6) := 1
+value = SCA,AA,AT,AP
+time = 1
+ignorehitpause = 1
+
+[State 170,8]
+type = Null
+trigger1 = !sysvar(2)
+trigger1 = !(var(20)&1073741824)
+trigger1 = var(20) := (var(20)|1073741824)
+ignorehitpause = 1
+
+[State ALL]
+Type = VarAdd
+trigger1 = 1
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = fvar(0):=vel x||fvar(1):=vel y||fvar(2):=pos x||fvar(3):=pos y||1
+sysvar(3) = stateno
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = roundstate > 2 && var(58) = [7,11]
+value = 5150
+persistent = 256
+ignorehitpause = 1
+
+;������������������������������������������������������������������
+;��������
+;������������������������������������������������������������������
+
+[Statedef 175]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper&&name!="ミシャグジさま"&&const(data.airjuggle)!=2661342
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = stateno != sysvar(3)
+sysvar(2) = 0
+ignorehitpause = 1
+
+[State ALL]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 175,1]
+type = SelfState
+trigger1 = roundstate < 4
+value = 0 + ((var(20):=(var(20)|4))&&0)
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+[State 175,2]
+type = StateTypeSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(5) := (var(5)&(63^-1)) || 1
+trigger1 = var(5) := (var(5)|1) || 1
+trigger1 = var(5) := (var(5)|8) || 1
+statetype = S
+movetype = I
+physics = S
+ignorehitpause = 1
+
+[State 175,3]
+type = CtrlSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(20) := (var(20)&(4^-1)) || 1
+value = 0
+ignorehitpause = 1
+
+[State 175,4]
+type = ChangeAnim
+trigger1 = sysvar(2) = 0
+value = 175 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 175,5]
+type = AssertSpecial
+triggerall = sysvar(2) < 75
+trigger1 = var(58) != [10,11]
+trigger2 = win
+trigger3 = roundstate > 3
+trigger4 = !numexplod(1646180000)
+flag = RoundNotOver
+ignorehitpause = 1
+
+[State 175,6]
+type = VelSet
+trigger1 = sysvar(2) = 0
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 175,7]
+type = NotHitBy
+trigger1 = var(58) = [1,4]
+trigger2 = var(6) := 1
+value = SCA,AA,AT,AP
+time = 1
+ignorehitpause = 1
+
+[State 175,8]
+type = Null
+trigger1 = !sysvar(2)
+trigger1 = !(var(20)&1073741824)
+trigger1 = var(20) := (var(20)|1073741824)
+ignorehitpause = 1
+
+[State ALL]
+Type = VarAdd
+trigger1 = 1
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = fvar(0):=vel x||fvar(1):=vel y||fvar(2):=pos x||fvar(3):=pos y||1
+sysvar(3) = stateno
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 6 || var(58) > 9
+trigger2 = roundstate > 2 && var(58) = [7,9]
+value = 5150
+persistent = 256
+ignorehitpause = 1
+
+;������������������������������������������������������������������
+;����������
+;������������������������������������������������������������������
+
+[Statedef 180]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper&&name!="ミシャグジさま"&&const(data.airjuggle)!=2661342
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = stateno != sysvar(3)
+sysvar(2) = 0
+ignorehitpause = 1
+
+[State ALL]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 180,1]
+type = SelfState
+trigger1 = roundstate != 4 && (roundstate||numenemy)
+value = 0 + ((var(20):=(var(20)|4))&&0)
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+[State 180,2]
+type = StateTypeSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(5) := (var(5)&(63^-1)) || 1
+trigger1 = var(5) := (var(5)|1) || 1
+trigger1 = var(5) := (var(5)|8) || 1
+statetype = S
+physics = S
+ignorehitpause = 1
+
+[State 180,3]
+type = NotHitBy
+trigger1 = var(58) = [1,4]
+trigger2 = var(6) := 1
+value = SCA,AA,AT,AP
+time = 1
+ignorehitpause = 1
+
+[State 180,4]
+type = AssertSpecial
+trigger1 = var(58) != [10,11]
+trigger2 = win
+trigger3 = roundstate > 3
+trigger4 = !numexplod(1646180000)
+flag = RoundNotOver
+ignorehitpause = 1
+
+[State 180,5]
+type = Null
+trigger1 = !sysvar(2)
+trigger1 = !(var(20)&1073741824)
+trigger1 = var(20) := (var(20)|1073741824)
+ignorehitpause = 1
+
+[State 180,6]
+type = SelfState
+trigger1 = sysvar(2) = 0
+value = 181
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+Type = VarAdd
+trigger1 = 1
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = fvar(0):=vel x||fvar(1):=vel y||fvar(2):=pos x||fvar(3):=pos y||1
+sysvar(3) = stateno
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = roundstate > 2 && var(58) = [7,11]
+value = 5150
+persistent = 256
+ignorehitpause = 1
+
+;������������������������������������������������������������������
+;������
+;������������������������������������������������������������������
+
+[Statedef 181]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper&&name!="ミシャグジさま"&&const(data.airjuggle)!=2661342
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = stateno != sysvar(3)
+sysvar(2) = 0
+ignorehitpause = 1
+
+[State ALL]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 181,1]
+type = SelfState
+trigger1 = roundstate != 4 && (roundstate||numenemy)
+value = 0 + ((var(20):=(var(20)|4))&&0)
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+[State 181,2]
+type = StateTypeSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(5) := (var(5)&(63^-1)) || 1
+trigger1 = var(5) := (var(5)|1) || 1
+trigger1 = var(5) := (var(5)|8) || 1
+statetype = S
+movetype = I
+physics = S
+ignorehitpause = 1
+
+[State 181,3]
+type = CtrlSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(20) := (var(20)&(4^-1)) || 1
+value = 0
+ignorehitpause = 1
+
+[State 181,4]
+type = ChangeAnim
+trigger1 = sysvar(2) = 0
+value = 181 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 181,5]
+type = AssertSpecial
+triggerall = anim = 181
+triggerall = sysvar(2) <= 126
+trigger1 = var(58) != [10,11]
+trigger2 = win
+trigger3 = roundstate > 3
+trigger4 = !numexplod(1646180000)
+flag = RoundNotOver
+ignorehitpause = 1
+
+[State 181,9]
+type = PlaySnd
+trigger1 = anim = 181
+trigger1 = ifelse(var(58)>9,animelemno(0)=5&&var(26)=1,!animelemtime(6))
+value = 4,2
+ignorehitpause = 1
+
+[State 181,10]
+type = EnvShake
+trigger1 = anim = 181
+trigger1 = ifelse(var(58)>9,animelemno(0)=5&&var(26)=1,!animelemtime(6))
+time = 20
+ampl = -2
+freq = 80
+ignorehitpause = 1
+
+[State 181,11]
+type = VelSet
+trigger1 = sysvar(2) = 0
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 181,12]
+type = NotHitBy
+trigger1 = var(58) = [1,4]
+trigger2 = var(6) := 1
+value = SCA,AA,AT,AP
+time = 1
+ignorehitpause = 1
+
+[State ALL]
+Type = VarAdd
+trigger1 = 1
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = fvar(0):=vel x||fvar(1):=vel y||fvar(2):=pos x||fvar(3):=pos y||1
+sysvar(3) = stateno
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = roundstate > 2 && var(58) = [7,11]
+value = 5150
+persistent = 256
+ignorehitpause = 1
+
+;������������������������������������������������������������������
+;�o��
+;������������������������������������������������������������������
+
+[Statedef 190]
+type = U
+movetype = U
+physics = U
+juggle = 0
+hitdefpersist = 1
+movehitpersist = 1
+hitcountpersist = 1
+
+[State ALL]
+type = ChangeState
+trigger1 = !ishelper&&name!="ミシャグジさま"&&const(data.airjuggle)!=2661342
+trigger2 = ishelper
+value = 1141514113
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 5
+value = 55
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = stateno != sysvar(3)
+sysvar(2) = 0
+ignorehitpause = 1
+
+[State ALL]
+type = HitDef
+trigger1 = 1
+attr = 
+ignorehitpause = 1
+
+[State 190,1]
+type = SelfState
+trigger1 = roundstate > 1
+value = 0 + ((var(20):=(var(20)|4))&&0)
+ctrl = 1
+persistent = 256
+ignorehitpause = 1
+
+[State 190,2]
+type = StateTypeSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(5) := (var(5)&(63^-1)) || 1
+trigger1 = var(5) := (var(5)|1) || 1
+trigger1 = var(5) := (var(5)|8) || 1
+statetype = S
+movetype = I
+physics = S
+ignorehitpause = 1
+
+[State 190,3]
+type = CtrlSet
+trigger1 = sysvar(2) = 0
+trigger1 = var(20) := (var(20)&(4^-1)) || 1
+value = 0
+ignorehitpause = 1
+
+[State 190,4]
+type = AssertSpecial
+trigger1 = 1;sysvar(2) <= 30
+flag = Intro
+ignorehitpause = 1
+
+[State 190,5]
+type = ChangeAnim
+trigger1 = sysvar(2) = 0
+value = 190 + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
+ignorehitpause = 1
+
+[State 190,5]
+type = Explod
+trigger1 = anim = 190
+trigger1 = animelemno(0) = 1
+trigger1 = !(var(20)&268435456)
+trigger1 = gametime%4 = 0
+trigger1 = var(59) := (((random%241)+240)%361) || 1
+anim = 20001 + random%5
+removetime = -2
+pos = floor(sin(var(59)/(180/pi))*100),floor(cos(var(59)/(180/pi))*-100-15)
+vel = sin(var(59)/(180/pi)) * -1,cos(var(59)/(180/pi)) * 1
+accel = sin(var(59)/(180/pi)) * -1 * .1,cos(var(59)/(180/pi)) * 1 * .1
+ID = 10190
+scale = .35,.35
+trans = sub
+sprpriority = -2
+supermove = 1
+pausemovetime = -1
+supermovetime = -1
+ignorehitpause = 1
+
+[State 190,5]
+type = Explod
+trigger1 = anim = 190
+trigger1 = animelemno(0) = 1
+trigger1 = !(var(20)&268435456)
+trigger1 = gametime%4 = 0
+trigger1 = var(59) := (((random%241)+240)%361) || 1
+anim = 20001 + random%5
+removetime = -2
+pos = floor(sin(var(59)/(180/pi))*100),floor(cos(var(59)/(180/pi))*-100-15)
+vel = sin(var(59)/(180/pi)) * -1,cos(var(59)/(180/pi)) * 1
+accel = sin(var(59)/(180/pi)) * -1 * .1,cos(var(59)/(180/pi)) * 1 * .1
+ID = 10190
+scale = .35,.35
+sprpriority = -1
+supermove = 1
+pausemovetime = -1
+supermovetime = -1
+ignorehitpause = 1
+
+[State 190,5]
+type = Explod
+trigger1 = anim = 190
+trigger1 = sysvar(2) = 10
+anim = 191
+removetime = -2
+pos = 0,-210
+vel = 0,2
+ID = 10190
+sprpriority = 0
+supermove = 1
+pausemovetime = -1
+supermovetime = -1
+ignorehitpause = 1
+
+[State 190,6]
+type = PlaySnd
+trigger1 = anim = 190
+trigger1 = sysvar(2) = 15
+value = 14,13
+ignorehitpause = 1
+
+[State 190,6]
+type = PlaySnd
+trigger1 = anim = 190
+trigger1 = sysvar(2) = 68
+value = 14,22
+ignorehitpause = 1
+
+[State 190,5]
+type = Explod
+trigger1 = anim = 190
+trigger1 = sysvar(2) = 110
+anim = 32000
+scale = .5,.5
+pos = 0,-20
+removetime = -2
+ID = 351797
+ontop = 1
+supermove = 1
+pausemovetime = -1
+supermovetime = -1
+ignorehitpause = 1
+
+[State 190,5]
+type = Explod
+trigger1 = anim = 190
+trigger1 = sysvar(2) = 110
+anim = 32001
+scale = .5,.5
+pos = 0,-20
+removetime = -2
+ID = 351797
+ontop = 1
+supermove = 1
+pausemovetime = -1
+supermovetime = -1
+ignorehitpause = 1
+
+[State 190,6]
+type = PlaySnd
+trigger1 = anim = 190
+trigger1 = sysvar(2) = 110
+value = 5,9
+ignorehitpause = 1
+
+[State 190,6]
+type = Projectile
+trigger1 = var(58) > 9 || !(!(var(19)&67108864))
+trigger1 = sysvar(2) = [110,130]
+trigger1 = sysvar(2)%5 = 0
+attr = ,N
+guard.dist = 0
+projID = 351798
+projanim = 31200
+projremanim = 31201
+projscale = .5 * facing,.5
+projsprpriority = 2147483643+((sysvar(2)-110)/5)
+offset = 0,-18
+velocity = 0,-5
+remvelocity = 0,-0.5
+projremove = 0
+projremovetime = 16
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 190,6]
+type = Projectile
+trigger1 = var(58) > 9 || !(!(var(19)&67108864))
+trigger1 = sysvar(2) = [110,130]
+trigger1 = sysvar(2)%5 = 0
+attr = ,N
+guard.dist = 0
+projID = 351798
+projanim = 31202
+projremanim = 31203
+projscale = .5 * facing,.5
+projsprpriority = 2147483642+((sysvar(2)-110)/5)
+offset = 0,-18
+velocity = 0,-5
+remvelocity = 0,-0.5
+projremove = 0
+projremovetime = 16
+projedgebound = 1000000000
+projstagebound = 2147483647
+projheightbound = -2147483648,2147483647
+supermovetime = 2147483647
+pausemovetime = 2147483647
+ignorehitpause = 1
+
+[State 190,6]
+type = PlaySnd
+trigger1 = var(58) > 9 || !(!(var(19)&67108864))
+trigger1 = sysvar(2) = [110,130]
+trigger1 = sysvar(2)%5 = 0
+value = 12,0
+channel = 12
+ignorehitpause = 1
+
+[State 190,7]
+type = VelSet
+trigger1 = sysvar(2) = 0
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State 190,8]
+type = NotHitBy
+trigger1 = var(58) = [1,4]
+trigger2 = var(6) := 1
+value = SCA,AA,AT,AP
+time = 1
+ignorehitpause = 1
+
+[State 190,9]
+type = AssertSpecial
+trigger1 = var(20) := (var(20)|65536) || 1
+flag = NoAutoTurn
+ignorehitpause = 1
+
+[State 190,10]
+type = SelfState
+trigger1 = anim = 190
+trigger1 = !(!(var(20)&268435456))
+value = 0 + ((var(20):=(var(20)&(4^-1)))&&0)
+ctrl = 0
+persistent = 256
+ignorehitpause = 1
+
+[State ALL]
+Type = VarAdd
+trigger1 = 1
+sysvar(2) = 1
+ignorehitpause = 1
+
+[State ALL]
+type = VarSet
+trigger1 = fvar(0):=vel x||fvar(1):=vel y||fvar(2):=pos x||fvar(3):=pos y||1
+sysvar(3) = stateno
+ignorehitpause = 1
+
+[State ALL]
+type = SelfState
+trigger1 = var(58) = 6 || var(58) > 9
+trigger2 = roundstate > 2 && var(58) = [7,9]
+value = 5150
+persistent = 256
+ignorehitpause = 1
