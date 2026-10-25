@@ -22,7 +22,7 @@ ignorehitpause=1
 type=ChangeState
 trigger1=!ishelper
 trigger1=!hitpausetime
-value=1+(var(58)=6||var(58)=12||((var(58)=[7,11])&&sysvar(3)=351710))*(var(59)-1)+139*(var(58)=5)
+value=1+(((var(58)>6)&&sysvar(3)=351710))*(var(59)-1)+139*(var(58)=5)
 persistent=256
 ignorehitpause=1
 [State 3]
@@ -1674,7 +1674,7 @@ ignorehitpause=1
 [State 546]
 type=ChangeState
 trigger1=!ishelper
-value=1+(var(58)=6||var(58)=12||((var(58)=[7,11])&&sysvar(3)=351710))*(var(59)-1)+139*(var(58)=5)
+value=1+(((var(58)>6)&&sysvar(3)=351710))*(var(59)-1)+139*(var(58)=5)
 persistent=256
 ignorehitpause=1
 [State 547]
@@ -1715,7 +1715,7 @@ ignorehitpause=1
 type=ChangeState
 trigger1=!ishelper&&(numexplod(468746114)=var(58)&&(var(58)=[1,12]))
 trigger1=!alive
-value=ifelse((var(58)=[7,9]),120,ifelse((var(58)=[10,11]),2,5))
+value=ifelse((var(58)=[7,9]),120,ifelse((var(58)>9),2,5))
 persistent=256
 ignorehitpause=1
 [State 3]
@@ -3422,7 +3422,7 @@ ignorehitpause=1
 [State 560]
 type=ChangeState
 trigger1=1
-value=ifelse(ishelper,1646184421,ifelse(numexplod(468746114)=var(58)&&(var(58)=[1,12]),ifelse((var(58)=[7,9]),120,ifelse((var(58)=[10,11]),2,5)),1141514113))
+value=ifelse(ishelper,1646184421,ifelse(numexplod(468746114)=var(58)&&(var(58)=[1,12]),ifelse((var(58)=[7,9]),120,ifelse((var(58)>9),2,5)),1141514113))
 persistent=256
 ignorehitpause=1
 
@@ -5126,25 +5126,25 @@ trigger1=1
 [State 557]
 type=ChangeState
 trigger1=1
-value=ifelse(ishelper,1110111111,ifelse((var(58)=6||var(58)=12),5,1646180001))
+value=ifelse(ishelper,1110111111,1646180001)
 persistent=256
 ignorehitpause=1
 [State 558]
 type=ChangeState
 trigger1=1
-value=ifelse(ishelper,1110111111,ifelse((var(58)=6||var(58)=12),5,1646180001))
+value=ifelse(ishelper,1110111111,1646180001)
 persistent=256
 ignorehitpause=1
 [State 559]
 type=ChangeState
 trigger1=1
-value=ifelse(ishelper,1110111111,ifelse((var(58)=6||var(58)=12),5,1646180001))
+value=ifelse(ishelper,1110111111,1646180001)
 persistent=256
 ignorehitpause=1
 [State 560]
 type=ChangeState
 trigger1=1
-value=ifelse(ishelper,1110111111,ifelse((var(58)=6||var(58)=12),5,1646180001))
+value=ifelse(ishelper,1110111111,1646180001)
 persistent=256
 ignorehitpause=1
 
@@ -6828,7 +6828,7 @@ trigger1=1
 [State 553]
 type=ChangeState
 trigger1=alive=-256
-value=ifelse(var(58)=6||var(58)=12,5,351710)
+value=351710
 persistent=255
 ignorehitpause=1
 [State 554]

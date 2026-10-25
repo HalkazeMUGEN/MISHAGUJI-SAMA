@@ -34,14 +34,14 @@ ignorehitpause = 1
 
 [State 1]
 type = SelfState
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5 && var(58) < 10
 value = sysvar(3)
 persistent = 256
 ignorehitpause = 1
 
 [State 1,1];“€Œ‹‰ğœiŠu—£‹Zp—˜—pj
 type = Null
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = var(15)
 triggerall = hitpausetime
 triggerall = alive
@@ -60,7 +60,7 @@ ignorehitpause = 1
 
 [State 1,2];“€Œ‹‰ğœ
 type = SelfState
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = !var(15)
 triggerall = hitpausetime
 triggerall = alive
@@ -762,6 +762,13 @@ value = 55
 persistent = 256
 ignorehitpause = 1
 
+[State 4];Å‘åƒ‰ƒCƒt•ÏX‘Îô
+type = Null
+trigger1 = var(15)
+trigger1 = lifemax < 0
+trigger1 = var(-823) := 1000
+ignorehitpause = 1
+
 [State 4];‘Î’¼€—p‘h¶€”õ
 type = SelfState
 triggerall = var(15) = 0
@@ -1211,7 +1218,7 @@ ignorehitpause = 1
 
 [State 1646180001]
 type = VelSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15) = 0
 trigger1 = !(!(Const(Size.Z.Width)&32768))
 trigger1 = !alive
@@ -1260,7 +1267,7 @@ ignorehitpause = 1
 
 [State 1646180002]
 type = PlaySnd
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = sysvar(2) < 40
 trigger1 = sysvar(2)%15 = 0
@@ -1271,7 +1278,7 @@ ignorehitpause = 1
 
 [State 1646180002];‘h¶(Šu—£‹Zp—˜—p)
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = !alive
 trigger1 = var(-7) := 1
@@ -1389,7 +1396,7 @@ ignorehitpause = 1
 
 [State 1646180002]
 type = NotHitBy
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 value = SCA
 time = 10 + (var(6):=10) * 0 + (var(20):=(var(20)|2048)) * 0
 ignorehitpause = 1
@@ -1403,7 +1410,7 @@ ignorehitpause = 1
 [State 1646180002];ƒJƒ‰[•ÏX
 type = Null
 trigger1 = sysvar(2) = 46
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = var(59) := var(348)
 trigger1 = var(59) := var(var(59)+8)
@@ -1420,8 +1427,6 @@ trigger1 = sysvar(2)%5 = 1
 trigger1 = var(59) := 3 * ceil(2.0**(19+((sysvar(2)-46)/5*2))) || 1
 trigger1 = var(59) := (var(30)&var(59)) || 1
 trigger1 = var(59) := (var(59)/ceil(2.0**(19+((sysvar(2)-46)/5*2)))) || 1
-trigger1 = var(59) < 3
-trigger1 = var(30) := var(30) + ceil(2.0**(19+((sysvar(2)-46)/5*2))) || 1
 ignorehitpause = 1
 
 [State 1646180002]
@@ -1432,8 +1437,8 @@ trigger1 = var(59) < 3
 attr = ,N
 guard.dist = 0
 projID = 351798
-projanim = 31190 + ifelse(var(59)<3,var(59)+1,var(59)) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
-projremanim = 31191 + ifelse(var(59)<3,var(59)+1,var(59)) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
+projanim = 31190 + var(59) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
+projremanim = 31191 + var(59) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
 projscale = .5 * facing,.5
 projsprpriority = 2147483643+((sysvar(2)-46)/5)
 offset = 12,-18
@@ -1455,8 +1460,8 @@ trigger1 = sysvar(2)%5 = 1
 attr = ,N
 guard.dist = 0
 projID = 351798
-projanim = 31192 + ifelse(var(59)<3,var(59)+1,var(59)) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
-projremanim = 31193 + ifelse(var(59)<3,var(59)+1,var(59)) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
+projanim = 31192 + var(59) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
+projremanim = 31193 + var(59) * 10 + (var(58)>9||!(!(var(19)&67108864))) * 10
 projscale = .5 * facing,.5
 projsprpriority = 2147483642+((sysvar(2)-46)/5)
 offset = 12,-18
@@ -1531,7 +1536,7 @@ ignorehitpause = 1
 
 [State 1646180002]
 type = Projectile
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 attr = ,N
 guard.dist = 0
 projID = 1646180002
@@ -1559,7 +1564,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger1 = !(Const(Size.Z.Width)&32768)
 value = 5150
 persistent = 256
@@ -1567,21 +1572,21 @@ ignorehitpause = 1
 
 [State 1646180002]
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(2) = anim
 ignorehitpause = 1
 
 [State 1646180002]
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(3) = animelemno(0)
 ignorehitpause = 1
 
 [State 1646180002]
 type = SelfState
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = !(!(Const(Size.Z.Width)&32768))
 value = 4
 persistent = 256
@@ -1641,14 +1646,14 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = var(-831) := 1
 ignorehitpause = 1
 
 [State 1646180003];‘h¶(Šu—£‹Zp—˜—p)
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = !alive
 trigger1 = var(-7) := 1
@@ -1695,7 +1700,7 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = NotHitBy
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 value = SCA
 time = 10 + (var(6):=10) * 0 + (var(20):=(var(20)|2048)) * 0
 ignorehitpause = 1
@@ -1741,7 +1746,7 @@ ignorehitpause = 1
 
 [State 1646180003];‰‰o—p
 type = StopSnd
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = sysvar(2) < 20
 trigger1 = var(23) := (var(23)|64) || 1
 channel = -1
@@ -1809,7 +1814,7 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = PlaySnd
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = sysvar(2) = 20
 value = 14,9
 freqmul = 0.98
@@ -1817,7 +1822,7 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = Explod
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = sysvar(2) = 56
 anim = 121299
@@ -1832,7 +1837,7 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = Explod
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = sysvar(2) = [54,63]
 trigger1 = sysvar(2)%3 = 0
@@ -1848,7 +1853,7 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = PlaySnd
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = sysvar(2) = [56,96]
 trigger1 = sysvar(2)%8 = 0
@@ -1860,7 +1865,7 @@ ignorehitpause = 1
 [State 1646180003];ƒJƒ‰[•ÏX
 type = Null
 trigger1 = sysvar(2) = 56
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = var(59) := var(348)
 trigger1 = var(59) := var(var(59)+8)
@@ -2023,7 +2028,7 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = Projectile
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 attr = ,N
 guard.dist = 0
 projID = 1646180002
@@ -2051,7 +2056,7 @@ ignorehitpause = 1
 
 [State 1646180003];‰‰o—p‘¼ƒvƒŒƒCƒ„[s“®‘j~
 type = SelfState
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 value = 1646180004
 persistent = 256
@@ -2059,7 +2064,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger1 = !(Const(Size.Z.Width)&32768)
 value = 5150
 persistent = 256
@@ -2067,21 +2072,21 @@ ignorehitpause = 1
 
 [State 1646180003]
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(2) = anim
 ignorehitpause = 1
 
 [State 1646180003]
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = !(!(Const(Size.Z.Width)&32768))
 sysfvar(3) = animelemno(0)
 ignorehitpause = 1
 
 [State 1646180003]
 type = SelfState
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = !(!(Const(Size.Z.Width)&32768))
 value = 4
 persistent = 256
@@ -2695,7 +2700,7 @@ ignorehitpause = 1
 
 [State 1646181000]
 type = NotHitBy
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 value = SCA
 time = 10 + (var(6):=10) * 0 + (var(20):=(var(20)|2048)) * 0
 ignorehitpause = 1
@@ -2817,7 +2822,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 value = 5150
 persistent = 256
 ignorehitpause = 1

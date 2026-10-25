@@ -550,39 +550,6 @@ type = TagOut
 trigger1 = name != "繝溘す繝｣繧ｰ繧ｸ縺輔∪"
 ignorehitpause = 1
 
-[State -3]
-type = Explod
-trigger1 = ishelper(571863712)
-trigger2 = ishelper(571863713)
-anim = 101111111
-ID = 571860214
-bindtime = -1
-removetime = 0
-supermove = 1
-supermovetime = 2147483647
-pausemovetime = 2147483647
-ignorehitpause = 1
-
-[State -3]
-type = Explod
-trigger1 = ishelper(571863712)
-trigger2 = ishelper(571863713)
-anim = 101111111
-ID = 571860214
-bindtime = -1
-removetime = 1
-supermove = 1
-supermovetime = 2147483647
-pausemovetime = 2147483647
-ignorehitpause = 1
-
-[State -3];GameTime変数
-type = Null
-trigger1 = ishelper(510908551) || ishelper(510908552)
-trigger1 = 1 || var(1) := floor(1000*sin(gametime*pi/180)+0.5)
-trigger1 = 1 || var(2) := floor(1000*cos(gametime*pi/180)+0.5)
-ignorehitpause = 1
-
 [State -3];処理切り上げ
 type = TagOut
 trigger1 = ishelper
@@ -676,14 +643,13 @@ ignorehitpause = 1
 
 [State -3];1~4P,7~9P,10P接触感知
 type = Null
-trigger1 = (var(59)!=[5,6]) && var(59) != 12
 trigger1 = movetype = H && !(var(20)&128)
 trigger1 = var(20) := (var(20)|2097152)
 ignorehitpause = 1
 
 [State -3];1~4P,7~9P喰らい再現
 type = Null
-trigger1 = (var(59)=[1,4]) || (var(59)=[7,9])
+trigger1 = var(59) != 5 && var(59) < 10
 trigger1 = !(!(var(20)&128))
 trigger1 = !(!(var(20)&4))
 trigger1 = var(20) := (var(20)&(128^-1)) && 0
@@ -691,7 +657,7 @@ ignorehitpause = 1
 
 [State -3];1~4P喰らい再現
 type = Null
-trigger1 = (var(59)=[1,4])
+trigger1 = var(59) < 5
 trigger1 = !(!(var(20)&2097152))
 trigger1 = (stateno=5000&&statetype=S)||(stateno=5010&&statetype=C)||(stateno=5070&&statetype=S)||(stateno=5020&&statetype=A)
 trigger1 = var(20) := (var(20)&(4^-1)) || 1
@@ -700,7 +666,6 @@ ignorehitpause = 1
 
 [State -3];AI用一部内部処理ステート移動無効化
 type = SelfState
-trigger1 = var(59) != 6 && var(59) != 12
 trigger1 = sysvar(3) != stateno
 trigger1 = stateno = 10 || stateno = 40
 value = sysvar(3)
@@ -726,7 +691,7 @@ ignorehitpause = 1
 
 [State -1];処理スキップ（特殊）
 type = SelfState
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = gametime = 0
 trigger1 = roundstate = 0
 trigger1 = numhelper + enemy,numhelper + enemy(numenemy>1),numhelper = 0
@@ -737,7 +702,7 @@ ignorehitpause = 1
 
 [State -1];処理スキップ
 type = SelfState
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = !(Const(Size.Z.Width)&32)
 trigger1 = Const(Size.Z.Width) != 0
 trigger2 = !(!(Const(Size.Z.Width)&32768))
@@ -766,14 +731,14 @@ ignorehitpause = 1
 
 [State -1];無敵時間減少
 type = VarAdd
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = var(6) > 0
 var(6) = -1
 ignorehitpause = 1
 
 [State -1];無敵時間減少
 type = VarAdd
-triggerall = var(58) = [7,11]
+triggerall = var(58) > 6
 triggerall = var(7) > 0
 trigger1 = gametime%4 = 0
 trigger2 = var(58) != [10,11]
@@ -782,7 +747,7 @@ ignorehitpause = 1
 
 [State -1];無敵時間上限設定
 type = Null
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = var(7) < 0
 trigger1  =var(7) := 0 || 1
 trigger2 = var(58) = [7,9]
@@ -799,7 +764,7 @@ ignorehitpause = 1
 
 [State -1];ガード後コントロール不可（１Ｐ～４Ｐ）
 type = Null
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = sysvar(3) = 150 || sysvar(3) = 152 || sysvar(3) = 154
 trigger1 = !time
 trigger1 = var(20) := (var(20)&(4^-1)) || 1
@@ -808,7 +773,7 @@ ignorehitpause = 1
 [State -1];死亡後操作不能
 type = VarSet
 triggerall = roundstate
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = var(6) <= 0
 trigger2 = var(58) > 5
 trigger2 = sysfvar(4) = 0
@@ -833,7 +798,8 @@ triggerall = !(var(19)&512)
 triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(59)&524288)
 trigger1 = var(58) < 5 && (command="s")
-trigger2 = var(58) > 5 && (helper(157900000),command="s")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "s"
 var(30) = ifelse(((var(30)&28672)/4096)<4,var(30)+4096,(var(30)&(28672^-1)))
 ignorehitpause = 1
 
@@ -851,7 +817,8 @@ triggerall = (power>=3000||power=powermax) && fvar(14) >= 600 + ((var(30)&402653
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_06_S")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_06_S")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_06_S"
 var(8) = -351706
 ignorehitpause = 1
 
@@ -869,7 +836,8 @@ triggerall = (power>=2000||power=powermax) && fvar(14) >= 600 + ((var(30)&100663
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_08_S")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_08_S")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_08_S"
 var(8) = -351708
 ignorehitpause = 1
 
@@ -884,7 +852,8 @@ triggerall = (power>=2000||power=powermax) && fvar(14) >= 600 + ((var(30)&251658
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_04_S")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_04_S")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_04_S"
 var(8) = -351704
 ignorehitpause = 1
 
@@ -902,7 +871,8 @@ triggerall = (power>=1000||power=powermax) && fvar(14) >= 600 + ((var(30)&629145
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_05_S")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_05_S")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_05_S"
 var(8) = -351705
 ignorehitpause = 1
 
@@ -917,7 +887,8 @@ triggerall = (power>=1000||power=powermax) && fvar(14) >= 600 + ((var(30)&157286
 triggerall = statetype = S || statetype = C || statetype = A
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_02_S")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_02_S")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_02_S"
 var(8) = -351702
 ignorehitpause = 1
 
@@ -935,7 +906,8 @@ triggerall = (power>=3000||power=powermax) && fvar(14) >= 1000 && fvar(39) >= 4
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_10")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_10")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_10"
 var(8) = 351710
 ignorehitpause = 1
 
@@ -949,7 +921,8 @@ triggerall = power >= 3000 || power = powermax
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_06")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_06")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_06"
 var(8) = 351706
 ignorehitpause = 1
 
@@ -966,7 +939,8 @@ triggerall = power >= 2000 || power = powermax
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_08")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_08")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_08"
 var(8) = 351708
 ignorehitpause = 1
 
@@ -980,7 +954,8 @@ triggerall = power >= 2000 || power = powermax
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_04")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_04")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_04"
 var(8) = 351704
 ignorehitpause = 1
 
@@ -997,7 +972,8 @@ triggerall = power >= 1000 || power = powermax
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_05")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_05")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_05"
 var(8) = 351705
 ignorehitpause = 1
 
@@ -1011,7 +987,8 @@ triggerall = power >= 1000 || power = powermax
 triggerall = statetype = S || statetype = C || statetype = A
 triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 trigger1 = var(58) < 5 && (command="Spell_02")
-trigger2 = var(58) > 5 && (helper(157900000),command="Spell_02")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Spell_02"
 var(8) = 351702
 ignorehitpause = 1
 
@@ -1028,7 +1005,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_04_C")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_04_C")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_04_C"
 var(8) = 1310
 ignorehitpause = 1
 
@@ -1042,7 +1020,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_04_B")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_04_B")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_04_B"
 var(8) = 1300
 ignorehitpause = 1
 
@@ -1056,7 +1035,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_03_C")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_03_C")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_03_C"
 var(8) = 1210
 ignorehitpause = 1
 
@@ -1070,7 +1050,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_03_B")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_03_B")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_03_B"
 var(8) = 1200
 ignorehitpause = 1
 
@@ -1084,7 +1065,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_01_C")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_01_C")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_01_C"
 var(8) = 1010
 ignorehitpause = 1
 
@@ -1098,7 +1080,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_01_B")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_01_B")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_01_B"
 var(8) = 1000
 ignorehitpause = 1
 
@@ -1112,7 +1095,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_02_C")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_02_C")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_02_C"
 var(8) = 1110
 ignorehitpause = 1
 
@@ -1126,7 +1110,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&128))
 trigger1 = var(58) < 5 && (command="Skill_02_B")
-trigger2 = var(58) > 5 && (helper(157900000),command="Skill_02_B")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "Skill_02_B"
 var(8) = 1100
 ignorehitpause = 1
 
@@ -1142,7 +1127,8 @@ triggerall = ifelse(var(58)<5,var(6)>0,sysfvar(4)!=0)
 triggerall = fvar(14) >= 400
 triggerall = (!(!(var(59)&512))&&(var(58)>5||movecontact||movereversed)) || (var(58)>5&&!(!(var(20)&4))) || (var(58)<5&&(sysvar(3)=[120,159]))
 trigger1 = var(58) < 5 && (command="reigeki")
-trigger2 = var(58) > 5 && (helper(157900000),command="reigeki")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "reigeki"
 var(8) = 900 + ((var(20):=(var(20)&(128^-1)))&&0)
 ignorehitpause = 1
 
@@ -1159,7 +1145,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = A
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="c") && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="c") && (helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "c"
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 720 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1173,7 +1161,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = A
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="c") && (command="holdfwd")
-trigger2 = var(58) > 5 && (helper(157900000),command="c") && (helper(157900000),command="holdfwd")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "c"
+trigger2 = helper(157900000),command = "holdfwd"
 var(8) = 710 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1187,7 +1177,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = A
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="c")
-trigger2 = var(58) > 5 && (helper(157900000),command="c")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "c"
 var(8) = 700 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1201,7 +1192,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = A
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="b") && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="b") && (helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "b"
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 620 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1215,7 +1208,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = A
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="b") && (command="holdfwd")
-trigger2 = var(58) > 5 && (helper(157900000),command="b") && (helper(157900000),command="holdfwd")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "b"
+trigger2 = helper(157900000),command = "holdfwd"
 var(8) = 610 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1229,7 +1224,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = A
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="b")
-trigger2 = var(58) > 5 && (helper(157900000),command="b")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "b"
 var(8) = 600 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1242,7 +1238,9 @@ triggerall = !(var(20)&128)
 triggerall = statetype = A
 triggerall = !(!(var(20)&4)) || ((sysvar(3)=[500,510])&&(movecontact||movereversed))
 trigger1 = var(58) < 5 && (command="a") && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="a") && (command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 520
 ignorehitpause = 1
 
@@ -1255,7 +1253,9 @@ triggerall = !(var(20)&128)
 triggerall = statetype = A
 triggerall = !(!(var(20)&4)) || (sysvar(3)=500&&(movecontact||movereversed))
 trigger1 = var(58) < 5 && (command="a") && (command="holdfwd")
-trigger2 = var(58) > 5 && (helper(157900000),command="a") && (command="holdfwd")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
+trigger2 = helper(157900000),command = "holdfwd"
 var(8) = 510
 ignorehitpause = 1
 
@@ -1268,7 +1268,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = A
 triggerall = !(!(var(20)&4)) || (sysvar(3)=500&&fvar(38)<6&&!(!(var(59)&2048)))
 trigger1 = var(58) < 5 && (command="a")
-trigger2 = var(58) > 5 && (helper(157900000),command="a")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
 var(8) = 500
 ignorehitpause = 1
 
@@ -1282,7 +1283,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="c") && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="c") && (helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "c"
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 420
 ignorehitpause = 1
 
@@ -1296,7 +1299,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || sysvar(3) = 100
 trigger1 = var(58) < 5 && (command="c") && (command="holdfwd")
-trigger2 = var(58) > 5 && (helper(157900000),command="c") && (helper(157900000),command="holdfwd")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "c"
+trigger2 = helper(157900000),command = "holdfwd"
 var(8) = 410
 ignorehitpause = 1
 
@@ -1310,7 +1315,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="c")
-trigger2 = var(58) > 5 && (helper(157900000),command="c")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "c"
 var(8) = 400
 ignorehitpause = 1
 
@@ -1324,7 +1330,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="b") && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="b") && (helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "b"
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 320
 ignorehitpause = 1
 
@@ -1338,7 +1346,9 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || sysvar(3) = 100
 trigger1 = var(58) < 5 && (command="b") && (command="holdfwd")
-trigger2 = var(58) > 5 && (helper(157900000),command="b") && (helper(157900000),command="holdfwd")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "b"
+trigger2 = helper(157900000),command = "holdfwd"
 var(8) = 310
 ignorehitpause = 1
 
@@ -1351,7 +1361,10 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || (sysvar(3)=230&&(movecontact||movereversed))
 trigger1 = var(58) < 5 && (command="a") && (command="holdfwd") && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="a") && (helper(157900000),command="holdfwd") && (helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
+trigger2 = helper(157900000),command = "holdfwd"
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 240 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1364,7 +1377,9 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4))||(sysvar(3)=230&&!(!(var(59)&2048)))
 trigger1 = var(58) < 5 && (command="a") && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="a") && (helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 230
 ignorehitpause = 1
 
@@ -1378,7 +1393,8 @@ triggerall = fvar(14) >= 200
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || !(!(var(59)&1024))
 trigger1 = var(58) < 5 && (command="b")
-trigger2 = var(58) > 5 && (helper(157900000),command="b")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "b"
 var(8) = 300 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1391,7 +1407,9 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || sysvar(3) = 100
 trigger1 = var(58) < 5 && (command="a") && (command="holdfwd")
-trigger2 = var(58) > 5 && (helper(157900000),command="a") && (helper(157900000),command="holdfwd")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
+trigger2 = helper(157900000),command = "holdfwd"
 var(8) = 220 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1404,7 +1422,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S
 triggerall = !(!(var(20)&4)) || ((sysvar(3)=[200,201])&&(movecontact||movereversed))
 trigger1 = var(58) < 5 && ((command="a")&&((fvar(4)>=30&&(var(8)!=[201,203]))||(command="holdback")))
-trigger2 = var(58) > 5 && ((helper(157900000),command="a")&&((fvar(4)>=30&&(var(8)!=[201,203]))||(helper(157900000),command="holdback")))
+trigger2 = var(58) > 5
+trigger2 = ((helper(157900000),command="a")&&((fvar(4)>=30&&(var(8)!=[201,203]))||(helper(157900000),command="holdback")))
 var(8) = 210 + ((var(20):=(var(20)&(134217728^-1)))&&0)
 ignorehitpause = 1
 
@@ -1416,7 +1435,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = sysvar(3) = 202 && (movecontact||movereversed)
 trigger1 = var(58) < 5 && (command="a")
-trigger2 = var(58) > 5 && (helper(157900000),command="a")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
 var(8) = 203
 ignorehitpause = 1
 
@@ -1428,7 +1448,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = sysvar(3) = 201 && (movecontact||movereversed)
 trigger1 = var(58) < 5 && (command="a")
-trigger2 = var(58) > 5 && (helper(157900000),command="a")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
 var(8) = 202
 ignorehitpause = 1
 
@@ -1440,7 +1461,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = sysvar(3) = 200 && (movecontact||movereversed)
 trigger1 = var(58) < 5 && (command="a")
-trigger2 = var(58) > 5 && (helper(157900000),command="a")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
 var(8) = 201
 ignorehitpause = 1
 
@@ -1453,7 +1475,8 @@ triggerall = !(var(20)&128)
 triggerall = fvar(4) < 30
 triggerall = (!(!(var(20)&4))&&statetype=S) || (sysvar(3)=230&&(movecontact||movereversed))
 trigger1 = var(58) < 5 && (command="a")
-trigger2 = var(58) > 5 && (helper(157900000),command="a")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "a"
 var(8) = 200
 ignorehitpause = 1
 
@@ -1466,7 +1489,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&32))
 trigger1 = var(58) < 5 && ((command="DU")||((command="holdz")&&(command="holdup")))
-trigger2 = var(58) > 5 && ((helper(157900000),command="DU")||((helper(157900000),command="holdz")&&(helper(157900000),command="holdup")))
+trigger2 = var(58) > 5
+trigger2 = (helper(157900000),command="DU") || ((helper(157900000),command="holdz")&&(helper(157900000),command="holdup"))
 var(8) = 40 + ((var(20):=(var(20)|2))&&0) + ((var(20):=(var(20)&(1^-1)))&&0)
 ignorehitpause = 1
 
@@ -1480,7 +1504,8 @@ triggerall = statetype = A && !(sysvar(3)=50&&fvar(38)=1)
 triggerall = !(var(20)&4096)
 triggerall = !(!(var(20)&4)) || !(!(var(59)&64))
 trigger1 = var(58) < 5 && (((command="FF")^^(command="BB"))||((command="holdz")&&((command="holdfwd")^^(command="holdback"))))
-trigger2 = var(58) > 5 && (((helper(157900000),command="FF")^^(helper(157900000),command="BB"))||((helper(157900000),command="holdz")&&((helper(157900000),command="holdfwd")^^(helper(157900000),command="holdback"))))
+trigger2 = var(58) > 5
+trigger2 = ((helper(157900000),command="FF")^^(helper(157900000),command="BB")) || ((helper(157900000),command="holdz")&&((helper(157900000),command="holdfwd")^^(helper(157900000),command="holdback")))
 var(8) = 110 + ((var(20):=(var(20)|4096))&&0)
 ignorehitpause = 1
 
@@ -1493,7 +1518,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&64))
 trigger1 = var(58) < 5 && ((command="BB")||((command="holdz")&&(command="holdback")))
-trigger2 = var(58) > 5 && ((helper(157900000),command="BB")||((helper(157900000),command="holdz")&&(helper(157900000),command="holdback")))
+trigger2 = var(58) > 5
+trigger2 = (helper(157900000),command="BB") || ((helper(157900000),command="holdz")&&(helper(157900000),command="holdback"))
 var(8) = 105
 ignorehitpause = 1
 
@@ -1506,7 +1532,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&64))
 trigger1 = var(58) < 5 && ((command="FF")||((command="holdz")&&(command="holdfwd")))
-trigger2 = var(58) > 5 && ((helper(157900000),command="FF")||((helper(157900000),command="holdz")&&(helper(157900000),command="holdfwd")))
+trigger2 = var(58) > 5
+trigger2 = (helper(157900000),command="FF") || ((helper(157900000),command="holdz")&&(helper(157900000),command="holdfwd"))
 var(8) = 100 + ((var(20):=(var(20)|4))&&0)
 ignorehitpause = 1
 
@@ -1520,7 +1547,8 @@ triggerall = statetype = A && !(!(var(20)&1))
 triggerall = var(58) > 5 || stateno != [120,132]
 triggerall = ((sysvar(3)=50)&&!(!(var(20)&4))) || !(!(var(59)&16))
 trigger1 = var(58) < 5 && (command="holdup")
-trigger2 = var(58) > 5 && (helper(157900000),command="holdup")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "holdup"
 var(8) = 45 + ((var(20):=(var(20)|8))&&0) + ((var(20):=(var(20)&(1^-1)))&&0)
 ignorehitpause = 1
 
@@ -1534,7 +1562,8 @@ triggerall = statetype = S
 triggerall = var(58) > 5 || stateno != [120,132]
 triggerall = !(!(var(20)&4)) || !(!(var(59)&16))
 trigger1 = var(58) < 5 && (command="holdup")
-trigger2 = var(58) > 5 && (helper(157900000),command="holdup")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "holdup"
 var(8) = 40 + ((var(20):=(var(20)&(3^-1)))&&0)
 ignorehitpause = 1
 
@@ -1548,7 +1577,8 @@ triggerall = statetype = S
 triggerall = var(58) > 5 || stateno != [120,132]
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && (command="holddown")
-trigger2 = var(58) > 5 && (helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = helper(157900000),command = "holddown"
 var(8) = 10
 ignorehitpause = 1
 
@@ -1559,10 +1589,11 @@ triggerall = !(var(19)&512)
 triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = S && !(var(59)&2)
-triggerall = var(58) > 5 || stateno != [120,132]
+triggerall = var(58) > 5 || ((stateno!=[120,132])&&(stateno!=[150,155]))
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && ((command="holdfwd")^^(command="holdback"))
-trigger2 = var(58) > 5 && ((helper(157900000),command="holdfwd")^^(helper(157900000),command="holdback"))
+trigger2 = var(58) > 5
+trigger2 = (helper(157900000),command="holdfwd") ^^ (helper(157900000),command="holdback")
 var(8) = 20
 ignorehitpause = 1
 
@@ -1586,7 +1617,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = C
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && !(command="holddown")
-trigger2 = var(58) > 5 && !(helper(157900000),command="holddown")
+trigger2 = var(58) > 5
+trigger2 = !(helper(157900000),command="holddown")
 var(8) = 12
 ignorehitpause = 1
 
@@ -1599,7 +1631,8 @@ triggerall = !(var(20)&128)
 triggerall = sysvar(3) = 20
 triggerall = !(!(var(20)&4))
 trigger1 = var(58) < 5 && !((command="holdfwd")^^(command="holdback"))
-trigger2 = var(58) > 5 && !((helper(157900000),command="holdfwd")^^(helper(157900000),command="holdback"))
+trigger2 = var(58) > 5
+trigger2 = !((helper(157900000),command="holdfwd")^^(helper(157900000),command="holdback"))
 var(8) = 0
 ignorehitpause = 1
 
@@ -1616,14 +1649,14 @@ triggerall = var(30) := (var(30)&(1024^-1)) || 1
 triggerall = !(!(var(59)&512)) && (sysvar(3)=[351700,351709])
 trigger1 = ((var(19)&224)/32) < 3
 trigger1 = var(30) := (var(30)|1024) || 1
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = var(7) >= 100
 trigger2 = var(30) := (var(30)|1024) || 1
 trigger3 = sysvar(3) = 351704
 trigger3 = anim = 3040 && sysvar(2) < 17
 trigger3 = var(30) := (var(30)|1024) || 1
 trigger4 = sysvar(3) = 351704
-trigger4 = var(58) = [7,11]
+trigger4 = var(58) > 6
 trigger4 = anim = 3042
 trigger4 = var(30) := (var(30)|1024) || 1
 trigger5 = sysvar(3) = 351706
@@ -1651,7 +1684,6 @@ ignorehitpause = 1
 
 [State -1]
 type = Null
-triggerall = var(58) != 6 && var(58) != 12
 trigger1 = var(32) = 0
 trigger1 = var(30) := (var(30)&(512^-1)) || 1
 ignorehitpause = 1
@@ -1659,7 +1691,7 @@ ignorehitpause = 1
 [State -1,モード初期化]
 type = Null
 trigger1 = roundstate < 2
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = var(30) := (var(30)&(1610612736^-1)) || 1
 trigger1 = var(33) := (var(33)&2147483647) || 1
 trigger1 = var(30) := (var(30)|(536870912*(((var(19)&224)/32)!=7))) || 1
@@ -1668,14 +1700,14 @@ ignorehitpause = 1
 [State -1,モード変更]
 type = Null
 triggerall = !(!(var(19)&512))
-triggerall = var(58) = [7,11]
+triggerall = var(58) > 6
 triggerall = roundstate = 2
 triggerall = ((var(19)&224)/32) != 7
 ;通常→回避
 ;超必→回避
 trigger1 = ((var(19)&224)/32) = 6 && !(var(33)&-2147483648)
 trigger1 = ((var(30)&1610612736)/536870912) != 0
-trigger1 = (var(58)=[10,11]) || !(!(var(19)&16))
+trigger1 = var(58) > 9 || !(!(var(19)&16))
 trigger1 = life <= 0.2 * lifemax
 trigger1 = random < 2
 trigger1 = var(30) := (var(30)&(1610612736^-1)) || 1
@@ -2023,7 +2055,7 @@ trigger3 = enemynear(!enemynear,alive&&numenemy>1),stateno = [5200,5299]
 trigger4 = ((var(19)&224)/32) < 5
 trigger4 = random < (5-((var(19)&224)/32)) * 1
 trigger5 = roundstate != 2
-trigger6 = var(58) = [1,4]
+trigger6 = var(58) < 5
 trigger6 = movereversed
 trigger7 = !(!(var(32)&8)) && sysvar(3) != [200,203]
 trigger8 = var(58) > 6 && !(var(32)&4096) && sysvar(3) = 900
@@ -2044,13 +2076,13 @@ triggerall = !(var(33)&1073741824)
 trigger1 = !(!(var(33)&536870912)) || !(!(var(30)&262144)) || (sysfvar(1)>6000&&!(!(var(30)&-2147483648))&&life<lifemax)
 trigger2 = roundno > 1 && (var(55)%100) > ((var(55)/100)%100);勝ち越し
 trigger2 = life<(0.1*lifemax)||lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax)-life>0.6*lifemax||(lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax)>life&&sysfvar(1)>8000)
-trigger2 = numexplod(351780) + numprojID(351780) || (random<(2*(var(58)!=[10,11])+3*(!!numexplod(351780)+!!numprojID(351780))+1+2*((var(55)/10000)%100))&&sysfvar(1)>7777)
+trigger2 = numexplod(351780) + numprojID(351780) || (random<(2*(var(58)<10)+3*(!!numexplod(351780)+!!numprojID(351780))+1+2*((var(55)/10000)%100))&&sysfvar(1)>7777)
 trigger3 = roundno > 1 && (var(55)%100) <= ((var(55)/100)%100);負け越し
 trigger3 = life<(0.1*lifemax)||lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax)-life>0.5*lifemax||(lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax)>life&&sysfvar(1)>6000)
-trigger3 = numexplod(351780) + numprojID(351780) || (random<(3*(var(58)!=[10,11])+3*(!!numexplod(351780)+!!numprojID(351780))+((var(55)/10000)%100)+floor(sysfvar(1)/3000))&&sysfvar(1)>1800)
+trigger3 = numexplod(351780) + numprojID(351780) || (random<(3*(var(58)<10)+3*(!!numexplod(351780)+!!numprojID(351780))+((var(55)/10000)%100)+floor(sysfvar(1)/3000))&&sysfvar(1)>1800)
 trigger3 = ((var(19)&7168)/1024) < 6 || random < (lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax)-life) / lifemax * 10 * floor(sysfvar(1)/3000)
 trigger4 = roundno = 1
-trigger4 = !(var(58)=[10,11]) || numexplod(351780)
+trigger4 = !(var(58)>9) || numexplod(351780)
 trigger4 = sysfvar(1) > 6000
 trigger4 = life <= (0.2*lifemax) && lifemax*(enemy(!enemy,alive&&numenemy>1),life*1.0/enemy(!enemy,alive&&numenemy>1),lifemax) >= 0.9 * lifemax
 trigger5 = sysfvar(1) > 11800 - 4000 * ((var(55)%100)<((var(55)/100)%100))
@@ -2081,7 +2113,7 @@ triggerall = !(!(var(20)&4)) || !(!(var(59)&256))
 triggerall = numexplod(351781) = 1
 trigger1 = enemy,hitpausetime < 30
 trigger2 = sysfvar(1) > 36000
-trigger3 = var(58) = [10,11]
+trigger3 = var(58) > 9
 trigger3 = var(15)
 trigger3 = ((var(19)&7168)/1024) = 2 || ((var(19)&7168)/1024) >= 4
 var(8) = 351710
@@ -2163,7 +2195,7 @@ ignorehitpause = 1
 type = VarSet
 triggerall = var(8) = -1
 triggerall = !(!(var(19)&512))
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = sysfvar(4) != 0
 triggerall = fvar(14) >= 400
@@ -2228,8 +2260,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&64))
 triggerall = sysvar(3) != 100 && sysvar(3) != 105
-triggerall = (var(58)=[7,11]) || random < 80 * ((var(19)&224)/32)
-triggerall = !(var(58)=[7,11]) || random < 250 + (abs(var(6))+abs(var(7))<=0) * 60 * ((var(19)&224)/32) + ((enemynear(!enemynear,alive&&numenemy>1),movetype=A)||(enemy,numproj+enemy(numenemy>1),numproj>0)) * 60 * ((var(19)&224)/32)
+triggerall = (var(58)>6) || random < 80 * ((var(19)&224)/32)
+triggerall = !(var(58)>6) || random < 250 + (abs(var(6))+abs(var(7))<=0) * 60 * ((var(19)&224)/32) + ((enemynear(!enemynear,alive&&numenemy>1),movetype=A)||(enemy,numproj+enemy(numenemy>1),numproj>0)) * 60 * ((var(19)&224)/32)
 triggerall = enemynear(!enemynear,alive&&numenemy>1),vel x < 3
 triggerall = enemynear(!enemynear,alive&&numenemy>1),movetype = A || (((sysvar(3)=[120,155])||(var(9)=[120,155]))&&enemynear(!enemynear,alive&&numenemy>1),movetype=I)
 triggerall = enemynear(!enemynear,alive&&numenemy>1),hitdefattr=SCA,AT || (enemynear(!enemynear,alive&&numenemy>1),stateno=[200,699])
@@ -2333,8 +2365,8 @@ triggerall = (var(58)>5) || (!hitpausetime&&!(!(var(59)&1)))
 triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4)) || !(!(var(59)&32))
-triggerall = (var(58)=[7,11]) || ((((var(19)&224)/32)<6||fvar(11)<=50)&&random<50)
-triggerall = !(var(58)=[7,11]) || random < 10 * (1+(fvar(11)<=50)) * ((var(19)&224)/32)
+triggerall = (var(58)>6) || ((((var(19)&224)/32)<6||fvar(11)<=50)&&random<50)
+triggerall = !(var(58)>6) || random < 10 * (1+(fvar(11)<=50)) * ((var(19)&224)/32)
 triggerall = fvar(5) >= -80 + 2 * enemynear(!enemynear,alive&&numenemy>1),vel x
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),movetype = A
 trigger2 = (sysvar(3)=[150,155]) || (var(9)=[120,155])
@@ -2352,8 +2384,8 @@ triggerall = !(var(20)&128)
 triggerall = statetype = S || statetype = C
 triggerall = sysvar(3) != 100 && sysvar(3) != 105
 triggerall = !(!(var(20)&4)) || !(!(var(59)&64))
-triggerall = (var(58)=[7,11]) || ((((var(19)&224)/32)<6||fvar(11)<=50)&&random<50)
-triggerall = !(var(58)=[7,11]) || random < 50 * (1+(fvar(11)<=50)) * ((var(19)&224)/32)
+triggerall = (var(58)>6) || ((((var(19)&224)/32)<6||fvar(11)<=50)&&random<50)
+triggerall = !(var(58)>6) || random < 50 * (1+(fvar(11)<=50)) * ((var(19)&224)/32)
 triggerall = fvar(5) < -80 + 2 * enemynear(!enemynear,alive&&numenemy>1),vel x
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),movetype = A
 trigger2 = (sysvar(3)=[150,155]) || (var(9)=[120,155])
@@ -2463,7 +2495,8 @@ triggerall = enemynear(!enemynear,alive&&numenemy>1),statetype != L
 triggerall = fvar(4) = [0,30+2*enemynear(!enemynear,alive&&numenemy>1),vel x]
 triggerall = fvar(5) > -50
 triggerall = ((var(19)&224)/32) > 1
-triggerall = random < abs(((var(19)&224)/32)*100-(((var(19)&224)/32)/4)*200-abs(((var(19)&224)/32)-4)*200+50) * ifelse(enemynear(!enemynear,alive&&numenemy>1),vel x<=0,1,2/enemynear(!enemynear,alive&&numenemy>1),vel x)
+triggerall = fvar(39) := enemynear(!enemynear,alive&&numenemy>1),vel x || 1
+triggerall = random < abs(((var(19)&224)/32)*100-(((var(19)&224)/32)/4)*200-abs(((var(19)&224)/32)-4)*200+50) * ifelse(fvar(39)<=0,1,2/(fvar(39)+!fvar(39)))
 triggerall = !(enemynear(!enemynear,alive&&numenemy>1),hitdefattr=SCA,AT)
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),movetype = A
 trigger2 = (sysvar(3)=[150,155]) || (var(9)=[120,155])
@@ -2482,14 +2515,14 @@ triggerall = !(var(20)&128)
 triggerall = statetype = A && !(sysvar(3)=50&&fvar(38)=1)
 triggerall = !(var(20)&4096)
 triggerall = !(!(var(20)&4)) || !(!(var(59)&64))
-triggerall = (var(58)=[7,11]) || random < 80 + floor(100+pos y) * 3 + (enemynear(!enemynear,alive&&numenemy>1),movetype=A) * 40 * ((var(19)&224)/32)
-triggerall = !(var(58)=[7,11]) || random < 130 * (2*((var(19)&224)/32)-1) || ((var(19)&224)/32) > 5
-triggerall = (var(58)=[7,11]) || inguarddist || (abs(fvar(4))<60&&enemynear(!enemynear,alive&&numenemy>1),movetype=A) || (p2movetype=A&&abs(p2dist x)<75)
-triggerall = !(var(58)=[7,11]) || (var(9)=900&&((var(19)&224)/32)>4) || (sysvar(3)=50&&vel y>=-1&&((var(19)&224)/32)>5)
+triggerall = (var(58)>6) || random < 80 + floor(100+pos y) * 3 + (enemynear(!enemynear,alive&&numenemy>1),movetype=A) * 40 * ((var(19)&224)/32)
+triggerall = !(var(58)>6) || random < 130 * (2*((var(19)&224)/32)-1) || ((var(19)&224)/32) > 5
+triggerall = (var(58)>6) || inguarddist || (abs(fvar(4))<60&&enemynear(!enemynear,alive&&numenemy>1),movetype=A) || (p2movetype=A&&abs(p2dist x)<75)
+triggerall = !(var(58)>6) || (var(9)=900&&((var(19)&224)/32)>4) || (sysvar(3)=50&&vel y>=-1&&((var(19)&224)/32)>5)
 trigger1 = (fvar(4)=[0,50]) && (fvar(11)>50||(fvar(11)<=50&&fvar(5)>ifelse(-const(size.head.pos.y)>const(size.height),-const(size.head.pos.y),const(size.height))))
 trigger2 = fvar(4) > 130
 trigger3 = (fvar(6)=[-120,0]) && (fvar(10)>70||(fvar(10)<=70&&fvar(5)>ifelse(-const(size.head.pos.y)>const(size.height),-const(size.head.pos.y),const(size.height))))
-trigger4 = (var(58)=[7,11]) && !var(6) && !var(7)
+trigger4 = (var(58)>6) && !var(6) && !var(7)
 trigger4 = !((var(30)&1610612736)/536870912) || random < 166 * ((var(19)&224)/32)
 var(8) = 110 + ((var(20):=(var(20)|4096))&&0)
 ignorehitpause = 1
@@ -2517,7 +2550,7 @@ type = VarSet
 triggerall = var(8) = -1
 triggerall = !(!(var(19)&512))
 triggerall = roundstate = 2
-triggerall = var(58) = [1,4]
+triggerall = var(58) < 5
 triggerall = !hitpausetime && !(!(var(59)&1))
 triggerall = !(var(20)&128)
 triggerall = !(!(var(20)&4))
@@ -4209,7 +4242,7 @@ triggerall = statetype = S || statetype = C
 triggerall = !(!(var(20)&4))||(sysvar(3)=230&&!(!(var(59)&2048)))
 trigger1 = enemynear(!enemynear,alive&&numenemy>1),pos y = 0
 trigger1 = fvar(4) = [0,45+2*enemynear(!enemynear,alive&&numenemy>1),vel x]
-trigger1 = random < 80 * ((var(19)&224)/32) * ifelse(enemynear(!enemynear,alive&&numenemy>1),vel x<=0,1,2/enemynear(!enemynear,alive&&numenemy>1),vel x)
+trigger1 = random < 80 * ((var(19)&224)/32) * ifelse(enemynear(!enemynear,alive&&numenemy>1),vel x<=0,1,2/(enemynear(!enemynear,alive&&numenemy>1),vel x+!enemynear(!enemynear,alive&&numenemy>1),vel x))
 var(8) = 230
 ignorehitpause = 1
 
@@ -4553,14 +4586,14 @@ ignorehitpause = 1
 
 [State -1]
 type = MoveHitReset
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = var(8) >= 0
 trigger1 = sysvar(3) != var(8) || !(!(var(59)&2048)) || sysvar(3) = 900
 ignorehitpause = 1
 
 [State -1]
 type = VarSet
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = var(8) < -1
 trigger1 = var(8) = -351702
 trigger1 = ((var(30)&1572864)/524288) = 3
@@ -4577,7 +4610,7 @@ ignorehitpause = 1
 
 [State -1];コマンド移行
 type = SelfState
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5 && var(58) < 10
 trigger1 = var(8) >= 0
 trigger1 = sysvar(3) != var(8) || !(!(var(59)&2048)) || sysvar(3) = 900
 value = var(8)
@@ -4587,13 +4620,13 @@ ignorehitpause = 1
 
 [State -1]
 type = MoveHitReset
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = var(8) < -1
 ignorehitpause = 1
 
 [State -1];コマンド移行
 type = SelfState
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5 && var(58) < 10
 trigger1 = var(8) < -1
 value = 351798
 ctrl = !(!(var(20)&4))
@@ -4602,7 +4635,7 @@ ignorehitpause = 1
 
 [State -1];自動振り向き再現
 type = Turn
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5 && var(58) < 10
 trigger1 = var(59) := (var(59)&2147483647) || 1
 trigger1 = sysfvar(2) != 5 && sysfvar(2) != 6
 trigger1 = roundstate = [2,3]
@@ -4615,7 +4648,7 @@ ignorehitpause = 1
 
 [State -1];振り向きアニメ表示
 type = ChangeAnim
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5 && var(58) < 10
 trigger1 = !(!(var(59)&-2147483648))
 trigger1 = sysfvar(2) != 5 && sysfvar(2) != 6
 value = 5 + (statetype=C) + ((var(26):=-1)&&0) + ((var(20):=(var(20)&(268435456^-1)))&&0)
@@ -4636,7 +4669,7 @@ trigger1 = roundstate = 4
 trigger1 = alive
 trigger1 = sysvar(1) > 210
 trigger1 = !(var(20)&1073741824)
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5 && var(58) < 10
 value = ifelse(!win,ifelse(lose,170,175),180)
 persistent = 256
 ignorehitpause = 1

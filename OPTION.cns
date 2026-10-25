@@ -438,13 +438,6 @@ trigger1 = root,numexplod(1646180000)
 flag = RoundNotOver
 ignorehitpause = 1
 
-[State -2]
-type = Null
-trigger1 = ishelper(510908551) || ishelper(510908552)
-trigger1 = var(1) := floor(1000*sin(gametime*pi/180)+0.5) || 1
-trigger1 = var(2) := floor(1000*cos(gametime*pi/180)+0.5) || 1
-ignorehitpause = 1
-
 [State -2];ヘルパー共通ステートへ
 type = SelfState
 trigger1 = ishelper
@@ -800,7 +793,7 @@ ignorehitpause = 1
 
 [State -2];TU回復設定
 type = Explod
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = numexplod(1354830) = 0 && numexplod(1354831) = 0
 anim = 101111111
 ID = 1354830 + !(!(var(19)&16))
@@ -846,7 +839,7 @@ ignorehitpause = 1
 
 [State -2];カラー戻し処理
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = RoundState = 0
 trigger1 = var(392) != 0
@@ -857,7 +850,7 @@ ignorehitpause = 1
 
 [State -2];最大スロットＩＤ修正
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = var(var(4938572)+47444) := var(var(4938572)+48576) + 4 || 1
 ignorehitpause = 1
@@ -870,7 +863,7 @@ ignorehitpause = 1
 
 [State -2]
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = sysfvar(1) < var(var(4938572)+48188)
 sysfvar(1) = var(var(4938572)+48188)
@@ -878,7 +871,7 @@ ignorehitpause = 1
 
 [State -2];投げられ先ステート記録
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = roundstate > 1
 trigger1 = !(var(20)&512)
 trigger1 = var(50) := stateno
@@ -886,7 +879,7 @@ ignorehitpause = 1
 
 [State -2];簡易即死ステート探査(未実装)
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(51) := var(50)
 ignorehitpause = 1
 
@@ -917,20 +910,18 @@ ignorehitpause = 1
 
 [State -2];時止め無視
 type = Pause
-triggerall = gametime
-trigger1 = var(58) = 6 || var(58) = 12
-trigger2 = var(58) = 5 || var(58) = [10,11]
-trigger2 = var(15) = 0
+trigger1 = gametime
+trigger1 = var(58) = 5 || var(58) > 9
+trigger1 = var(15) = 0
 time = 2147483647
 movetime = 2147483647
 ignorehitpause = 1
 
 [State -2];時止め無視
 type = SuperPause
-triggerall = gametime
-trigger1 = var(58) = 6 || var(58) = 12
-trigger2 = var(58) = 5 || var(58) = [10,11]
-trigger2 = var(15) = 0
+trigger1 = gametime
+trigger1 = var(58) = 5 || var(58) > 9
+trigger1 = var(15) = 0
 anim = -1
 time = 2147483647
 movetime = 2147483647
@@ -941,14 +932,14 @@ ignorehitpause = 1
 
 [State -2];時止め無視
 type = Pause
-trigger1 = var(58) = 5 || var(58) = [10,11]
+trigger1 = var(58) = 5 || var(58) > 9
 trigger1 = var(15)
 time = 0
 ignorehitpause = 1
 
 [State -2];時止め無視
 type = SuperPause
-trigger1 = var(58) = 5 || var(58) = [10,11]
+trigger1 = var(58) = 5 || var(58) > 9
 trigger1 = var(15)
 anim = -1
 time = 0
@@ -959,7 +950,7 @@ ignorehitpause = 1
 
 [State -2];時止め無視
 type = Null
-trigger1 = var(58) = 5 || var(58) = [10,11]
+trigger1 = var(58) = 5 || var(58) > 9
 trigger1 = var(15)
 trigger1 = var(-793) := 2147483647
 trigger1 = var(-792) := 2147483647
@@ -992,7 +983,7 @@ ignorehitpause = 1
 
 [State -2]
 type = AssertSpecial
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = !(!(var(19)&512))
 flag = NoStandGuard
 flag2 = NoCrouchGuard
@@ -1013,14 +1004,7 @@ ignorehitpause = 1
 
 [State -2]
 type = PosFreeze
-trigger1 = var(58) = 6 || var(58) > 9
-ignorehitpause = 1
-
-[State -2]
-type = ScreenBound
-trigger1 = numhelper(157900000) > 0
-trigger1 = var(58) = 6 || var(58) = 12
-value = 0
+trigger1 = var(58) > 9
 ignorehitpause = 1
 
 [State -2]
@@ -1041,31 +1025,25 @@ ignorehitpause = 1
 
 [State -2];Attack
 type = AttackMulSet
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 value = 1.0
 ignorehitpause = 1
 
 [State -2];Defence
 type = DefenceMulSet
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 value = 1.0
 ignorehitpause = 1
 
 [State -2];Facing
 type = Turn
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger1 = facing != var(12)
 ignorehitpause = 1
 
 [State -2];Anim
 type = ChangeAnim
-trigger1 = var(58) = 6 || var(58) > 11
-value = floor(sysfvar(2))
-ignorehitpause = 1
-
-[State -2];Anim
-type = ChangeAnim
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = numenemy || (anim!=170&&anim!=181)
 value = floor(sysfvar(2))
 elem = floor(sysfvar(3))
@@ -1073,7 +1051,7 @@ ignorehitpause = 1
 
 [State -2];Anim
 type = ChangeAnim
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(26) = -2
 trigger1 = animelemno(1) != sysfvar(3)
 value = floor(sysfvar(2))
@@ -1082,14 +1060,14 @@ ignorehitpause = 1
 
 [State -2];MoveType
 type = StateTypeSet
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger1 = !(!(var(20)&64))
 movetype = A
 ignorehitpause = 1
 
 [State -2];Vel
 type = VelSet
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger1 = roundstate
 x = fvar(0)
 y = fvar(1)
@@ -1098,7 +1076,7 @@ ignorehitpause = 1
 [State -2];Pos
 type = PosSet
 trigger1 = numhelper(510908553)
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = numhelper(510908553)
 trigger1 = (fvar(2) := fvar(12) + (helper(510908553),pos x)) || 1
 trigger1 = (fvar(3) := fvar(13) + (helper(510908553),pos y + 1010160160)) || 1
@@ -1106,45 +1084,37 @@ x = fvar(2)
 y = fvar(3)
 ignorehitpause = 1
 
-[State -2];Pos
-type = PosSet
-trigger1 = var(58) = 6 || var(58) > 11
-trigger1 = roundstate
-x = fvar(2)
-y = fvar(3)
-ignorehitpause = 1
-
 [State -2]
 type = StateTypeSet
-trigger1 = var(58) != [1,5]
+trigger1 = var(58) > 5
 trigger1 = (var(5)&7) = 1
 statetype = S
 ignorehitpause = 1
 
 [State -2]
 type = StateTypeSet
-trigger1 = var(58) != [1,5]
+trigger1 = var(58) > 5
 trigger1 = (var(5)&7) = 2
 statetype = A
 ignorehitpause = 1
 
 [State -2]
 type = StateTypeSet
-trigger1 = var(58) != [1,5]
+trigger1 = var(58) > 5
 trigger1 = (var(5)&7) = 3
 statetype = C
 ignorehitpause = 1
 
 [State -2]
 type = StateTypeSet
-trigger1 = var(58) != [1,5]
+trigger1 = var(58) > 5
 trigger1 = (var(5)&7) = 4
 statetype = L
 ignorehitpause = 1
 
 [State -2]
 type = Null
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 trigger1 = !(var(20)&16)
 trigger1 = var(13) := -1 || 1
 trigger2 = !(!(var(20)&16))
@@ -1155,7 +1125,7 @@ ignorehitpause = 1
 
 [State -2];「決死結界」演出中用特殊処理
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = sysvar(3) = 351710
 trigger1 = sysvar(2) = [470,499]
@@ -1165,7 +1135,7 @@ ignorehitpause = 1
 
 [State -2];処理スキップ（特殊）
 type = SelfState
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = gametime = 0
 trigger1 = roundstate = 0
 trigger1 = numhelper + enemy,numhelper + enemy(numenemy>1),numhelper = 0
@@ -1176,7 +1146,7 @@ ignorehitpause = 1
 
 [State -2]
 type = LifeSet
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate
 triggerall = !(Const(Size.Z.Width)&32) && (Const(Size.Z.Width)!=0||!(!(Const(Size.Z.Width)&32768)))
 trigger1 = sysfvar(4) >= 100
@@ -1191,7 +1161,7 @@ ignorehitpause = 1
 
 [State -2];処理スキップ
 type = SelfState
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = !(Const(Size.Z.Width)&32)
 trigger1 = Const(Size.Z.Width) != 0
 trigger2 = !(!(Const(Size.Z.Width)&32768))
@@ -1201,7 +1171,7 @@ ignorehitpause = 1
 
 [State -2]
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = var(-831) := 0 || 1
 ignorehitpause = 1
@@ -1214,7 +1184,7 @@ ignorehitpause = 1
 
 [State -2]
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = roundstate = 2
 trigger1 = var(var(4938572)+48188) > var(var(4938572)+39444)
@@ -1223,7 +1193,7 @@ ignorehitpause = 1
 
 [State -2]
 type = CtrlSet
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 value = !(!(var(20)&4))
 ignorehitpause = 1
 
@@ -1248,15 +1218,15 @@ ignorehitpause = 1
 
 [State -2]
 type = Null
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = var(59) := 157900003 || 1
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = var(59) := 510908553 || 1
 ignorehitpause = 1
 
 [State -2];StageEdgeBodyDist再現
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = numhelper(var(59))
 trigger1 = facing = 1
 trigger1 = fvar(10) := var(57) - (pos x-helper(var(59)),pos x) || 1
@@ -1282,12 +1252,6 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = numprojID(49999)
 sysfvar(2) = floor(sysfvar(2)-5)
-ignorehitpause = 1
-
-[State -2]
-type = CtrlSet
-trigger1 = var(58) = 6 || var(58) = 12
-value = 0
 ignorehitpause = 1
 
 [State -2];movetype保存
@@ -1320,7 +1284,7 @@ ignorehitpause = 1
 
 [State -2];コンボ補正値リセット
 type = VarSet
-triggerall = (var(58)=[1,4]) || (var(58)=[7,9])
+triggerall = var(58) != 5
 trigger1 = roundstate < 2
 trigger2 = movetype != A && numtarget = 0
 trigger3 = enemy,movetype != H
@@ -1329,7 +1293,7 @@ ignorehitpause = 1
 
 [State -2];コンボ補正値計算
 type = VarAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5
 trigger1 = numtarget
 trigger1 = projcontacttime(0) = 1
 trigger1 = sysvar(3) != 351704 && sysvar(3) != 351705 && sysvar(3) != 351708
@@ -1338,14 +1302,14 @@ ignorehitpause = 1
 
 [State -2];コンボ補正値最低保障
 type = VarSet
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5
 trigger1 = fvar(15) < 0.05
 fvar(15) = 0.05
 ignorehitpause = 1
 
 [State -2]
 type = VarSet
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(59) := ((var(30)&1572864)/524288) || 1
 trigger1 = var(59) := var(59) + ((var(30)&6291456)/2097152) || 1
 trigger1 = var(59) := var(59) + ((var(30)&25165824)/8388608) || 1
@@ -1356,7 +1320,7 @@ ignorehitpause = 1
 
 [State -2];霊力ゲージ
 type = VarSet
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 trigger1 = roundstate < 2
 trigger2 = !(!(var(19)&256))
 fvar(14) = 1000
@@ -1364,7 +1328,7 @@ ignorehitpause = 1
 
 [State -2];霊力ゲージ回復
 type = VarAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = ((var(5)&65408)/128) = 0
 trigger1 = !((sysvar(3)=[351700,351710])&&!(!(var(20)&2048)))
 fvar(14) = 6 * ifelse(var(58)>6,2,1) * ifelse(var(58)>9,2,1)
@@ -1372,14 +1336,14 @@ ignorehitpause = 1
 
 [State -2];霊力ゲージ端数処理
 type = VarSet
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = fvar(14) > 1000 || fvar(14) < 0
 fvar(14) = ifelse(fvar(14)>1000,1000,0)
 ignorehitpause = 1
 
 [State -2];ゲージ自動上昇
 type = PowerAdd
-triggerall = var(58) = [7,11]
+triggerall = var(58) > 6
 triggerall = ((var(19)&805306368)/268435456) > 0
 triggerall = roundstate = 2 || ((var(19)&805306368)/268435456) > 1
 triggerall = (sysvar(3)!=[351700,351799]) || ((var(19)&805306368)/268435456) > 2
@@ -1393,7 +1357,7 @@ ignorehitpause = 1
 
 [State -2]
 type = Null
-triggerall = var(58) = [7,11]
+triggerall = var(58) > 6
 triggerall = numpartner = 0
 trigger1 = fvar(16) < 0
 trigger1 = fvar(16) := 0 || 1
@@ -1403,7 +1367,7 @@ ignorehitpause = 1
 
 [State -2]
 type = PowerSet
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = numpartner = 0
 trigger1 = fvar(16) > power
 value = ceil(fvar(16))
@@ -1411,7 +1375,7 @@ ignorehitpause = 1
 
 [State -2]
 type = Null
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = numpartner = 0
 trigger1 = fvar(16) := power || 1
 ignorehitpause = 1
@@ -1422,10 +1386,10 @@ triggerall = var(58) > 6
 triggerall = !numexplod(1646180080)
 triggerall = !numexplod(1646180081)
 triggerall = numprojID(895353553) = 2
-trigger1 = var(58) = [7,9]
+trigger1 = var(58) < 10
 trigger1 = (var(6)||var(7)) && !(!(var(20)&2097152)) && movereversed != 1 && gethitvar(groundtype)
 trigger1 = !((sysvar(3)=[351705,351706])&&!(!(var(20)&2048)))
-trigger2 = var(58) = [10,11]
+trigger2 = var(58) > 9
 trigger2 = var(15)
 trigger2 = movereversed != 1
 trigger2 = var(6) && (var(111)&var(112)&7) && (var(111)&var(112)&4088)
@@ -1440,7 +1404,7 @@ ignorehitpause = 1
 
 [State -2];強制PalNo変更感知
 type = Explod
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = palno != var(58)
 trigger1 = !numexplod(1646180090)
 trigger1 = !numexplod(1646180091)
@@ -1455,7 +1419,7 @@ ignorehitpause = 1
 
 [State -2];フライング感知
 type = Explod
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = numprojID(895353553) = 2
 trigger1 = roundstate < 2 || (roundstate=2&&!(var(20)&16))
 trigger1 = !(!(var(20)&2097152)) || !(var(20)&512)
@@ -1484,34 +1448,29 @@ ignorehitpause = 1
 [State -2];Anim保存
 type = VarSet
 trigger1 = sysfvar(1) > 1
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 5 || var(58) = [7,9]
 sysfvar(2) = anim
 ignorehitpause = 1
 
 [State -2];AnimElemNo(0)保存
 type = VarSet
 triggerall = sysfvar(1) > 1
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
-trigger1 = var(59) := animelemno(0) || 1
-trigger2 = var(58) = 6 || var(58) = 12
-trigger2 = var(59) := helper(157900000),animelemno(0) || 1
-sysfvar(3) = var(59)
+trigger1 = var(58) < 5|| var(58) = [7,9]
+sysfvar(3) = animelemno(0)
 ignorehitpause = 1
 
 [State -2];!AnimTimeトリガー代用
 type = VarSet
-triggerall = var(58) != 5
-triggerall = var(58) != [10,11]
-triggerall = sysfvar(1) > 1
-triggerall = var(20) := (var(20)&(268435456^-1)) || 1
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 5|| var(58) = [7,9]
+trigger1 = sysfvar(1) > 1
+trigger1 = var(20) := (var(20)&(268435456^-1)) || 1
 trigger1 = !animtime
 var(20) = (var(20)|268435456)
 ignorehitpause = 1
 
 [State -2];レベル最大超必殺技のクールタイム減少
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 trigger1 = var(31) := (var(31)&-1073741825) || 1
 trigger1 = var(31) = 0 || sysvar(3) = [351702,351708]
@@ -1529,7 +1488,7 @@ ignorehitpause = 1
 
 [State -2];レベル最大超必殺技のクールタイム設定
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = var(9) = [351702,351708]
 trigger1 = var(9) = 351702
@@ -1551,7 +1510,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断-開宴「天の逆手」
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(!(var(33)&1)) && (sysvar(3)=351702)
 trigger1 = ((var(33)&1920)/128) < 15
@@ -1564,7 +1523,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断-蛙符「元朝の赤蛙」
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(!(var(33)&1)) && (sysvar(3)=351704)
 trigger1 = sysvar(2) = 1
@@ -1580,7 +1539,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断-蛙狩狩「蛇の狩らるるは牙ゆえに」
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(!(var(33)&1)) && (sysvar(3)=351705)
 trigger1 = sysvar(2) = 1
@@ -1595,7 +1554,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断-蛙狩狩「蛇の狩らるるは牙ゆえに」
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(!(var(33)&1)) && (sysvar(3)=351705)
 trigger1 = anim = 3052
@@ -1612,7 +1571,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断-「土着神の頂点」
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(!(var(33)&1)) && (sysvar(3)=351706)
 trigger1 = sysvar(2) = 1
@@ -1624,7 +1583,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断-復符「御神渡り神事」
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(!(var(33)&1)) && (sysvar(3)=351708)
 trigger1 = ((var(33)&1920)/128) < 15
@@ -1634,7 +1593,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断-「決死結界」
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = numexplod(351711)
 triggerall = roundstate = 4
@@ -1647,7 +1606,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断解除
 type = VarSet
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = roundstate = 2
 trigger1 = fvar(33) > 0
@@ -1660,7 +1619,7 @@ ignorehitpause = 1
 
 [State -2];超必殺技有効判断
 type = VarSet
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(!(var(33)&1)) && (sysvar(3)!=[351700,351710])
 ;開宴「天の逆手」有効
@@ -1726,14 +1685,14 @@ ignorehitpause = 1
 
 [State -2];全超必殺技封印解除
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(7) >= 1000
 trigger1 = var(33) := (var(33)&(4128768^-1)) || 1
 ignorehitpause = 1
 
 [State -2];決死結界有効判断中は全超必殺技レベル上げ対象化
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = !(!(var(19)&512))
 trigger1 = fvar(39) := 0 || 1
 trigger1 = !(!(var(33)&536870912)) || !(!(var(30)&262144)) || (sysfvar(1)>2000&&!(!(var(30)&-2147483648))&&life<lifemax)
@@ -1743,7 +1702,7 @@ ignorehitpause = 1
 
 [State -2];レベル判断使用超必殺技決定-解除
 type = VarSet
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 trigger1 = !fvar(39)
 trigger1 = ((var(33)&14)/2) = ((var(33)&112)/16) || ((var(33)&458752)/65536) = ((var(33)&112)/16) || ((var(33)&3670016)/524288) = ((var(33)&112)/16)
@@ -1753,7 +1712,7 @@ ignorehitpause = 1
 
 [State -2];レベル判断使用超必殺技決定
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = !(!(var(19)&512))
 triggerall = !(var(33)&112)
 ;全部同レベルの場合ランダムで判定（無効化済み超必殺技も選出されるので上記で再選出させる）
@@ -1786,7 +1745,7 @@ ignorehitpause = 1
 
 [State -2];時止め有効判定用
 type = Null
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = !(!(var(19)&512))
 triggerall = numexplod(351780) = 0
 triggerall = !(!(var(20)&16777216))
@@ -1799,7 +1758,7 @@ ignorehitpause = 1
 
 [State -2]
 type = Explod
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = !(!(var(19)&512))
 trigger1 = numexplod(351780) = 0
 trigger1 = fvar(31) >= 30
@@ -1815,7 +1774,7 @@ ignorehitpause = 1
 
 [State -2];勝敗記録
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = var(58) < 10 || !var(15)
 trigger1 = roundstate = 0
 trigger1 = var(55) := (var(55)%1000000) || 1
@@ -1826,7 +1785,7 @@ ignorehitpause = 1
 
 [State -2];勝敗記録
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = var(15)
 trigger1 = roundstate = 0
 trigger1 = var(59) := var(4938572)
@@ -1837,7 +1796,7 @@ ignorehitpause = 1
 
 [State -2];敗北後隔離水準上昇
 type = Null
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = roundstate = 0
 trigger1 = !(!(var(19)&4))
 trigger1 = roundsexisted > 0
@@ -1849,7 +1808,7 @@ ignorehitpause = 1
 
 [State -2]
 type = DisplayToClipBoard
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) != 5
 trigger1 = !(!(var(19)&512))
 text = "AI:%d MODE:%d EFFTV:%d "
 params = ((var(19)&224)/32),((var(30)&1610612736)/536870912),((var(33)&14)/2)
@@ -1857,7 +1816,7 @@ ignorehitpause = 1
 
 [State -2]
 type = AppendToClipBoard
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 5 || var(58) = [7,9]
 trigger1 = !(!(var(19)&512))
 text = "TODO:%d BAN1:%d BAN2:%d EX:%d"
 params = ((var(33)&112)/16),((var(33)&458752)/65536),((var(33)&3670016)/524288),(!(!(var(33)&536870912))||!(!(var(30)&262144))||(sysfvar(1)>2000&&!(!(var(30)&-2147483648))&&life<lifemax))
@@ -1865,7 +1824,7 @@ ignorehitpause = 1
 
 [State -2];試合後時間計測
 type = VarAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = roundstate = 4
 sysvar(1) = 1
 ignorehitpause = 1
@@ -1876,7 +1835,7 @@ ignorehitpause = 1
 
 [State -2]
 type = Projectile
-triggerall = var(58) = 6 || var(58) > 9
+triggerall = var(58) > 9
 triggerall = !numprojID(4684616)
 triggerall = roundstate > 1
 trigger1 = sysfvar(4) != [0,1000]
@@ -1905,7 +1864,7 @@ ignorehitpause = 1
 
 [State -2];TU回復
 type = VarSet
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = wintime || losetime || drawgame
 trigger1 = roundstate > 2
 trigger1 = numexplod(1354831) || sysfvar(4) = 127
@@ -1914,8 +1873,7 @@ ignorehitpause = 1
 
 [State -2]
 type = VarSet
-triggerall = var(58) > 5
-triggerall = var(58) != [7,9]
+triggerall = var(58) > 9
 trigger1 = roundstate < 2
 trigger2 = numprojID(4684616)
 sysfvar(4) = lifemax
@@ -1923,7 +1881,7 @@ ignorehitpause = 1
 
 [State -2]
 type = LifeSet
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate
 trigger1 = sysfvar(4) >= 100
 trigger1 = var(59) := floor(sysfvar(4)+0.5) || 1
@@ -1971,14 +1929,14 @@ ignorehitpause = 1
 
 [State -2];死にやすく（1P）
 type = Null
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = life < var(6)
 trigger1 = var(6) := life || 1
 ignorehitpause = 1
 
 [State -2];ライフ初期値設定（1P）
 type = VarSet
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = roundstate = 0
 var(6) = life;				サバイバルなども考慮すること
 ignorehitpause = 1
@@ -1991,21 +1949,21 @@ ignorehitpause = 1
 
 [State -2];Life合わせ（1P）
 type = LifeSet
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = roundstate < 3
 value = var(6)
 ignorehitpause = 1
 
 [State -2];ダメージ処理（アンダーフローダメージを受けると変数がオーバーフローしてしまうので例外処理）
 type = VarAdd
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = gethitvar(damage) > -2147483648 + life
 var(6) = -gethitvar(damage)
 ignorehitpause = 1
 
 [State -2];落下ダメージの処理はHitFallDamage適用時に行う
 type = VarSet
-triggerall = var(58) = [1,4]
+triggerall = var(58) < 5
 trigger1 = var(6) < 0
 trigger2 = gethitvar(damage) <= -2147483648 + life
 var(6) = 0
@@ -2013,7 +1971,7 @@ ignorehitpause = 1
 
 [State -2]
 type = VarSet
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = var(6) > lifemax
 var(6) = lifemax
 ignorehitpause = 1
@@ -2220,7 +2178,7 @@ trigger1 = enemynear,movetype = A || p2movetype = A
 trigger1 = enemynear,life > 0 && p2life > 0
 trigger1 = enemynear,alive = 1
 trigger1 = enemynear,palno = [1,12]
-trigger1 = fvar(39) := (ifelse(sysfvar(4)>900,30,sysfvar(4)**0.5)/30)**ifelse(1.0*enemy(!enemy,alive&&numenemy>1),life/var(13+(!enemy,alive&&numenemy>1))*lifemax-life>=0.8*lifemax&&((var(19)&7168)/1024)<6,2,1) || 1
+trigger1 = fvar(39) := (ifelse(sysfvar(4)>900,30,sysfvar(4)**0.5)/30)**ifelse(1.0*enemy(!enemy,alive&&numenemy>1),life/var(13+(!enemy,alive&&numenemy>1))*lifemax-life>=0.9*lifemax&&(var(19)&3)<3,1.5,1) || 1
 sysfvar(4) = -ifelse(var(59)>100,100,var(59)) * fvar(39)
 ignorehitpause = 1
 
@@ -2287,7 +2245,7 @@ ignorehitpause = 1
 
 [State -2]
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = !(!(var(19)&512))
 trigger1 = roundstate = 3
 trigger1 = losetime || drawgame
@@ -2299,7 +2257,7 @@ ignorehitpause = 1
 
 [State -2];敵ライフ監視
 type = VarSet
-trigger1 = var(58) != [10,11]
+trigger1 = var(58) < 10
 trigger2 = (var(19)&7168)/1024 < 6
 trigger3 = enemy(!enemy,alive&&numenemy>1),life < var(4)
 var(4) = enemy(!enemy,alive&&numenemy>1),life
@@ -2307,14 +2265,14 @@ ignorehitpause = 1
 
 [State -2]
 type = AssertSpecial
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = numexplod(351713)
 flag = NoKO
 ignorehitpause = 1
 
 [State -2]
 type = LifeSet
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = numexplod(351713)
 trigger1 = var(58) = [1,4]
 trigger1 = var(6) := !!alive || 1
@@ -2324,7 +2282,7 @@ ignorehitpause = 1
 
 [State -2]
 type = VarSet
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = numexplod(351713)
 sysfvar(4) = !!alive
 ignorehitpause = 1
@@ -2335,13 +2293,13 @@ ignorehitpause = 1
 
 [State -2]
 type = HitAdd
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 value = -999
 ignorehitpause = 1
 
 [State -2]
 type = RemoveExplod
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = numexplod(99999)
 ID = 99999
 ignorehitpause = 1
@@ -2350,7 +2308,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10014
 ID = 99999
@@ -2370,7 +2328,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10013
 ID = 99999
@@ -2390,7 +2348,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10014
 ID = 99999
@@ -2410,7 +2368,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10013
 ID = 99999
@@ -2430,7 +2388,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10014
 ID = 99999
@@ -2450,7 +2408,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = fvar(14) > 800
 anim = 10016 + (fvar(14)<1000)*(22+ceil((1000-fvar(14))*22.0/200.0))
@@ -2471,7 +2429,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = fvar(14) > 600
 anim = 10015 + (fvar(14)<800)*(1+ceil((800-fvar(14))*22.0/200.0))
@@ -2492,7 +2450,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = fvar(14) > 400
 anim = 10016 + (fvar(14)<600)*(22+ceil((600-fvar(14))*22.0/200.0))
@@ -2513,7 +2471,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = fvar(14) > 200
 anim = 10015 + (fvar(14)<400)*(1+ceil((400-fvar(14))*22.0/200.0))
@@ -2534,7 +2492,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = fvar(14) > 0
 anim = 10016 + (fvar(14)<200)*(22+ceil((200-fvar(14))*22.0/200.0))
@@ -2555,7 +2513,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10014
 ID = 99999
@@ -2575,7 +2533,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10013
 ID = 99999
@@ -2595,7 +2553,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10014
 ID = 99999
@@ -2615,7 +2573,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10013
 ID = 99999
@@ -2635,7 +2593,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10014
 ID = 99999
@@ -2655,7 +2613,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = fvar(14) > 800
 anim = 10016 + (fvar(14)<1000)*(122+ceil((1000-fvar(14))*22.0/200.0))
@@ -2676,7 +2634,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = fvar(14) > 600
 anim = 10015 + (fvar(14)<800)*(101+ceil((800-fvar(14))*22.0/200.0))
@@ -2697,7 +2655,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = fvar(14) > 400
 anim = 10016 + (fvar(14)<600)*(122+ceil((600-fvar(14))*22.0/200.0))
@@ -2718,7 +2676,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = fvar(14) > 200
 anim = 10015 + (fvar(14)<400)*(101+ceil((400-fvar(14))*22.0/200.0))
@@ -2739,7 +2697,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = fvar(14) > 0
 anim = 10016 + (fvar(14)<200)*(122+ceil((200-fvar(14))*22.0/200.0))
@@ -2760,7 +2718,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10200
 ID = 99999
@@ -2780,7 +2738,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10201
 ID = 99999
@@ -2800,7 +2758,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10210
 ID = 99999
@@ -2820,7 +2778,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10211
 ID = 99999
@@ -2840,7 +2798,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10221
 ID = 99999
@@ -2860,7 +2818,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10220
 ID = 99999
@@ -2880,7 +2838,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10221
 ID = 99999
@@ -2900,7 +2858,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 anim = 10220
 ID = 99999
@@ -2920,7 +2878,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10220
 ID = 99999
@@ -2940,7 +2898,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10221
 ID = 99999
@@ -2960,7 +2918,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10220
 ID = 99999
@@ -2980,7 +2938,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 anim = 10221
 ID = 99999
@@ -3000,7 +2958,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = var(59) := ((var(30)&28672)/4096) || 1
 trigger1 = teamside = 1
 trigger1 = var(59) < 6
@@ -3022,7 +2980,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = var(59) < 6
 anim = 44001 + 10 * var(59)
@@ -3043,7 +3001,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = var(59) < 5
 anim = 44002 + 10 * ((var(59)+1)%5)
@@ -3064,7 +3022,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = var(59) < 5
 anim = 44003 + 10 * ((var(59)+1)%5)
@@ -3085,7 +3043,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = var(59) < 5
 anim = 44004 + 10 * ((var(59)+2)%5)
@@ -3106,7 +3064,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = var(59) < 5
 anim = 44005 + 10 * ((var(59)+2)%5)
@@ -3127,7 +3085,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = var(59) < 5
 anim = 44002 + 10 * ((var(59)+3)%5)
@@ -3148,7 +3106,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = var(59) < 5
 anim = 44003 + 10 * ((var(59)+3)%5)
@@ -3169,7 +3127,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = var(59) < 5
 anim = 44004 + 10 * ((var(59)+4)%5)
@@ -3190,7 +3148,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = var(59) < 5
 anim = 44005 + 10 * ((var(59)+4)%5)
@@ -3209,7 +3167,7 @@ ignorehitpause = 1
 
 [State -2];レベルMAXスペルカウント / レベルMAXスペル識別
 type = Null
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = fvar(39) := 0 || 1
 trigger1 = ((var(30)&1572864)/524288) = 3
 trigger1 = var(59) := var(59) + 8 || 1
@@ -3232,7 +3190,7 @@ ignorehitpause = 1
 type = Explod
 triggerall = !numexplod(351711)
 triggerall = roundstate = [2,3]
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = teamside = 1
 triggerall = (var(59)&7) < 6
 trigger1 = (var(59)&7) = 5
@@ -3255,7 +3213,7 @@ ignorehitpause = 1
 type = Explod
 triggerall = !numexplod(351711)
 triggerall = roundstate = [2,3]
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = teamside = 2
 triggerall = (var(59)&7) < 6
 trigger1 = (var(59)&7) = 5
@@ -3278,7 +3236,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+1)%5)+3))))
@@ -3300,7 +3258,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+1)%5)+3))))
@@ -3322,7 +3280,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+2)%5)+3))))
@@ -3344,7 +3302,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+2)%5)+3))))
@@ -3366,7 +3324,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+3)%5)+3))))
@@ -3388,7 +3346,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+3)%5)+3))))
@@ -3410,7 +3368,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+4)%5)+3))))
@@ -3432,7 +3390,7 @@ ignorehitpause = 1
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = (var(59)&7) < 5
 trigger1 = !(!(var(59)&floor(2.0**((((var(59)&7)+4)%5)+3))))
@@ -3454,7 +3412,7 @@ ignorehitpause = 1
 type = Null
 triggerall = !numexplod(351711)
 triggerall = roundstate = [2,3]
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 triggerall = var(59) := ((var(30)&28672)/4096) || 1
 trigger1 = var(59) = 0
 trigger1 = var(59) := ((var(30)&1572864)/524288) || 1
@@ -3469,11 +3427,11 @@ trigger5 = var(59) := ((var(30)&402653184)/134217728) || 1
 trigger6 = var(59) := 4 - ifelse(var(58)>9,1,!(!(var(19)&67108864))) || 1
 ignorehitpause = 1
 
-[State -2];レベル表示
+[State -2,1];レベル表示
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 1
 trigger1 = var(59) := var(59) + ifelse(var(58)>9,1,!(!(var(19)&67108864))); || 1
 anim = 44110 + var(59)
@@ -3490,11 +3448,11 @@ supermovetime = 2147483647
 pausemovetime = 2147483647
 ignorehitpause = 1
 
-[State -2];レベル表示
+[State -2,2];レベル表示
 type = Explod
 trigger1 = !numexplod(351711)
 trigger1 = roundstate = [2,3]
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = teamside = 2
 trigger1 = var(59) := var(59) + ifelse(var(58)>9,1,!(!(var(19)&67108864))); || 1
 anim = 44110 + var(59)
@@ -3608,7 +3566,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（文字）
 type = Explod
 trigger1 = teamside = 1
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = roundstate = 2
 trigger1 = !numexplod(351711)
 anim = 90100
@@ -3628,7 +3586,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（千の位）
 type = Explod
 triggerall = teamside = 1
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3652,7 +3610,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（百の位）
 type = Explod
 triggerall = teamside = 1
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3676,7 +3634,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（十の位）
 type = Explod
 triggerall = teamside = 1
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3700,7 +3658,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（一の位）
 type = Explod
 triggerall = teamside = 1
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3724,7 +3682,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（文字）
 type = Explod
 trigger1 = teamside = 2
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 trigger1 = roundstate = 2
 trigger1 = !numexplod(351711)
 anim = 90100
@@ -3744,7 +3702,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（千の位）
 type = Explod
 triggerall = teamside = 2
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3768,7 +3726,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（百の位）
 type = Explod
 triggerall = teamside = 2
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3792,7 +3750,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（十の位）
 type = Explod
 triggerall = teamside = 2
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3816,7 +3774,7 @@ ignorehitpause = 1
 [State -2];耐性時間表示表示（一の位）
 type = Explod
 triggerall = teamside = 2
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = roundstate = 2
 triggerall = !numexplod(351711)
 trigger1 = var(58) = 10
@@ -3839,7 +3797,7 @@ ignorehitpause = 1
 
 [State -2]
 type = AssertSpecial
-trigger1 = var(58) != [10,11]
+trigger1 = var(58) < 9
 trigger1 = numhelper(157900000) > 0
 flag = Invisible
 flag2 = NoShadow
@@ -3847,7 +3805,7 @@ ignorehitpause = 1
 
 [State -2];GetHitVar(_VelAdd)系は機能しておらず、KO時のGetHitVar(_Vel)は一定の値が代入されている？（常に一定値）
 type = Null
-trigger1 = var(58) > 9 || ((var(58)=[1,4])&&!var(6)) || ((var(58)!=[1,4])&&!sysfvar(4))
+trigger1 = var(58) > 9 || (var(58)<5&&!var(6)) || (var(58)>4&&!sysfvar(4))
 trigger1 = fvar(7) := -2.8 * facing || 1
 trigger1 = fvar(8) := -3.5 || 1
 trigger2 = (var(58)=[7,9]) && gethitvar(animtype) = 0
@@ -3924,7 +3882,7 @@ ignorehitpause = 1
 
 [State -2];ステージ端距離算出補助ヘルパー
 type = Helper
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger1 = numhelper(157900003) = 0
 name = "Pointer"
 ID = 157900003
@@ -3953,7 +3911,7 @@ ignorehitpause = 1
 
 [State -2];時止めヘルパー設置予定地
 type = Helper
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = numhelper(251435865) = 0
 triggerall = numhelper(251435866) = 0
 triggerall = numexplod(5596014) = 0
@@ -3970,7 +3928,7 @@ ignorehitpause = 1
 
 [State -2];時止め解除ヘルパー召喚ヘルパー
 type = Helper
-triggerall = var(58) = [10,11]
+triggerall = var(58) > 9
 triggerall = numhelper(251435866) = 0
 triggerall = numexplod(5596014) = 0
 trigger1 = numhelper(510908553) = 0
@@ -4001,7 +3959,7 @@ ignorehitpause = 1
 
 [State -2];AI起動ヘルパー
 type = Helper
-trigger1 = (var(58)=[1,4]) || ((var(58)=[7,11])&&numhelper(510908553))
+trigger1 = var(58) < 5 || (var(58)>6&&numhelper(510908553))
 trigger1 = var(56) = 0 || var(57) = 0
 trigger1 = numhelper(157900002) = 0
 name = "SEARCH_BORDER_HELPER"
@@ -4020,7 +3978,7 @@ ignorehitpause = 1
 
 [State -2];これ以降でも使用するものを一時保存
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = var(59) := 0 || 1
 trigger1 = var(59) := var(59) + !(!(var(20)&512)) * 1 || 1
 trigger1 = var(59) := var(59) + !(!(var(20)&32768)) * 2 || 1
@@ -4039,7 +3997,7 @@ ignorehitpause = 1
 
 [State -2];個別ステートで使用するものを保存
 type = Explod
-triggerall = (var(58)=[1,4]) || (var(58)=[7,11])
+triggerall = var(58) != 5
 trigger1 = !(var(20)&512)
 trigger2 = !(!(var(20)&2097152))
 anim = 101111111
@@ -4053,36 +4011,36 @@ ignorehitpause = 1
 
 [State -2];霊力回復までのフレーム減少(7P~9Pなら1.5倍速、10P~11Pなら2.5倍速)
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = ((var(5)&65408)/128) > 0
 trigger1 = var(5) := var(5) - 128 * ifelse(var(58)>9,2,1) || 1
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = gametime%2 = 0
 trigger1 = var(5) := var(5) - 128 || 1
 ignorehitpause = 1
 
 [State -2];MoveType保存
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = var(20) := (var(20)&(64^-1)) || 1
 ignorehitpause = 1
 
 [State -2];ジャンプダッシュ使用済みフラグリセット
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = statetype != A
 trigger1 = var(20) := (var(20)&(4096^-1)) || 1
 ignorehitpause = 1
 
 [State -2];NoAutoTurnフラグ
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 5 || var(58) = [7,9]
 trigger1 = var(20) := (var(20)&(65536^-1)) || 1
 ignorehitpause = 1
 
 [State -2,20];各フラグリセット
 type = Null
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
+trigger1 = var(58) != 5
 trigger1 = var(20) := (var(20)&(28479232^-1)) || 1
 ;trigger1 = var(20) := (var(20)&(256^-1)) || 1		;ガード不可攻撃フラグ
 ;trigger1 = var(20) := (var(20)&(512^-1)) || 1		;ステート奪取感知フラグ
@@ -4109,7 +4067,6 @@ ignorehitpause = 1
 
 [State -2];コンテニュー演出へ
 type = SelfState
-trigger1 = var(58) != 6 && var(58) != 12
 trigger1 = stateno = 5500
 trigger1 = roundstate = 0
 trigger1 = !ishometeam && teamside = 1
@@ -4121,7 +4078,6 @@ ignorehitpause = 1
 [State -2];リザルト演出へ
 type = SelfState
 trigger1 = !numenemy
-trigger1 = var(58) != 6 && var(58) != 12
 trigger1 = !roundstate
 trigger1 = stateno = 170 || stateno = [180,181]
 value = stateno
@@ -4130,7 +4086,7 @@ ignorehitpause = 1
 
 [State -2]
 type = SelfState
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = numhelper(510908553) = 0
 value = 5901 + (var(59):=0)
 persistent = 256
@@ -4138,7 +4094,7 @@ ignorehitpause = 1
 
 [State -2];凍結解除（「決死結界」発動中特殊処理）
 type = SelfState
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = sysvar(3) = 351710
 trigger1 = hitpausetime
 trigger1 = !alive
@@ -4149,7 +4105,6 @@ ignorehitpause = 1
 
 [State -2];「決死結界」発動中
 type = SelfState
-trigger1 = var(58) != 6 && var(58) != 12
 trigger1 = sysvar(3) = 351710
 value = 351710
 persistent = 256
@@ -4157,7 +4112,7 @@ ignorehitpause = 1
 
 [State -2];10~11Pステ固定
 type = SelfState
-trigger1 = var(58) = [10,11]
+trigger1 = var(58) > 9
 value = 1
 persistent = 256
 ignorehitpause = 1
@@ -4276,7 +4231,7 @@ trigger1 = var(58) < 10
 trigger1 = !(!(var(59)&1))
 trigger1 = sysvar(3) = [351700,351799]
 trigger1 = !alive
-trigger1 = ((var(58)=[1,4])&&!var(6)) || ((var(58)!=[1,4])&&!sysfvar(4))
+trigger1 = (var(58)<5&&!var(6)) || (var(58)>4&&!sysfvar(4))
 value = 5030
 persistent = 256
 ignorehitpause = 1

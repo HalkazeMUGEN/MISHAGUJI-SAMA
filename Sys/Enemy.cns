@@ -64,38 +64,6 @@ trigger1 = 1
 flag = NoJuggleCheck
 ignorehitpause = 1
 
-[State 1141514113];’T¸ƒwƒ‹ƒp[¢Š«ƒwƒ‹ƒp[
-type = ChangeState
-trigger1 = ishelper(const(size.shadowoffset))
-trigger1 = const(size.shadowoffset) = 571863719
-value = 100000010
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113];–{‘ÌŠÔÒƒwƒ‹ƒp[
-type = ChangeState
-trigger1 = ishelper(alive)
-trigger1 = alive = 571863730
-value = 101111101
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113];ŠÔÒƒwƒ‹ƒp[
-type = ChangeState
-trigger1 = ishelper(const(size.shadowoffset))
-trigger1 = const(size.shadowoffset) = [571863720,571863724]
-value = 110111111
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113];ŠÔÒ¶¬—p˜g–„ƒwƒ‹ƒp[
-type = ChangeState
-trigger1 = ishelper(const(size.shadowoffset))
-trigger1 = const(size.shadowoffset) = 571863799
-value = 011111111
-persistent = 256
-ignorehitpause = 1
-
 [State 1141514113];–¡•ûƒwƒ‹ƒp[
 type = SelfState
 triggerall = ishelper(const(size.shadowoffset))
@@ -108,102 +76,30 @@ ignorehitpause = 1
 
 [State 1141514113];’áƒJƒ‰[‚É“Gƒwƒ‹ƒp[‚ª–À‚¢‚ñ‚¾ê‡
 type = ChangeState
-triggerall = ishelper
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 6
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 12 || teamside = 1
+trigger1 = ishelper
 value = 011111111
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113];“Gƒwƒ‹ƒp[
-type = ChangeState
-triggerall = ishelper
-trigger1 = name != "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾" && const(data.airjuggle) != 2661342
-trigger2 = name = "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"
-trigger2 = enemy,name = "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"
-trigger2 = teamside = 2
-trigger2 = root,var(58) = 12
-value = 101111111
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113];ö“üŒ^‚©‚ç¶¬‚³‚ê‚½ƒwƒ‹ƒp[
-type = SelfState
-triggerall = ishelper
-trigger1 = root,name = "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾" && root,authorname = "Halkaze"
-trigger2 = root,authorname = "Halkaze" && root,const(data.airjuggle) = 2661342
-trigger3 = root,const(data.airjuggle) = 2661342 && root,name = "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"
-value = 210000099
 persistent = 256
 ignorehitpause = 1
 
 [State 1141514113];’áƒJƒ‰[‚É“G‚ª–À‚¢‚ñ‚¾ê‡i“Áêˆ—j
 type = ChangeState
-triggerall = !ishelper
-triggerall = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),sysvar(3) = 351705
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 6
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 12
+trigger1 = !ishelper
+trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),sysvar(3) = 351705
 value = 3517050
 persistent = 256
 ignorehitpause = 1
 
 [State 1141514113];’áƒJƒ‰[‚É“G‚ª–À‚¢‚ñ‚¾ê‡i“Áêˆ—j
 type = ChangeState
-triggerall = !ishelper
-triggerall = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),sysvar(3) = 351710
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 6
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 12
+trigger1 = !ishelper
+trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),sysvar(3) = 351710
 value = 3517062
 persistent = 256
 ignorehitpause = 1
 
 [State 1141514113];’áƒJƒ‰[‚É“G‚ª–À‚¢‚ñ‚¾ê‡
 type = SelfState
-triggerall = !ishelper
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 6
-trigger1 = enemy(enemy(0),name!="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"&&numenemy>1),var(58) != 12 || teamside = 1
-value = 5030
-ctrl = 0
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113]
-type = Helper
 trigger1 = !ishelper
-trigger1 = name != "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾" && const(data.airjuggle) != 2661342
-trigger1 = numhelper(571863719) + numhelper(571863720) + numhelper(571863721) + numhelper(571863722) + numhelper(571863723) + numhelper(571863730) + numhelper(571863730) = 0
-name = ""
-ID = 571863731
-size.shadowoffset = 571863731
-stateno = 571863000 + random
-helpertype = normal
-keyctrl = 0
-pausemovetime = 2147483647
-supermovetime = 2147483647
-ignorehitpause = 1
-
-[State 1141514113];“G–{‘Ìi¶‘¶j
-type = ChangeState
-trigger1 = !ishelper
-trigger1 = name != "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾" && const(data.airjuggle) != 2661342
-trigger1 = alive && hitpausetime
-value = 150941102
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113];“G–{‘Ìi¶‘¶j
-type = ChangeState
-trigger1 = !ishelper
-trigger1 = name != "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾" && const(data.airjuggle) != 2661342
-trigger1 = alive
-value = 150941103
-persistent = 256
-ignorehitpause = 1
-
-[State 1141514113];“G–{‘Ìi€–Sj
-type = SelfState
-trigger1 = !ishelper
-trigger1 = name != "ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾" && const(data.airjuggle) != 2661342
 value = 5030
 ctrl = 0
 persistent = 256
@@ -225,7 +121,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -293,7 +189,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -776,7 +672,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -913,7 +809,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -983,7 +879,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -1051,7 +947,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -1094,7 +990,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -1200,7 +1096,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -1342,7 +1238,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -1508,7 +1404,7 @@ ignorehitpause = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256
@@ -1829,7 +1725,7 @@ hitcountpersist = 1
 [State ALL];“G–{‘Ì‚Ì‚İ‚ğ’Ê‚·
 type = ChangeState
 trigger1 = !ishelper&&(name="ãƒŸã‚·ãƒ£ã‚°ã‚¸ã•ã¾"||const(data.airjuggle)=2661342)
-trigger1 = var(58) = [5,12]
+trigger1 = var(58) > 4
 trigger2 = ishelper
 value = 1141514113
 persistent = 256

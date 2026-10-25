@@ -224,7 +224,7 @@ ignorehitpause = 1
 [State 170,5]
 type = AssertSpecial
 triggerall = sysvar(2) <= 70
-trigger1 = var(58) != [10,11]
+trigger1 = var(58) < 10
 trigger2 = win
 trigger3 = roundstate > 3
 trigger4 = !numexplod(1646180000)
@@ -241,7 +241,7 @@ ignorehitpause = 1
 
 [State 170,7]
 type = NotHitBy
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger2 = var(6) := 1
 value = SCA,AA,AT,AP
 time = 1
@@ -268,7 +268,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = roundstate > 2 && var(58) = [7,11]
+trigger1 = roundstate > 2 && var(58) > 6
 value = 5150
 persistent = 256
 ignorehitpause = 1
@@ -348,7 +348,7 @@ ignorehitpause = 1
 [State 175,5]
 type = AssertSpecial
 triggerall = sysvar(2) < 75
-trigger1 = var(58) != [10,11]
+trigger1 = var(58) < 10
 trigger2 = win
 trigger3 = roundstate > 3
 trigger4 = !numexplod(1646180000)
@@ -364,7 +364,7 @@ ignorehitpause = 1
 
 [State 175,7]
 type = NotHitBy
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger2 = var(6) := 1
 value = SCA,AA,AT,AP
 time = 1
@@ -391,7 +391,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -457,7 +457,7 @@ ignorehitpause = 1
 
 [State 180,3]
 type = NotHitBy
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger2 = var(6) := 1
 value = SCA,AA,AT,AP
 time = 1
@@ -465,7 +465,7 @@ ignorehitpause = 1
 
 [State 180,4]
 type = AssertSpecial
-trigger1 = var(58) != [10,11]
+trigger1 = var(58) < 10
 trigger2 = win
 trigger3 = roundstate > 3
 trigger4 = !numexplod(1646180000)
@@ -500,7 +500,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = roundstate > 2 && var(58) = [7,11]
+trigger1 = roundstate > 2 && var(58) > 6
 value = 5150
 persistent = 256
 ignorehitpause = 1
@@ -581,7 +581,7 @@ ignorehitpause = 1
 type = AssertSpecial
 triggerall = anim = 181
 triggerall = sysvar(2) <= 126
-trigger1 = var(58) != [10,11]
+trigger1 = var(58) < 10
 trigger2 = win
 trigger3 = roundstate > 3
 trigger4 = !numexplod(1646180000)
@@ -613,7 +613,7 @@ ignorehitpause = 1
 
 [State 181,12]
 type = NotHitBy
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger2 = var(6) := 1
 value = SCA,AA,AT,AP
 time = 1
@@ -633,7 +633,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = roundstate > 2 && var(58) = [7,11]
+trigger1 = roundstate > 2 && var(58) > 6
 value = 5150
 persistent = 256
 ignorehitpause = 1
@@ -889,7 +889,7 @@ ignorehitpause = 1
 
 [State 190,8]
 type = NotHitBy
-trigger1 = var(58) = [1,4]
+trigger1 = var(58) < 5
 trigger2 = var(6) := 1
 value = SCA,AA,AT,AP
 time = 1
@@ -924,7 +924,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256

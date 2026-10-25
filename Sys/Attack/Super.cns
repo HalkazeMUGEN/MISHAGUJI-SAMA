@@ -6,9 +6,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -108,9 +108,9 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = anim = 1000
 trigger1 = animelemno(0) < 4
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = anim = 1000
-trigger3 = var(58) = [7,11]
+trigger3 = var(58) > 6
 trigger3 = anim = 1001
 trigger3 = animelemno(0) < 5
 value = SCA
@@ -121,7 +121,7 @@ ignorehitpause = 1
 type = Null
 triggerall = anim = 1001
 trigger1 = var(30) := (var(30)|48) || 1
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = movecontact || movereversed
 trigger1 = var(30) := (var(30)|6) && 0
 trigger2 = animelemno(0) > 5
@@ -139,19 +139,18 @@ ignorehitpause = 1
 
 [State 1000]
 type = HitDef
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !movecontact && !movereversed
 trigger1 = var(20) := (var(20)&(8192^-1)) || 1
 ID = 1000
 attr = SA,SA
-damage = ceil(150*fvar(15)),ceil(ifelse((var(58)=[1,4]),15,75)*fvar(15))
+damage = ceil(150*fvar(15)),ceil(ifelse((var(58)<5),15,75)*fvar(15))
 getpower = 0,0
 givepower = 50,300
 animtype = Hard
 hitflag = MAF
 guardflag = MA
-priority = ifelse((var(58)=[1,4]),6,7),H
-pausetime = ifelse((var(58)=[1,4]),27,22),30
+priority = ifelse((var(58)<5),6,7),H
+pausetime = ifelse((var(58)<5),27,22),30
 hitsound = S5,2
 guardsound = S6,0
 ground.type = High
@@ -164,7 +163,6 @@ ignorehitpause = 1
 
 [State 1000]
 type = Explod
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact
 anim = ifelse(moveguarded,29999,20013)
@@ -176,14 +174,14 @@ scale = .7,.7
 ownpal = 1
 ontop = 1
 sprpriority = 0
-supermove = 1 * (var(58)=[10,11])
-pausemovetime = -1 * (var(58)=[10,11])
-supermovetime = -1 * (var(58)=[10,11])
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
 ignorehitpause = 1
 
 [State 1000]
 type = VarAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 10
 trigger1 = !(var(20)&8192)
 trigger1 = numtarget
 trigger1 = movecontact = 1
@@ -192,7 +190,6 @@ ignorehitpause = 1
 
 [State 1000]
 type = PowerAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact || movereversed
 trigger1 = var(20) := (var(20)|8192) || 1
@@ -229,7 +226,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -243,9 +240,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -345,9 +342,9 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = anim = 1010
 trigger1 = animelemno(0) < 4
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = anim = 1010
-trigger3 = var(58) = [7,11]
+trigger3 = var(58) > 6
 trigger3 = anim = 1001
 trigger3 = animelemno(0) < 5
 value = SCA
@@ -358,10 +355,10 @@ ignorehitpause = 1
 type = Null
 triggerall = anim = 1001
 trigger1 = var(30) := (var(30)|48) || 1
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = movecontact || movereversed
 trigger1 = var(30) := (var(30)|6) && 0
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = animelemno(0) > 5
 trigger2 = var(30) := (var(30)|6) && 0
 ignorehitpause = 1
@@ -386,19 +383,18 @@ ignorehitpause = 1
 
 [State 1010]
 type = HitDef
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !movecontact && !movereversed
 trigger1 = var(20) := (var(20)&(8192^-1)) || 1
 ID = 1000
 attr = SA,SA
-damage = ceil(70*fvar(15)),ceil(ifelse((var(58)=[1,4]),7,35)*fvar(15))
+damage = ceil(70*fvar(15)),ceil(ifelse((var(58)<5),7,35)*fvar(15))
 getpower = 0,0
 givepower = 35,140
 animtype = Hard
 hitflag = MAF
 guardflag = MA
-priority = ifelse((var(58)=[1,4]),6,7),H
-pausetime = ifelse((var(58)=[1,4]),18,13),18
+priority = ifelse((var(58)<5),6,7),H
+pausetime = ifelse((var(58)<5),18,13),18
 hitsound = S5,2+11*!(!(animelemno(0)>4))
 guardsound = S6,0
 ground.type = High
@@ -411,7 +407,6 @@ ignorehitpause = 1
 
 [State 1010]
 type = Explod
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact
 trigger1 = animelemno(0) <= 4
@@ -424,14 +419,13 @@ scale = .7,.7
 ownpal = 1
 ontop = 1
 sprpriority = 0
-supermove = 1 * (var(58)=[10,11])
-pausemovetime = -1 * (var(58)=[10,11])
-supermovetime = -1 * (var(58)=[10,11])
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
 ignorehitpause = 1
 
 [State 1010]
 type = Explod
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact
 trigger1 = animelemno(0) > 4
@@ -444,14 +438,14 @@ scale = .8,.8
 ownpal = 1
 ontop = 1
 sprpriority = 0
-supermove = 1 * (var(58)=[10,11])
-pausemovetime = -1 * (var(58)=[10,11])
-supermovetime = -1 * (var(58)=[10,11])
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
 ignorehitpause = 1
 
 [State 1010]
 type = VarAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 10
 trigger1 = !(var(20)&8192)
 trigger1 = numtarget
 trigger1 = movecontact = 1
@@ -460,7 +454,6 @@ ignorehitpause = 1
 
 [State 1010]
 type = PowerAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact || movereversed
 trigger1 = var(20) := (var(20)|8192) || 1
@@ -497,7 +490,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -511,9 +504,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -591,7 +584,7 @@ ignorehitpause = 1
 [State 1100]
 type = NotHitBy
 trigger1 = anim = 1100
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = animelemno(0) < 8
 value = SCA
 time = 1 + (var(6):=1) * 0
@@ -684,7 +677,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -698,9 +691,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -778,7 +771,7 @@ ignorehitpause = 1
 [State 1110]
 type = NotHitBy
 trigger1 = anim = 1100
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = animelemno(0) < 8
 value = SCA
 time = 1 + (var(6):=1) * 0
@@ -871,7 +864,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -885,9 +878,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -1041,11 +1034,11 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = anim = 1200
 trigger1 = animelemno(0) > 6
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = anim = 1200
 trigger3 = anim = 1201
 trigger3 = animelemno(0) < 6
-trigger4 = var(58) = [7,11]
+trigger4 = var(58) > 6
 trigger4 = anim = 1201
 trigger4 = animelemno(0) < 9
 value = SCA
@@ -1057,7 +1050,7 @@ type = Null
 triggerall = anim = 1201
 trigger1 = animelemno(0) > 7
 trigger1 = var(30) := (var(30)|48) || 1
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = animelemno(0) > 8
 trigger2 = movecontact || movereversed
 trigger2 = var(30) := (var(30)|6) && 0
@@ -1076,18 +1069,17 @@ ignorehitpause = 1
 
 [State 1200]
 type = HitDef
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !movecontact && !movereversed
 trigger1 = var(20) := (var(20)&(8192^-1)) || 1
 attr = S,SA
-damage = ceil(70*fvar(15)),ceil(ifelse((var(58)=[1,4]),7,35)*fvar(15))
+damage = ceil(70*fvar(15)),ceil(ifelse((var(58)<5),7,35)*fvar(15))
 getpower = 0,0
 givepower = 23,140
 animtype = Hard
 hitflag = MAF
 guardflag = MA
-priority = ifelse((var(58)=[1,4]),6,7),H
-pausetime = ifelse((var(58)=[1,4]),18,13),18
+priority = ifelse((var(58)<5),6,7),H
+pausetime = ifelse((var(58)<5),18,13),18
 hitsound = S5,2
 guardsound = S6,0
 ground.type = High
@@ -1099,7 +1091,6 @@ ignorehitpause = 1
 
 [State 1200]
 type = Explod
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact
 anim = ifelse(moveguarded,29999,20012)
@@ -1111,14 +1102,14 @@ scale = .7,.7
 ownpal = 1
 ontop = 1
 sprpriority = 0
-supermove = 1 * (var(58)=[10,11])
-pausemovetime = -1 * (var(58)=[10,11])
-supermovetime = -1 * (var(58)=[10,11])
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
 ignorehitpause = 1
 
 [State 1200]
 type = VarAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 10
 trigger1 = !(var(20)&8192)
 trigger1 = numtarget
 trigger1 = movecontact = 1
@@ -1127,7 +1118,6 @@ ignorehitpause = 1
 
 [State 1200]
 type = PowerAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact || movereversed
 trigger1 = var(20) := (var(20)|8192) || 1
@@ -1171,7 +1161,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -1185,9 +1175,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -1325,11 +1315,11 @@ ignorehitpause = 1
 type = NotHitBy
 trigger1 = anim = 1210
 trigger1 = animelemno(0) > 6
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = anim = 1210
 trigger3 = anim = 1211
 trigger3 = animelemno(0) < 7
-trigger4 = var(58) = [7,11]
+trigger4 = var(58) > 6
 trigger4 = anim = 1211
 trigger4 = animelemno(0) < 15
 value = SCA
@@ -1341,7 +1331,7 @@ type = Null
 triggerall = anim = 1211
 trigger1 = animelemno(0) > 13
 trigger1 = var(30) := (var(30)|48) || 1
-trigger2 = var(58) = [7,11]
+trigger2 = var(58) > 6
 trigger2 = animelemno(0) > 14
 trigger2 = var(30) := (var(30)|6) && 0
 ignorehitpause = 1
@@ -1357,7 +1347,6 @@ ignorehitpause = 1
 
 [State 1210]
 type = Explod
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact
 anim = ifelse(moveguarded,29999,20011)
@@ -1369,14 +1358,14 @@ scale = .8,.8
 ownpal = 1
 ontop = 1
 sprpriority = 0
-supermove = 1 * (var(58)=[10,11])
-pausemovetime = -1 * (var(58)=[10,11])
-supermovetime = -1 * (var(58)=[10,11])
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
 ignorehitpause = 1
 
 [State 1210]
 type = VarAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,9])
+trigger1 = var(58) < 10
 trigger1 = !(var(20)&8192)
 trigger1 = numtarget
 trigger1 = movehit = 1
@@ -1385,7 +1374,6 @@ ignorehitpause = 1
 
 [State 1210]
 type = PowerAdd
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !(var(20)&8192)
 trigger1 = movecontact || movereversed
 trigger1 = var(20) := (var(20)|8192) || 1
@@ -1399,19 +1387,18 @@ ignorehitpause = 1
 
 [State 1210]
 type = HitDef
-trigger1 = (var(58)=[1,4]) || (var(58)=[7,11])
 trigger1 = !movecontact && !movereversed
 trigger1 = var(20) := (var(20)&(8192^-1)) || 1
 attr = A,SA
-damage = ceil(70*fvar(15)),ceil(ifelse((var(58)=[1,4]),15,18)*fvar(15))
+damage = ceil(70*fvar(15)),ceil(ifelse((var(58)<5),15,18)*fvar(15))
 getpower = 0,0
 givepower = 23,5
 animtype = Hard
 hitflag = MAF
 guardflag = MA
-priority = ifelse((var(58)=[1,4]),6,7),H
-pausetime = ifelse((var(58)=[1,4]),20,15),18
-guard.pausetime = ifelse((var(58)=[1,4]),0,0),3
+priority = ifelse((var(58)<5),6,7),H
+pausetime = ifelse((var(58)<5),20,15),18
+guard.pausetime = ifelse((var(58)<5),0,0),3
 hitsound = S5,2
 guardsound = S6,0
 ground.type = High
@@ -1461,7 +1448,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -1475,9 +1462,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -1550,7 +1537,7 @@ ignorehitpause = 1
 [State 1300]
 type = NotHitBy
 trigger1 = anim = 1300
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = animelemno(0) < 8
 value = SCA
 time = 1 + (var(6):=1) * 0
@@ -1591,7 +1578,7 @@ offset = 0,0
 projremove = 0
 projremovetime = 25
 attr = SCA,AA,AT,AP
-damage = ceil(10*fvar(15)),ceil(ifelse((var(58)=[1,4]),1,5)*fvar(15))
+damage = ceil(10*fvar(15)),ceil(ifelse((var(58)<5),1,5)*fvar(15))
 getpower = 8,ifelse(var(58)<5,4,8)
 givepower = 5,10
 animtype = Hard
@@ -1621,9 +1608,9 @@ facing = facing
 scale = .55,.55
 ownpal = 1
 sprpriority = -2
-supermove = 1 * (var(58)=[10,11])
-pausemovetime = -1 * (var(58)=[10,11])
-supermovetime = -1 * (var(58)=[10,11])
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
 ignorehitpause = 1
 
 [State 1300]
@@ -1645,7 +1632,7 @@ velmul = 0,0.90
 projremove = 0
 projremovetime = 20
 attr = C,SP
-damage = ceil(10*fvar(15)),ceil(ifelse((var(58)=[1,4]),1,5)*fvar(15))
+damage = ceil(10*fvar(15)),ceil(ifelse((var(58)<5),1,5)*fvar(15))
 getpower = 8,ifelse(var(58)<5,4,8)
 givepower = 7,15
 animtype = Medium
@@ -1683,7 +1670,7 @@ velmul = 0,0.90
 projremove = 0
 projremovetime = 20
 attr = C,SP
-damage = ceil(10*fvar(15)),ceil(ifelse((var(58)=[1,4]),1,5)*fvar(15))
+damage = ceil(10*fvar(15)),ceil(ifelse((var(58)<5),1,5)*fvar(15))
 getpower = 8,ifelse(var(58)<5,4,8)
 givepower = 7,15
 animtype = Medium
@@ -1738,7 +1725,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256
@@ -1752,9 +1739,9 @@ type = U
 movetype = U
 physics = U
 juggle = 0
-hitdefpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-movehitpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
-hitcountpersist = ((var(58)=6||var(58)=12)||var(8)=-1)
+hitdefpersist = (var(8)=-1)
+movehitpersist = (var(8)=-1)
+hitcountpersist = (var(8)=-1)
 
 [State ALL]
 type = ChangeState
@@ -1827,7 +1814,7 @@ ignorehitpause = 1
 [State 1310]
 type = NotHitBy
 trigger1 = anim = 1310
-trigger1 = var(58) = [7,11]
+trigger1 = var(58) > 6
 trigger1 = animelemno(0) < 8
 value = SCA
 time = 1 + (var(6):=1) * 0
@@ -1868,7 +1855,7 @@ offset = 80 + (ifelse(var(58)>9,animelemtime(1)+var(26)+1,animelemtime(1))/6)*18
 projremove = 0
 projremovetime = 25
 attr = SCA,AA,AT,AP
-damage = ceil(10*fvar(15)),ceil(ifelse((var(58)=[1,4]),1,5)*fvar(15))
+damage = ceil(10*fvar(15)),ceil(ifelse((var(58)<5),1,5)*fvar(15))
 getpower = 20,ifelse(var(58)<5,10,20)
 givepower = 5,10
 animtype = Hard
@@ -1898,9 +1885,9 @@ facing = facing
 scale = .4,.4
 ownpal = 1
 sprpriority = -2
-supermove = 1 * (var(58)=[10,11])
-pausemovetime = -1 * (var(58)=[10,11])
-supermovetime = -1 * (var(58)=[10,11])
+supermove = 1 * (var(58)>9)
+pausemovetime = -1 * (var(58)>9)
+supermovetime = -1 * (var(58)>9)
 ignorehitpause = 1
 
 [State 1310]
@@ -1924,7 +1911,7 @@ velmul = 0,0.90
 projremove = 0
 projremovetime = 20
 attr = C,SP
-damage = ceil(10*fvar(15)),ceil(ifelse((var(58)=[1,4]),1,5)*fvar(15))
+damage = ceil(10*fvar(15)),ceil(ifelse((var(58)<5),1,5)*fvar(15))
 getpower = 24,ifelse(var(58)<5,12,24)
 givepower = 7,15
 animtype = Medium
@@ -1979,7 +1966,7 @@ ignorehitpause = 1
 
 [State ALL]
 type = SelfState
-trigger1 = var(58) = 6 || var(58) > 9
+trigger1 = var(58) > 9
 trigger2 = roundstate > 2 && var(58) = [7,9]
 value = 5150
 persistent = 256

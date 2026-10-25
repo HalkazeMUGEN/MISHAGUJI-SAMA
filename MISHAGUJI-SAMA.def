@@ -3,7 +3,7 @@
 name = "ミシャグジさま"             ;キャラの名前
 displayname = "MISHAGUJI-SAMA"      ;表示されるキャラの名前
 versiondate   = 3,4,2015            ;キャラの製作開始日
-latestversion = 7,11,2021           ;キャラの最終更新日
+latestversion = 8,23,2021           ;キャラの最終更新日
 mugenversion = 11,22,2000           ;キャラが動くmugenのバージョン
 author = "Halkaze"                  ;キャラの製作者名
 pal.defaults = 1,2,3,4              ;敵としてでるキャラのパレット
@@ -18,7 +18,7 @@ st4      = Sys/Helper.cns
 st5      = Sys/Enemy.cns
 st6      = Sys/Null_1.cns
 st7      = Sys/Special.cns
-st8      = Sys/Common.txt
+st8      = Sys/Common.cns
 
 ;隔離技術を使用したくない場合は下の行の先頭に「;」をつけてください
 st9      = Sys/Code.bin

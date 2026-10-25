@@ -37,7 +37,7 @@ ignorehitpause = 1
 [State ALL];自分のヘルパーのみを通す
 type = ChangeState
 trigger1 = !ishelper(const(size.shadowoffset))
-trigger2 = root,var(58) != [10,11]
+trigger2 = root,var(58) < 10
 trigger2 = !(root,numexplod(468746114)=root,var(58)&&(root,var(58)=[1,12]))
 trigger2 = !(root,numexplod(468746114)=13&&root,var(58)=5&&(root,numexplod(1424678194)||root,numexplod(1865338)!=1))
 value = 1141514113
@@ -59,7 +59,7 @@ ignorehitpause = 1
 [State 11111]
 type = PlayerPush
 trigger1 = ishelper(157900000)
-trigger1 = root,var(58) = [7,11]
+trigger1 = root,var(58) > 6
 trigger1 = !(root,var(20)&1048576)
 value = 1
 ignorehitpause = 1
@@ -340,24 +340,6 @@ value = 33333333
 persistent = 256
 ignorehitpause = 1
 
-[State 11111];特殊ヘルパー-「決死結界」用
-type = SelfState
-triggerall = playeridexist(ID)
-trigger1=ishelper(3517010)||ishelper(3517011)||ishelper(3517012)||ishelper(3517013)||ishelper(3517014)||ishelper(3517015)||ishelper(3517016)||ishelper(3517017)||ishelper(3517018)||ishelper(3517019)||ishelper(3517020)||ishelper(3517021)||ishelper(3517022)
-trigger2=ishelper(3517023)||ishelper(3517024)||ishelper(3517025)||ishelper(3517026)||ishelper(3517027)||ishelper(3517028)||ishelper(3517029)||ishelper(3517030)||ishelper(3517031)||ishelper(3517032)||ishelper(3517033)||ishelper(3517034)
-value = 33333334
-persistent = 256
-ignorehitpause = 1
-
-[State 11111];特殊ヘルパー-「決死結界」用
-type = SelfState
-triggerall = playeridexist(ID)
-trigger1=ishelper(3517040)||ishelper(3517041)||ishelper(3517042)||ishelper(3517043)||ishelper(3517044)||ishelper(3517045)||ishelper(3517046)||ishelper(3517047)||ishelper(3517048)||ishelper(3517049)||ishelper(3517050)||ishelper(3517051)||ishelper(3517052)
-trigger2=ishelper(3517053)||ishelper(3517054)||ishelper(3517055)||ishelper(3517056)||ishelper(3517057)||ishelper(3517058)||ishelper(3517059)||ishelper(3517060)||ishelper(3517061)||ishelper(3517062)||ishelper(3517063)||ishelper(3517064)
-value = 33333335
-persistent = 256
-ignorehitpause = 1
-
 [State 11111];表示ヘルパー-通常時
 type = SelfState
 trigger1 = playeridexist(ID)
@@ -470,6 +452,24 @@ type = SelfState
 triggerall = playeridexist(ID)
 trigger1=ishelper(900000055)||ishelper(900000056)||ishelper(900000057)||ishelper(900000058)||ishelper(900000059)
 value = 990999999
+persistent = 256
+ignorehitpause = 1
+
+[State 11111];特殊ヘルパー-「決死結界」用
+type = SelfState
+triggerall = playeridexist(ID)
+trigger1=ishelper(3517010)||ishelper(3517011)||ishelper(3517012)||ishelper(3517013)||ishelper(3517014)||ishelper(3517015)||ishelper(3517016)||ishelper(3517017)||ishelper(3517018)||ishelper(3517019)||ishelper(3517020)||ishelper(3517021)||ishelper(3517022)
+trigger2=ishelper(3517023)||ishelper(3517024)||ishelper(3517025)||ishelper(3517026)||ishelper(3517027)||ishelper(3517028)||ishelper(3517029)||ishelper(3517030)||ishelper(3517031)||ishelper(3517032)||ishelper(3517033)||ishelper(3517034)
+value = 33333334
+persistent = 256
+ignorehitpause = 1
+
+[State 11111];特殊ヘルパー-「決死結界」用
+type = SelfState
+triggerall = playeridexist(ID)
+trigger1=ishelper(3517040)||ishelper(3517041)||ishelper(3517042)||ishelper(3517043)||ishelper(3517044)||ishelper(3517045)||ishelper(3517046)||ishelper(3517047)||ishelper(3517048)||ishelper(3517049)||ishelper(3517050)||ishelper(3517051)||ishelper(3517052)
+trigger2=ishelper(3517053)||ishelper(3517054)||ishelper(3517055)||ishelper(3517056)||ishelper(3517057)||ishelper(3517058)||ishelper(3517059)||ishelper(3517060)||ishelper(3517061)||ishelper(3517062)||ishelper(3517063)||ishelper(3517064)
+value = 33333335
 persistent = 256
 ignorehitpause = 1
 
@@ -2582,7 +2582,7 @@ trigger1 = animelemno(0) > 1
 trigger1 = var(59) := 256
 trigger2 = var(59) := floor(96*cos((sysfvar(4)/200)*2*pi)+160) || 1
 time = 1
-add = var(59)*(floor(sysfvar(1))%10=1)*.5,var(59)*(floor(sysfvar(1))%10=2)*.2,var(59)*(floor(sysfvar(1))%10=3)*.5
+add = floor(var(59)*(floor(sysfvar(1))%10=1)*.5),floor(var(59)*(floor(sysfvar(1))%10=2)*.2),floor(var(59)*(floor(sysfvar(1))%10=3)*.5)
 mul = var(59),var(59),var(59)
 ignorehitpause = 1
 
@@ -2712,7 +2712,7 @@ projedgebound = 1000000000
 projstagebound = 1000000000
 projheightbound = -2147483648,2147483647
 offset = 0,0
-velocity = cos(var(59)/(180/pi)) * 1*facing,sin(var(59)/(180/pi)) * -1
+velocity = cos(var(59)/(180/pi)) * facing,sin(var(59)/(180/pi)) * -1
 accel = 0,0
 velmul = 1.02,1.02
 projremove = 0
@@ -2725,7 +2725,7 @@ animtype = Medium
 hitflag = MAF
 guardflag = MA
 pausetime = 0,40
-sparkxy = cos(var(59)/(180/pi)) * 50*facing,sin(var(59)/(180/pi)) * -50
+sparkxy = floor(cos(var(59)/(180/pi)) * 50 * facing),floor(sin(var(59)/(180/pi)) * -50)
 sparkno = S25000 + random%2
 guard.sparkno = S25000 + random%2
 ground.type = High
@@ -2761,7 +2761,7 @@ animtype = Medium
 hitflag = MAF
 guardflag = MA
 pausetime = 0,40
-sparkxy = cos(var(59)/(180/pi)) * 50*facing,sin(var(59)/(180/pi)) * -50
+sparkxy = floor(cos(var(59)/(180/pi)) * 50 * facing),floor(sin(var(59)/(180/pi)) * -50)
 sparkno = S25000 + random%2
 guard.sparkno = S25000 + random%2
 ground.type = High
@@ -2797,7 +2797,7 @@ animtype = Medium
 hitflag = MAF
 guardflag = MA
 pausetime = 0,40
-sparkxy = cos(var(59)/(180/pi)) * 50*facing,sin(var(59)/(180/pi)) * -50
+sparkxy = floor(cos(var(59)/(180/pi)) * 50 * facing),floor(sin(var(59)/(180/pi)) * -50)
 sparkno = S25000 + random%2
 guard.sparkno = S25000 + random%2
 ground.type = High
@@ -4359,7 +4359,7 @@ ID = 10080
 removetime = -1
 bindtime = -1
 postype = left
-pos = (screenpos x-pos x)-66,72
+pos = floor(screenpos x-pos x)-66,72
 trans = addalpha
 alpha = floor(fvar(21)),256-floor(fvar(21))
 scale = 0.5*((floor(root,fvar(38))%1000)-floor(root,fvar(38)/1000))/(floor(root,fvar(38))%1000),0.5
@@ -4377,7 +4377,7 @@ ID = 10081
 removetime = -1
 bindtime = -1
 postype = left
-pos = (screenpos x-pos x),72
+pos = floor(screenpos x-pos x),72
 scale = 0.5*fvar(20),0.5
 sprpriority = 2147483647
 supermove = 1
@@ -4599,7 +4599,7 @@ ID = 100040
 bindtime = -1
 removetime = -1
 postype = left
-pos = (screenpos x-pos x),122
+pos = floor(screenpos x-pos x),122
 trans = sub
 ontop = 1
 scale = 0,0
@@ -4617,7 +4617,7 @@ ID = 100041
 bindtime = -1
 removetime = -1
 postype = left
-pos = (screenpos x-pos x),122
+pos = floor(screenpos x-pos x),122
 trans = sub
 ontop = 1
 scale = 0,0
@@ -5447,13 +5447,22 @@ flag = Invisible
 ignorehitpause = 1
 
 [State 33333333,7]
+type = Null
+trigger1 = root,sysvar(3) = 351710
+trigger1 = var(59) := numhelper + enemy(0),numhelper + ifelse(numenemy>1,enemy(numenemy>1),numhelper,0) || 1
+trigger1 = numpartner
+trigger1 = var(59) := var(59) + partner,numhelper
+ignorehitpause = 1
+
+[State 33333333,7]
 type = Helper
 triggerall = root,sysvar(3) = 351710
 trigger1 = !root,numexplod(351715)
-trigger1 = numhelper + enemy(0),numhelper + ifelse(numenemy>1,enemy(numenemy>1),numhelper,0) + ifelse(numpartner,partner,numhelper,0) < root,var(3)
+trigger1 = var(59) < root,var(3)
+trigger1 = var(59) := var(59) + 1 || 1
 trigger2 = root,numexplod(351715)
-trigger2 = var(59) := root,numprojID(33517200)
-trigger2 = (var(58):=root,var(3)-numhelper-enemy(0),numhelper-ifelse(numenemy>1,enemy(numenemy>1),numhelper,0)-ifelse(numpartner,partner,numhelper,0)+numhelper(251435869)) > var(59)
+trigger2 = (var(58):=root,var(3)-var(59)+numhelper(251435869)) > (var(59):=root,numprojID(33517200))
+trigger2 = var(59)
 name = "FILL"
 ID = 3517003
 size.shadowoffset = 3517003
@@ -5468,7 +5477,7 @@ ignorehitpause = 1
 type = SelfState
 triggerall = root,sysvar(3) = 351710
 trigger1 = !root,numexplod(351715)
-trigger1 = numhelper + enemy(0),numhelper + ifelse(numenemy>1,enemy(numenemy>1),numhelper,0) + ifelse(numpartner,partner,numhelper,0) < root,var(3)
+trigger1 = var(59) < root,var(3)
 trigger2 = root,numexplod(351715)
 trigger2 = var(59)
 trigger2 = var(58) > var(59)
@@ -6105,7 +6114,7 @@ trigger1 = root,sysvar(3) = 351708
 trigger1 = root,sysvar(2) = [38,191]
 trigger1 = fvar(39) := 255 * abs(cos(PI*(sysvar(2)-50)*3/180))
 trans = AddAlpha
-alpha = 255-fvar(39),fvar(39)
+alpha = 255-floor(fvar(39)),floor(fvar(39))
 ignorehitpause = 1
 
 [State 157900000,20]
@@ -8387,7 +8396,6 @@ value = 0
 type = ParentVarSet
 trigger1 = var(23) := root,var(23) || 1
 trigger1 = parent,ID = root,ID
-trigger1 = root,var(58) != 6 && root,var(58) != 12
 trigger1 = anim = 101111111
 var(23) = ((root,var(23)&31)+1)%32 + (root,var(23)/32)*32
 ignorehitpause = 1
