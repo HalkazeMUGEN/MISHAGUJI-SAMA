@@ -1387,6 +1387,7 @@ triggerall = !numexplod(1646180080)
 triggerall = !numexplod(1646180081)
 triggerall = numprojID(895353553) = 2
 trigger1 = var(58) < 10
+trigger1 = 0
 trigger1 = (var(6)||var(7)) && !(!(var(20)&2097152)) && movereversed != 1 && gethitvar(groundtype)
 trigger1 = !((sysvar(3)=[351705,351706])&&!(!(var(20)&2048)))
 trigger2 = var(58) > 9
